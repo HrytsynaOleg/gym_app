@@ -1,0 +1,9 @@
+{
+  "id": 124,
+  "firstName": "Pavlo",
+  "lastName": "Petrenko",
+  "userName": "Pavlo.Petrenko",
+  "password": "123456",
+  "isActive": true,
+  "trainingType": "YOGA"
+}

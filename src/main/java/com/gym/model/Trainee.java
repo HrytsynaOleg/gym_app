@@ -1,11 +1,12 @@
 package com.gym.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class Trainee {
+public class Trainee extends User{
     long id;
-    User user;
     String address;
     String dateOfBirth;
 }
