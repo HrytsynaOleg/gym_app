@@ -1,5 +1,6 @@
 package com.gym.service.impl;
 
+import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
 import com.gym.model.Trainer;
 import com.gym.model.TrainingType;
@@ -12,24 +13,30 @@ import utils.StringUtils;
 public class TrainerService implements ITrainerService {
     @Autowired
     ITrainerDao trainerDao;
+    @Autowired
+    ITraineeDao traineeDao;
 
     @Override
-    public long create(String firstName, String lastName, TrainingType trainingType) {
+    public Trainer createTrainer(String firstName, String lastName, TrainingType trainingType) {
+        String userName = firstName + "." + lastName;
+        int usersCount = trainerDao.getListByUserName(userName).size() + traineeDao.getListByUserName(userName).size();
+        if (usersCount > 0) {
+            userName = userName + usersCount;
+        }
+        String password = StringUtils.generateRandomString(10);
         Trainer trainer = new Trainer();
         trainer.setFirstName(firstName);
         trainer.setLastName(lastName);
         trainer.setTrainingType(trainingType);
-        String userName = firstName + "." + lastName;
-        String password = StringUtils.generateRandomString(10);
         trainer.setPassword(password);
         trainer.setUserName(userName);
         trainer.setIsActive(true);
-        return trainerDao.addNew(trainer);
+        return trainerDao.add(trainer);
     }
 
     @Override
     public void update(Trainer trainer) {
-
+        trainerDao.update(trainer);
     }
 
     @Override

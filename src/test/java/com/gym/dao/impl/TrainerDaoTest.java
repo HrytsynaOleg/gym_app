@@ -3,6 +3,7 @@ package com.gym.dao.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainerDao;
 import com.gym.model.Trainer;
+import com.gym.model.TrainingType;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,32 +13,50 @@ import utils.JsonUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class TrainerDaoTest {
     @Autowired
     ITrainerDao dao;
 
     @Test
-    void addNew() {
-        ClassLoader classLoader = getClass().getClassLoader();
+    void addTrainerTest() {
         Trainer testTrainer;
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
             String json = JsonPath.parse(inputStream).jsonString();
             testTrainer = JsonUtils.parseJsonString(json, new TypeReference<>() {
             });
-            long id = dao.addNew(testTrainer);
-            Trainer newTrainer = dao.getById(id);
-
+            Trainer newTrainer = dao.add(testTrainer);
+            Trainer trainer = dao.getById(newTrainer.getId());
+            assertEquals(newTrainer.getId(), trainer.getId());
+            assertEquals(newTrainer.getFirstName(), trainer.getFirstName());
+            assertEquals(newTrainer.getLastName(), trainer.getLastName());
+            assertEquals(newTrainer.getTrainingType(), trainer.getTrainingType());
         } catch (IOException ex) {
             System.err.println(ex.getCause());
         }
     }
 
     @Test
-    void update() {
+    void updateTrainerTest() {
+        Trainer trainer = dao.getById(125);
+        assertEquals(TrainingType.YOGA, trainer.getTrainingType());
+        trainer.setTrainingType(TrainingType.STRETCHING);
+        dao.update(trainer);
+        Trainer updatedTrainer = dao.getById(125);
+        assertEquals(TrainingType.STRETCHING, updatedTrainer.getTrainingType());
     }
 
     @Test
-    void getById() {
+    void getByIdTest() {
+        Trainer trainer = dao.getById(125);
+        assertEquals(125, trainer.getId());
+        assertEquals("Dmytro", trainer.getFirstName());
+        assertEquals("Sirenko", trainer.getLastName());
+        assertEquals("Dmytro.Sirenko", trainer.getUserName());
+        assertEquals("123456", trainer.getPassword());
+        assertEquals(TrainingType.YOGA, trainer.getTrainingType());
+        assertTrue(trainer.getIsActive());
     }
 }
