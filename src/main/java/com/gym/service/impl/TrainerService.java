@@ -12,9 +12,9 @@ import utils.StringUtils;
 @Service
 public class TrainerService implements ITrainerService {
     @Autowired
-    ITrainerDao trainerDao;
+    private ITrainerDao trainerDao;
     @Autowired
-    ITraineeDao traineeDao;
+    private ITraineeDao traineeDao;
 
     @Override
     public Trainer createTrainer(String firstName, String lastName, TrainingType trainingType) {

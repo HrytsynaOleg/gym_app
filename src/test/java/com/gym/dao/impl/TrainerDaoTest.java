@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainerDao;
 import com.gym.model.Trainer;
 import com.gym.model.TrainingType;
-import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,8 +23,7 @@ class TrainerDaoTest {
     void addTrainerTest() {
         Trainer testTrainer;
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
-            String json = JsonPath.parse(inputStream).jsonString();
-            testTrainer = JsonUtils.parseJsonString(json, new TypeReference<>() {
+            testTrainer = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
             Trainer newTrainer = dao.add(testTrainer);
             Trainer trainer = dao.getById(newTrainer.getId());
@@ -40,11 +38,11 @@ class TrainerDaoTest {
 
     @Test
     void updateTrainerTest() {
-        Trainer trainer = dao.getById(125);
+        Trainer trainer = dao.getById(124);
         assertEquals(TrainingType.YOGA, trainer.getTrainingType());
         trainer.setTrainingType(TrainingType.STRETCHING);
         dao.update(trainer);
-        Trainer updatedTrainer = dao.getById(125);
+        Trainer updatedTrainer = dao.getById(124);
         assertEquals(TrainingType.STRETCHING, updatedTrainer.getTrainingType());
     }
 
@@ -58,5 +56,11 @@ class TrainerDaoTest {
         assertEquals("123456", trainer.getPassword());
         assertEquals(TrainingType.YOGA, trainer.getTrainingType());
         assertTrue(trainer.getIsActive());
+    }
+
+    @Test
+    void getByIdIfNotExistTest() {
+        Trainer trainer = dao.getById(180);
+        assertNull(trainer);
     }
 }

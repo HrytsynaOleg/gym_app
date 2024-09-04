@@ -12,26 +12,29 @@ import java.util.Map;
 @Repository
 public class TraineeDao implements ITraineeDao {
     @Autowired
-    Map<String, Trainee> storage;
+    private Map<String, Trainee> storage;
 
     @Override
     public Trainee add(Trainee trainee) {
-        return null;
+        long id = StorageUtils.generateId(storage);
+        trainee.setId(id);
+        storage.put(String.valueOf(id), trainee);
+        return trainee;
     }
 
     @Override
     public void update(Trainee trainee) {
-
+        storage.put(String.valueOf(trainee.getId()), trainee);
     }
 
     @Override
     public void delete(Trainee trainee) {
-
+        storage.remove(String.valueOf(trainee.getId()));
     }
 
     @Override
     public Trainee getById(long id) {
-        return null;
+        return storage.get(String.valueOf(id));
     }
 
     @Override

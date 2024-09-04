@@ -1,8 +1,8 @@
 {
-  "id": 124,
-  "firstName": "Pavlo",
-  "lastName": "Petrenko",
-  "userName": "Pavlo.Petrenko",
+  "id": 0,
+  "firstName": "Kerry",
+  "lastName": "King",
+  "userName": "Kerry.King",
   "password": "123456",
   "isActive": true,
   "trainingType": "YOGA"
