@@ -12,7 +12,7 @@ import java.util.Map;
 @Repository
 public class TrainerDao implements ITrainerDao {
     @Autowired
-    Map<String, Trainer> storage;
+    private Map<String, Trainer> storage;
 
     @Override
     public Trainer add(Trainer trainer) {
