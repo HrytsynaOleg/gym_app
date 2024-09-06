@@ -42,3 +42,4 @@ public class TraineeDao implements ITraineeDao {
         return StorageUtils.findByUserName(storage, userName);
     }
 }
+
