@@ -6,7 +6,6 @@ import com.gym.model.Trainer;
 import com.gym.model.TrainingType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import utils.JsonUtils;
 
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class TrainerDaoTest {
     @Autowired
     ITrainerDao dao;
