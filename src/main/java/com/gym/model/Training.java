@@ -1,6 +1,9 @@
 package com.gym.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class Training {
@@ -9,6 +12,7 @@ public class Training {
     long trainerId;
     String trainingName;
     TrainingType trainingType;
-    String trainingDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    Date trainingDate;
     int duration;
 }

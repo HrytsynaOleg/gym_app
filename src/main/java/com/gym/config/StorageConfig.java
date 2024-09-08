@@ -3,6 +3,7 @@ package com.gym.config;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.model.Trainee;
 import com.gym.model.Trainer;
+import com.gym.model.Training;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,19 +21,27 @@ public class StorageConfig {
 
     private Map<String, Trainer> trainerStorage;
     private Map<String, Trainee> traineeStorage;
+    private Map<String, Training> trainingStorage;
     @Value("${file.trainers}")
     private String trainerStorageFilePath;
     @Value("${file.trainees}")
     private String traineeStorageFilePath;
+    @Value("${file.training}")
+    private String trainingStorageFilePath;
 
-    @Bean
+    @Bean(name="trainerStorage")
     public  Map<String,Trainer> trainerStorage(){
         return trainerStorage;
     }
 
-    @Bean
+    @Bean(name="traineeStorage")
     public  Map<String,Trainee> traineeStorage(){
         return traineeStorage;
+    }
+
+    @Bean(name="trainingStorage")
+    public  Map<String,Training> trainingStorage(){
+        return trainingStorage;
     }
 
     @PostConstruct
@@ -40,6 +49,8 @@ public class StorageConfig {
         trainerStorage = StorageUtils.buildMapFromFile(trainerStorageFilePath, new TypeReference<>() {
         });
         traineeStorage = StorageUtils.buildMapFromFile(traineeStorageFilePath, new TypeReference<>() {
+        });
+        trainingStorage = StorageUtils.buildMapFromFile(trainingStorageFilePath, new TypeReference<>() {
         });
     }
 }

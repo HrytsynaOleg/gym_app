@@ -29,4 +29,13 @@ public class JsonUtils {
         }
         return null;
     }
+
+    public static String convertObjectToJson(Object object) {
+        try {
+            return mapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            System.out.println("Could not convert to json");
+        }
+        return "";
+    }
 }
