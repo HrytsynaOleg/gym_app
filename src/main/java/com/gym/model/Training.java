@@ -3,7 +3,7 @@ package com.gym.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class Training {
@@ -13,6 +13,6 @@ public class Training {
     String trainingName;
     TrainingType trainingType;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    Date trainingDate;
+    LocalDate trainingDate;
     int duration;
 }

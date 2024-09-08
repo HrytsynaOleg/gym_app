@@ -14,6 +14,5 @@ public class GymApplication {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
         ITraineeDao traineeDao = applicationContext.getBean(TraineeDao.class);
         ITraineeService traineeService = applicationContext.getBean(TraineeService.class);
-        System.out.println();
     }
 }

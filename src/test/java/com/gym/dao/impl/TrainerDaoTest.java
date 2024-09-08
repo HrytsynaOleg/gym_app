@@ -6,7 +6,7 @@ import com.gym.model.Trainer;
 import com.gym.model.TrainingType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.JsonUtils;
+import com.gym.utils.JsonUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

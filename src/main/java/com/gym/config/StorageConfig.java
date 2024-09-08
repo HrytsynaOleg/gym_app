@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import utils.StorageUtils;
+import com.gym.utils.StorageUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;

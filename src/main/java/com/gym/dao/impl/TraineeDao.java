@@ -4,7 +4,7 @@ import com.gym.dao.ITraineeDao;
 import com.gym.model.Trainee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import utils.StorageUtils;
+import com.gym.utils.StorageUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -28,8 +28,8 @@ public class TraineeDao implements ITraineeDao {
     }
 
     @Override
-    public void delete(Trainee trainee) {
-        storage.remove(String.valueOf(trainee.getId()));
+    public void delete(long id) {
+        storage.remove(String.valueOf(id));
     }
 
     @Override

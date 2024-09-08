@@ -5,7 +5,7 @@ import com.gym.dao.ITraineeDao;
 import com.gym.model.Trainee;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.JsonUtils;
+import com.gym.utils.JsonUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,7 +51,7 @@ class TraineeDaoTest {
     void deleteTraineeTest() {
         Trainee trainee = dao.getById(216);
         assertEquals("Maxym", trainee.getFirstName());
-        dao.delete(trainee);
+        dao.delete(216);
         Trainee deletedTrainee = dao.getById(216);
         assertNull(deletedTrainee);
     }
