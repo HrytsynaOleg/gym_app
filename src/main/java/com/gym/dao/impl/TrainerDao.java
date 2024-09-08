@@ -4,7 +4,7 @@ import com.gym.dao.ITrainerDao;
 import com.gym.model.Trainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import utils.StorageUtils;
+import com.gym.utils.StorageUtils;
 
 import java.util.List;
 import java.util.Map;

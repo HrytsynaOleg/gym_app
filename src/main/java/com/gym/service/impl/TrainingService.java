@@ -4,21 +4,19 @@ import com.gym.dao.ITrainingDao;
 import com.gym.model.Training;
 import com.gym.model.TrainingType;
 import com.gym.service.ITrainingService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Service
-@Slf4j
 public class TrainingService implements ITrainingService {
     @Autowired
     private ITrainingDao trainingDao;
 
     @Override
     public Training createTraining(long traineeId, long trainerId, String trainingName, TrainingType trainingType,
-                                   Date trainingDate, int duration) {
+                                   LocalDate trainingDate, int duration) {
         Training training = new Training();
         training.setId(0);
         training.setTraineeId(traineeId);

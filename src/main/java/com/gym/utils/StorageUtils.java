@@ -1,4 +1,4 @@
-package utils;
+package com.gym.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.model.User;

@@ -6,7 +6,10 @@ import com.gym.model.Trainee;
 import com.gym.service.ITraineeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import utils.StringUtils;
+import com.gym.utils.StringUtils;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class TraineeService implements ITraineeService {
@@ -30,7 +33,9 @@ public class TraineeService implements ITraineeService {
         trainee.setUserName(userName);
         trainee.setIsActive(true);
         trainee.setAddress(address);
-        trainee.setDateOfBirth(dateOfBirth);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(dateOfBirth, formatter);
+        trainee.setDateOfBirth(localDate);
         return traineeDao.add(trainee);
     }
 
@@ -40,8 +45,8 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public void delete(Trainee trainee) {
-        traineeDao.delete(trainee);
+    public void delete(long id) {
+        traineeDao.delete(id);
     }
 
     @Override

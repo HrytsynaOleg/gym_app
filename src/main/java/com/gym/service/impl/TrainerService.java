@@ -7,7 +7,7 @@ import com.gym.model.TrainingType;
 import com.gym.service.ITrainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import utils.StringUtils;
+import com.gym.utils.StringUtils;
 
 @Service
 public class TrainerService implements ITrainerService {

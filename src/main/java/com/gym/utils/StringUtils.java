@@ -1,4 +1,4 @@
-package utils;
+package com.gym.utils;
 
 import java.util.Random;
 import java.util.regex.Matcher;
