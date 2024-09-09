@@ -24,13 +24,14 @@ public class TrainerService implements ITrainerService {
             userName = userName + usersCount;
         }
         String password = StringUtils.generateRandomString(10);
-        Trainer trainer = new Trainer();
-        trainer.setFirstName(firstName);
-        trainer.setLastName(lastName);
-        trainer.setTrainingType(trainingType);
-        trainer.setPassword(password);
-        trainer.setUserName(userName);
-        trainer.setIsActive(true);
+        Trainer trainer = Trainer.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(userName)
+                .password(password)
+                .isActive(true)
+                .trainingType(trainingType)
+                .build();
         return trainerDao.add(trainer);
     }
 

@@ -7,3 +7,19 @@
 2024-09-09 23:38:06 ERROR Source file error - C:/GYM/trainees.json
 2024-09-09 23:38:06 ERROR Source file error - C:/GYM/training.json
 2024-09-09 23:38:06 INFO Storage initialized
+2024-09-09 23:43:46 INFO Start storage initialization
+2024-09-09 23:43:46 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-09 23:43:46 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-09 23:43:46 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-09 23:43:46 INFO Finish storage initialization
+2024-09-09 23:44:55 INFO Start storage initialization
+2024-09-09 23:44:55 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-09 23:44:55 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-09 23:44:55 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-09 23:44:55 INFO Finish storage initialization
+2024-09-10 00:06:48 INFO New trainee created
+2024-09-10 00:24:55 INFO New trainee created
+2024-09-10 00:25:50 INFO New trainee created
+2024-09-10 00:29:22 INFO New trainee created
+2024-09-10 00:39:58 INFO New trainee created
+2024-09-10 00:53:59 INFO New trainee created

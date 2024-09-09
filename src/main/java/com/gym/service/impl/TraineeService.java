@@ -4,6 +4,7 @@ import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
 import com.gym.model.Trainee;
 import com.gym.service.ITraineeService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gym.utils.StringUtils;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Service
+@Log4j2
 public class TraineeService implements ITraineeService {
     @Autowired
     private ITrainerDao trainerDao;
@@ -26,17 +28,20 @@ public class TraineeService implements ITraineeService {
             userName = userName + usersCount;
         }
         String password = StringUtils.generateRandomString(10);
-        Trainee trainee = new Trainee();
-        trainee.setFirstName(firstName);
-        trainee.setLastName(lastName);
-        trainee.setPassword(password);
-        trainee.setUserName(userName);
-        trainee.setIsActive(true);
-        trainee.setAddress(address);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dateOfBirth, formatter);
-        trainee.setDateOfBirth(localDate);
-        return traineeDao.add(trainee);
+        Trainee trainee = Trainee.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(userName)
+                .password(password)
+                .isActive(true)
+                .address(address)
+                .dateOfBirth(localDate)
+                .build();
+        Trainee newTrainee = traineeDao.add(trainee);
+        log.info("New trainee created");
+        return newTrainee;
     }
 
     @Override
