@@ -11,8 +11,13 @@ import java.util.Map;
 
 @Repository
 public class TraineeDao implements ITraineeDao {
+
+    private final Map<String, Trainee> storage;
+
     @Autowired
-    private Map<String, Trainee> storage;
+    public TraineeDao(Map<String, Trainee> storage) {
+        this.storage = storage;
+    }
 
     @Override
     public Trainee add(Trainee trainee) {

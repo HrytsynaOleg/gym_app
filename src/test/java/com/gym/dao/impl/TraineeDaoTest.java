@@ -3,38 +3,49 @@ package com.gym.dao.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITraineeDao;
 import com.gym.model.Trainee;
+import com.gym.utils.StorageUtils;
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.gym.utils.JsonUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@Log4j2
 class TraineeDaoTest {
-    @Autowired
-    ITraineeDao dao;
+
+    private final ITraineeDao dao;
+    private Trainee serviceInputTrainee;
+
+    TraineeDaoTest() {
+        Map<String, Trainee> storage = StorageUtils.buildMapFromFile("C:/GYM/trainees.json",
+                new TypeReference<>() {
+                });
+        this.dao = new TraineeDao(storage);
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainee.json")) {
+            this.serviceInputTrainee = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
+            });
+        } catch (IOException ex) {
+            log.error("Error reading source file");
+        }
+    }
 
     @Test
     void addTraineeTest() {
-        Trainee testTrainee;
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainee.json")) {
-            testTrainee = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
-            });
-            Trainee newTrainee = dao.add(testTrainee);
-            Trainee trainee = dao.getById(newTrainee.getId());
-            assertEquals(newTrainee.getId(), trainee.getId());
-            assertEquals(newTrainee.getFirstName(), trainee.getFirstName());
-            assertEquals(newTrainee.getLastName(), trainee.getLastName());
-            assertEquals(newTrainee.getUserName(), trainee.getUserName());
-            assertEquals(newTrainee.getPassword(), trainee.getPassword());
-            assertTrue(trainee.getIsActive());
-            assertEquals(newTrainee.getAddress(), trainee.getAddress());
-            assertEquals(newTrainee.getDateOfBirth(), trainee.getDateOfBirth());
-        } catch (IOException ex) {
-            System.err.println(ex.getCause());
-        }
+            Trainee newTrainee = dao.add(serviceInputTrainee);
+            Trainee testNewTrainee = dao.getById(newTrainee.getId());
+
+            assertNotNull(testNewTrainee);
+            assertEquals(newTrainee.getId(), testNewTrainee.getId());
+            assertEquals(serviceInputTrainee.getFirstName(), testNewTrainee.getFirstName());
+            assertEquals(serviceInputTrainee.getLastName(), testNewTrainee.getLastName());
+            assertEquals(serviceInputTrainee.getUserName(), testNewTrainee.getUserName());
+            assertEquals(serviceInputTrainee.getPassword(), testNewTrainee.getPassword());
+            assertTrue(serviceInputTrainee.getIsActive());
+            assertEquals(serviceInputTrainee.getAddress(), testNewTrainee.getAddress());
+            assertEquals(serviceInputTrainee.getDateOfBirth(), testNewTrainee.getDateOfBirth());
     }
 
     @Test

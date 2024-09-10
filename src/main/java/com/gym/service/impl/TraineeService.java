@@ -31,6 +31,7 @@ public class TraineeService implements ITraineeService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dateOfBirth, formatter);
         Trainee trainee = Trainee.builder()
+                .id(0)
                 .firstName(firstName)
                 .lastName(lastName)
                 .userName(userName)

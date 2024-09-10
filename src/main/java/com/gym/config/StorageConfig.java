@@ -5,7 +5,6 @@ import com.gym.model.Trainee;
 import com.gym.model.Trainer;
 import com.gym.model.Training;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
