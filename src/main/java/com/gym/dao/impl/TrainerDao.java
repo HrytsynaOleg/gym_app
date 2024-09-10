@@ -11,11 +11,16 @@ import java.util.Map;
 
 @Repository
 public class TrainerDao implements ITrainerDao {
+
+    private final Map<String, Trainer> storage;
+
     @Autowired
-    private Map<String, Trainer> storage;
+    public TrainerDao(Map<String, Trainer> storage) {
+        this.storage = storage;
+    }
 
     @Override
-    public Trainer add(Trainer trainer) {
+    public Trainer create(Trainer trainer) {
         long id = StorageUtils.generateId(storage);
         trainer.setId(id);
         storage.put(String.valueOf(id), trainer);
@@ -28,7 +33,7 @@ public class TrainerDao implements ITrainerDao {
     }
 
     @Override
-    public Trainer getById(long id) {
+    public Trainer get(long id) {
         return storage.get(String.valueOf(id));
     }
 

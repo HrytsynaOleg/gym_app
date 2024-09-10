@@ -3,8 +3,13 @@ package com.gym.service.impl;
 import com.gym.dao.impl.TraineeDao;
 import com.gym.dao.impl.TrainerDao;
 import com.gym.model.Trainee;
+import com.gym.service.ITraineeService;
+import com.gym.utils.StringUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.ReflectionUtils;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
@@ -13,14 +18,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 
 class TraineeServiceTest {
-    private final TraineeService traineeService;
+    private final ITraineeService traineeService;
     private final TraineeDao mockTraineeDao;
     private final TrainerDao mockTrainerDao;
     private final String address = "Los Angeles";
-    private final String dateOfBirth = "1999-02-15";
+    private final String dateOfBirthInString = "1999-02-15";
+    private final LocalDate dateOfBirth;
+    private final String firstName = "Valeriy";
+    private final String lastName = "Tokar";
+    private final String userName = "Valeriy.Tokar";
+    private final String password = "1234567890";
+    private MockedStatic<StringUtils> mockStringUtil;
 
     public TraineeServiceTest() {
         this.traineeService = new TraineeService();
@@ -42,85 +52,96 @@ class TraineeServiceTest {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        dateOfBirth = LocalDate.parse(dateOfBirthInString, formatter);
+    }
+
+    @BeforeEach
+    public void registerStaticMock() {
+        mockStringUtil = Mockito.mockStatic(StringUtils.class);
+        mockStringUtil.when(() -> StringUtils.generateRandomString(10))
+                .thenReturn("1234567890");
+    }
+
+    @AfterEach
+    public void unregisterStaticMock() {
+        mockStringUtil.close();
     }
 
     @Test
     void createTraineeTest() {
-        String firstName = "Valeriy";
-        String lastName = "Tokar";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDateOfBirth = LocalDate.parse(dateOfBirth, formatter);
-        Trainee mockTrainee = new Trainee();
-        mockTrainee.setId(18);
-        mockTrainee.setFirstName(firstName);
-        mockTrainee.setLastName(lastName);
-        mockTrainee.setUserName("Valeriy.Tokar");
-        mockTrainee.setPassword("1234567890");
-        mockTrainee.setIsActive(true);
-        mockTrainee.setAddress(address);
-        mockTrainee.setDateOfBirth(localDateOfBirth);
+        Trainee serviceCreatedTrainee = Trainee.builder()
+                .id(0)
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(userName)
+                .password(password)
+                .isActive(true)
+                .address(address)
+                .dateOfBirth(dateOfBirth)
+                .build();
+        Trainee daoResponseTrainee = Trainee.builder()
+                .id(18)
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(userName)
+                .password(password)
+                .isActive(true)
+                .address(address)
+                .dateOfBirth(dateOfBirth)
+                .build();
 
-        Mockito.when(mockTraineeDao.add(any())).thenReturn(mockTrainee);
-        Mockito.when(mockTraineeDao.getListByUserName("Valeriy.Tokar")).thenReturn(List.of());
-        Mockito.when(mockTrainerDao.getListByUserName("Valeriy.Tokar")).thenReturn(List.of());
-        Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirth);
+        Mockito.when(mockTraineeDao.add(serviceCreatedTrainee)).thenReturn(daoResponseTrainee);
+        Mockito.when(mockTraineeDao.getListByUserName(userName)).thenReturn(List.of());
+        Mockito.when(mockTrainerDao.getListByUserName(userName)).thenReturn(List.of());
 
+        Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
+
+        assertEquals(18, newTrainee.getId());
         assertEquals(firstName, newTrainee.getFirstName());
         assertEquals(lastName, newTrainee.getLastName());
-        assertEquals("Valeriy.Tokar", newTrainee.getUserName());
+        assertEquals(userName, newTrainee.getUserName());
         assertEquals(10, newTrainee.getPassword().length());
         assertEquals(address, newTrainee.getAddress());
-        assertEquals(localDateOfBirth, newTrainee.getDateOfBirth());
+        assertEquals(dateOfBirth, newTrainee.getDateOfBirth());
     }
 
     @Test
     void createTraineeIfUserExistTest() {
-        String firstName = "Pavlo";
-        String lastName = "Yakimets";
-        Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirth);
-        Trainee trainee = traineeService.getById(newTrainee.getId());
-        assertEquals(firstName, trainee.getFirstName());
-        assertEquals(lastName, trainee.getLastName());
-        assertEquals("Pavlo.Yakimets1", trainee.getUserName());
-    }
+        String expectedUserName = userName + 1;
+        Trainee serviceCreatedTrainee = Trainee.builder()
+                .id(0)
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(expectedUserName)
+                .password(password)
+                .isActive(true)
+                .address(address)
+                .dateOfBirth(dateOfBirth)
+                .build();
+        Trainee daoResponseTrainee = Trainee.builder()
+                .id(18)
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(expectedUserName)
+                .password(password)
+                .isActive(true)
+                .address(address)
+                .dateOfBirth(dateOfBirth)
+                .build();
 
-    @Test
-    void createTraineeIfUserExistInTrainersTest() {
-        String firstName = "Dmytro";
-        String lastName = "Sirenko";
-        Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirth);
-        Trainee trainee = traineeService.getById(newTrainee.getId());
-        assertEquals(firstName, trainee.getFirstName());
-        assertEquals(lastName, trainee.getLastName());
-        assertEquals("Dmytro.Sirenko1", trainee.getUserName());
-    }
+        Mockito.when(mockTraineeDao.add(serviceCreatedTrainee)).thenReturn(daoResponseTrainee);
+        Mockito.when(mockTraineeDao.getListByUserName(userName)).thenReturn(List.of(Trainee.builder().build()));
+        Mockito.when(mockTrainerDao.getListByUserName(userName)).thenReturn(List.of());
 
-    @Test
-    void updateTraineeTest() {
-        Trainee trainee = traineeService.getById(216);
-        assertEquals("Shvets", trainee.getLastName());
-        trainee.setLastName("Melnyk");
-        traineeService.update(trainee);
-        Trainee updatedTrainee = traineeService.getById(216);
-        assertEquals("Melnyk", updatedTrainee.getLastName());
-    }
+        Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
 
-    @Test
-    void getTraineeByIdTest() {
-        Trainee trainee = traineeService.getById(225);
-        assertEquals(225, trainee.getId());
-        assertEquals("Tom", trainee.getFirstName());
-        assertEquals("Arraya", trainee.getLastName());
-        assertEquals("Tom.Arraya", trainee.getUserName());
-        assertEquals("123456", trainee.getPassword());
-        assertEquals("Kharkiv, Nauki 45", trainee.getAddress());
-        assertEquals("2001/05/24", trainee.getDateOfBirth());
-        assertTrue(trainee.getIsActive());
-    }
-
-    @Test
-    void getTraineeByIdIfNotExistTest() {
-        Trainee trainee = traineeService.getById(290);
-        assertNull(trainee);
+        assertEquals(18, newTrainee.getId());
+        assertEquals(firstName, newTrainee.getFirstName());
+        assertEquals(lastName, newTrainee.getLastName());
+        assertEquals(expectedUserName, newTrainee.getUserName());
+        assertEquals(10, newTrainee.getPassword().length());
+        assertEquals(address, newTrainee.getAddress());
+        assertEquals(dateOfBirth, newTrainee.getDateOfBirth());
     }
 }

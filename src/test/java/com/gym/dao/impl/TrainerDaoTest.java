@@ -4,49 +4,60 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainerDao;
 import com.gym.model.Trainer;
 import com.gym.model.TrainingType;
+import com.gym.utils.StorageUtils;
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.gym.utils.JsonUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@Log4j2
 class TrainerDaoTest {
-    @Autowired
-    ITrainerDao dao;
 
-    @Test
-    void addTrainerTest() {
-        Trainer testTrainer;
+    private final ITrainerDao dao;
+    private Trainer serviceInputTrainer;
+
+    TrainerDaoTest() {
+        Map<String, Trainer> storage = StorageUtils.buildMapFromFile("C:/GYM/trainers.json",
+                new TypeReference<>() {
+                });
+        this.dao = new TrainerDao(storage);
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
-            testTrainer = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
+            this.serviceInputTrainer = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
-            Trainer newTrainer = dao.add(testTrainer);
-            Trainer trainer = dao.getById(newTrainer.getId());
-            assertEquals(newTrainer.getId(), trainer.getId());
-            assertEquals(newTrainer.getFirstName(), trainer.getFirstName());
-            assertEquals(newTrainer.getLastName(), trainer.getLastName());
-            assertEquals(newTrainer.getTrainingType(), trainer.getTrainingType());
         } catch (IOException ex) {
-            System.err.println(ex.getCause());
+            log.error("Error reading source file");
         }
     }
 
     @Test
+    void createTrainerTest() {
+            Trainer newTrainer = dao.create(serviceInputTrainer);
+            Trainer testNewTrainer = dao.get(newTrainer.getId());
+
+            assertNotNull(testNewTrainer);
+            assertEquals(newTrainer.getId(), testNewTrainer.getId());
+            assertEquals(serviceInputTrainer.getFirstName(), testNewTrainer.getFirstName());
+            assertEquals(serviceInputTrainer.getLastName(), testNewTrainer.getLastName());
+            assertEquals(serviceInputTrainer.getTrainingType(), testNewTrainer.getTrainingType());
+    }
+
+    @Test
     void updateTrainerTest() {
-        Trainer trainer = dao.getById(124);
+        Trainer trainer = dao.get(124);
         assertEquals(TrainingType.YOGA, trainer.getTrainingType());
         trainer.setTrainingType(TrainingType.STRETCHING);
         dao.update(trainer);
-        Trainer updatedTrainer = dao.getById(124);
+        Trainer updatedTrainer = dao.get(124);
         assertEquals(TrainingType.STRETCHING, updatedTrainer.getTrainingType());
     }
 
     @Test
-    void getByIdTest() {
-        Trainer trainer = dao.getById(125);
+    void getTest() {
+        Trainer trainer = dao.get(125);
         assertEquals(125, trainer.getId());
         assertEquals("Dmytro", trainer.getFirstName());
         assertEquals("Sirenko", trainer.getLastName());
@@ -57,8 +68,8 @@ class TrainerDaoTest {
     }
 
     @Test
-    void getByIdIfNotExistTest() {
-        Trainer trainer = dao.getById(180);
+    void getIfNotExistTest() {
+        Trainer trainer = dao.get(180);
         assertNull(trainer);
     }
 }

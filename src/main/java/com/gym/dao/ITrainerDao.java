@@ -5,8 +5,8 @@ import com.gym.model.Trainer;
 import java.util.List;
 
 public interface ITrainerDao {
-    Trainer add(Trainer trainer);
+    Trainer create(Trainer trainer);
     void update(Trainer trainer);
-    Trainer getById(long id);
+    Trainer get(long id);
     List<Trainer> getListByUserName(String userName);
 }

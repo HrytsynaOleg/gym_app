@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.model.Trainee;
 import com.gym.model.Trainer;
 import com.gym.model.Training;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +18,7 @@ import java.util.Map;
 @Configuration
 @ComponentScan(basePackages = "com.gym")
 @PropertySource("classpath:application.properties")
+@Log4j2
 public class StorageConfig {
 
     private Map<String, Trainer> trainerStorage;
@@ -46,11 +48,13 @@ public class StorageConfig {
 
     @PostConstruct
     void initStorage(){
+        log.info("Start storage initialization");
         trainerStorage = StorageUtils.buildMapFromFile(trainerStorageFilePath, new TypeReference<>() {
         });
         traineeStorage = StorageUtils.buildMapFromFile(traineeStorageFilePath, new TypeReference<>() {
         });
         trainingStorage = StorageUtils.buildMapFromFile(trainingStorageFilePath, new TypeReference<>() {
         });
+        log.info("Finish storage initialization");
     }
 }

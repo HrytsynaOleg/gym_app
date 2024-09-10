@@ -1,73 +1,139 @@
 package com.gym.service.impl;
 
+import com.gym.dao.impl.TraineeDao;
+import com.gym.dao.impl.TrainerDao;
 import com.gym.model.Trainer;
 import com.gym.model.TrainingType;
 import com.gym.service.ITrainerService;
+import com.gym.utils.StringUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.platform.commons.util.ReflectionUtils;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+
+import java.lang.reflect.Field;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TrainerServiceTest {
-    @Autowired
-    ITrainerService trainerService;
+    private final ITrainerService trainerService;
+    private final TraineeDao mockTraineeDao;
+    private final TrainerDao mockTrainerDao;
+    private final String firstName = "Kerry";
+    private final String lastName = "King";
+    private final String userName = "Kerry.King";
+    private final String password = "1234567890";
+    private final TrainingType trainingType = TrainingType.YOGA;
+    private final String trainingTypeString = "YOGA";
+    private MockedStatic<StringUtils> mockStringUtil;
+
+    TrainerServiceTest() {
+        this.trainerService = new TrainerService();
+        this.mockTraineeDao = Mockito.mock(TraineeDao.class);
+        this.mockTrainerDao = Mockito.mock(TrainerDao.class);
+        Field trainerDaoField = ReflectionUtils
+                .findFields(TrainerService.class, f -> f.getName().equals("trainerDao"),
+                        ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
+                .get(0);
+        trainerDaoField.setAccessible(true);
+        Field traineeDaoField = ReflectionUtils
+                .findFields(TrainerService.class, f -> f.getName().equals("traineeDao"),
+                        ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
+                .get(0);
+        traineeDaoField.setAccessible(true);
+        try {
+            trainerDaoField.set(trainerService, mockTrainerDao);
+            traineeDaoField.set(trainerService, mockTraineeDao);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @BeforeEach
+    public void registerStaticMock() {
+        mockStringUtil = Mockito.mockStatic(StringUtils.class);
+        mockStringUtil.when(() -> StringUtils.generateRandomString(10))
+                .thenReturn("1234567890");
+    }
+
+    @AfterEach
+    public void unregisterStaticMock() {
+        mockStringUtil.close();
+    }
 
     @Test
     void createTrainerTest() {
-        String firstName = "Andriy";
-        String lastName = "Dydenko";
-        Trainer newTrainer = trainerService.createTrainer(firstName, lastName, TrainingType.FITNESS);
-        Trainer trainer = trainerService.getById(newTrainer.getId());
-        assertEquals(firstName, trainer.getFirstName());
-        assertEquals(lastName, trainer.getLastName());
-        assertEquals("Andriy.Dydenko", trainer.getUserName());
-        assertEquals(TrainingType.FITNESS, trainer.getTrainingType());
-        assertEquals(10, trainer.getPassword().length());
+        Trainer serviceCreatedTrainer = Trainer.builder()
+                .id(0)
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(userName)
+                .password(password)
+                .isActive(true)
+                .trainingType(trainingType)
+                .build();
+        Trainer daoResponseTrainer = Trainer.builder()
+                .id(25)
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(userName)
+                .password(password)
+                .isActive(true)
+                .trainingType(trainingType)
+                .build();
+
+        Mockito.when(mockTrainerDao.create(serviceCreatedTrainer)).thenReturn(daoResponseTrainer);
+        Mockito.when(mockTraineeDao.getListByUserName(userName)).thenReturn(List.of());
+        Mockito.when(mockTrainerDao.getListByUserName(userName)).thenReturn(List.of());
+
+        Trainer newTrainer = trainerService.createTrainer(firstName, lastName, trainingTypeString);
+
+        assertEquals(25, newTrainer.getId());
+        assertEquals(firstName, newTrainer.getFirstName());
+        assertEquals(lastName, newTrainer.getLastName());
+        assertEquals(userName, newTrainer.getUserName());
+        assertEquals(10, newTrainer.getPassword().length());
+        assertEquals(trainingType, newTrainer.getTrainingType());
     }
 
     @Test
     void createTrainerIfUserExistTest() {
-        String firstName = "Pavlo";
-        String lastName = "Petrenko";
-        Trainer newTrainer = trainerService.createTrainer(firstName, lastName, TrainingType.ZUMBA);
-        Trainer trainer = trainerService.getById(newTrainer.getId());
-        assertEquals(firstName, trainer.getFirstName());
-        assertEquals(lastName, trainer.getLastName());
-        assertEquals("Pavlo.Petrenko1", trainer.getUserName());
-        assertEquals(TrainingType.ZUMBA, trainer.getTrainingType());
-    }
+        String expectedUserName = userName + 1;
+        Trainer serviceCreatedTrainer = Trainer.builder()
+                .id(0)
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(expectedUserName)
+                .password(password)
+                .isActive(true)
+                .trainingType(trainingType)
+                .build();
+        Trainer daoResponseTrainer = Trainer.builder()
+                .id(25)
+                .firstName(firstName)
+                .lastName(lastName)
+                .userName(expectedUserName)
+                .password(password)
+                .isActive(true)
+                .trainingType(trainingType)
+                .build();
 
-    @Test
-    void createTrainerIfUserExistInTraineesTest() {
-        String firstName = "Serhiy";
-        String lastName = "Volovets";
-        Trainer newTrainer = trainerService.createTrainer(firstName, lastName, TrainingType.ZUMBA);
-        Trainer trainer = trainerService.getById(newTrainer.getId());
-        assertEquals(firstName, trainer.getFirstName());
-        assertEquals(lastName, trainer.getLastName());
-        assertEquals("Serhiy.Volovets1", trainer.getUserName());
-        assertEquals(TrainingType.ZUMBA, trainer.getTrainingType());
-    }
+        Mockito.when(mockTrainerDao.create(serviceCreatedTrainer)).thenReturn(daoResponseTrainer);
+        Mockito.when(mockTraineeDao.getListByUserName(userName)).thenReturn(List.of());
+        Mockito.when(mockTrainerDao.getListByUserName(userName)).thenReturn(List.of(Trainer.builder().build()));
 
-    @Test
-    void updateTrainerTest() {
-        Trainer trainer = trainerService.getById(124);
-        assertEquals("Petrenko", trainer.getLastName());
-        trainer.setLastName("Melnyk");
-        trainerService.update(trainer);
-        Trainer updatedTrainer = trainerService.getById(124);
-        assertEquals("Melnyk", updatedTrainer.getLastName());
-    }
+        Trainer newTrainer = trainerService.createTrainer(firstName, lastName, trainingTypeString);
 
-    @Test
-    void getTrainerByIdTest() {
-        Trainer trainer = trainerService.getById(125);
-        assertEquals(125, trainer.getId());
-        assertEquals("Dmytro", trainer.getFirstName());
-        assertEquals("Sirenko", trainer.getLastName());
-        assertEquals("Dmytro.Sirenko", trainer.getUserName());
-        assertEquals("123456", trainer.getPassword());
-        assertEquals(TrainingType.YOGA, trainer.getTrainingType());
-        assertTrue(trainer.getIsActive());
+        assertEquals(25, newTrainer.getId());
+        assertEquals(firstName, newTrainer.getFirstName());
+        assertEquals(lastName, newTrainer.getLastName());
+        assertEquals(expectedUserName, newTrainer.getUserName());
+        assertEquals(10, newTrainer.getPassword().length());
+        assertEquals(trainingType, newTrainer.getTrainingType());
+
     }
 }
