@@ -4,8 +4,10 @@ import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
 import com.gym.model.Trainee;
 import com.gym.service.ITraineeService;
+import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.gym.utils.StringUtils;
 
@@ -19,15 +21,15 @@ public class TraineeService implements ITraineeService {
     private ITrainerDao trainerDao;
     @Autowired
     private ITraineeDao traineeDao;
+    @Value("${password.length}")
+    private Integer passwordLength;
 
     @Override
     public Trainee createTrainee(String firstName, String lastName, String address, String dateOfBirth) {
-        String userName = firstName + "." + lastName;
-        int usersCount = trainerDao.getListByUserName(userName).size() + traineeDao.getListByUserName(userName).size();
-        if (usersCount > 0) {
-            userName = userName + usersCount;
-        }
-        String password = StringUtils.generateRandomString(10);
+        long usersCount = trainerDao.getUserCountByUserName(firstName, lastName) +
+                traineeDao.getUserCountByUserName(firstName, lastName);
+        String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
+        String password = StringUtils.generateRandomString(passwordLength);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dateOfBirth, formatter);
         Trainee trainee = Trainee.builder()

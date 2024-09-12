@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.gym.utils.StorageUtils;
 
-import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -43,8 +42,9 @@ public class TraineeDao implements ITraineeDao {
     }
 
     @Override
-    public List<Trainee> getListByUserName(String userName) {
-        return StorageUtils.findByUserName(storage, userName);
+    public long getUserCountByUserName(String firstName, String lastName) {
+        String userName = firstName + "." + lastName;
+        return StorageUtils.getUserCountByUserName(storage, userName);
     }
 }
 

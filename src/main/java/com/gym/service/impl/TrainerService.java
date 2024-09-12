@@ -5,8 +5,10 @@ import com.gym.dao.ITrainerDao;
 import com.gym.model.Trainer;
 import com.gym.model.TrainingType;
 import com.gym.service.ITrainerService;
+import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.gym.utils.StringUtils;
 
@@ -17,15 +19,15 @@ public class TrainerService implements ITrainerService {
     private ITrainerDao trainerDao;
     @Autowired
     private ITraineeDao traineeDao;
+    @Value("${password.length}")
+    private Integer passwordLength;
 
     @Override
     public Trainer createTrainer(String firstName, String lastName, String trainingTypeString) {
-        String userName = firstName + "." + lastName;
-        int usersCount = trainerDao.getListByUserName(userName).size() + traineeDao.getListByUserName(userName).size();
-        if (usersCount > 0) {
-            userName = userName + usersCount;
-        }
-        String password = StringUtils.generateRandomString(10);
+        long usersCount = trainerDao.getUserCountByUserName(firstName, lastName) +
+                traineeDao.getUserCountByUserName(firstName, lastName);
+        String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
+        String password = StringUtils.generateRandomString(passwordLength);
         TrainingType trainingType = TrainingType.valueOf(trainingTypeString);
         Trainer trainer = Trainer.builder()
                 .id(0)
