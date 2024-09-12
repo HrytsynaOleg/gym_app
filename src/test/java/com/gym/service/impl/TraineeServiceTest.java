@@ -15,7 +15,6 @@ import org.mockito.Mockito;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,6 +29,7 @@ class TraineeServiceTest {
     private final String lastName = "Tokar";
     private final String userName = "Valeriy.Tokar";
     private final String password = "1234567890";
+    private final Integer passwordLength = 10;
     private MockedStatic<StringUtils> mockStringUtil;
 
     public TraineeServiceTest() {
@@ -46,9 +46,15 @@ class TraineeServiceTest {
                         ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
                 .get(0);
         traineeDaoField.setAccessible(true);
+        Field passwordLengthField = ReflectionUtils
+                .findFields(TraineeService.class, f -> f.getName().equals("passwordLength"),
+                        ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
+                .get(0);
+        passwordLengthField.setAccessible(true);
         try {
             trainerDaoField.set(traineeService, mockTrainerDao);
             traineeDaoField.set(traineeService, mockTraineeDao);
+            passwordLengthField.set(traineeService, passwordLength);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -59,7 +65,7 @@ class TraineeServiceTest {
     @BeforeEach
     public void registerStaticMock() {
         mockStringUtil = Mockito.mockStatic(StringUtils.class);
-        mockStringUtil.when(() -> StringUtils.generateRandomString(10))
+        mockStringUtil.when(() -> StringUtils.generateRandomString(passwordLength))
                 .thenReturn("1234567890");
     }
 
@@ -92,8 +98,8 @@ class TraineeServiceTest {
                 .build();
 
         Mockito.when(mockTraineeDao.add(serviceCreatedTrainee)).thenReturn(daoResponseTrainee);
-        Mockito.when(mockTraineeDao.getListByUserName(userName)).thenReturn(List.of());
-        Mockito.when(mockTrainerDao.getListByUserName(userName)).thenReturn(List.of());
+        Mockito.when(mockTraineeDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
+        Mockito.when(mockTrainerDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
 
         Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
 
@@ -101,7 +107,7 @@ class TraineeServiceTest {
         assertEquals(firstName, newTrainee.getFirstName());
         assertEquals(lastName, newTrainee.getLastName());
         assertEquals(userName, newTrainee.getUserName());
-        assertEquals(10, newTrainee.getPassword().length());
+        assertEquals(passwordLength, newTrainee.getPassword().length());
         assertEquals(address, newTrainee.getAddress());
         assertEquals(dateOfBirth, newTrainee.getDateOfBirth());
     }
@@ -131,8 +137,8 @@ class TraineeServiceTest {
                 .build();
 
         Mockito.when(mockTraineeDao.add(serviceCreatedTrainee)).thenReturn(daoResponseTrainee);
-        Mockito.when(mockTraineeDao.getListByUserName(userName)).thenReturn(List.of(Trainee.builder().build()));
-        Mockito.when(mockTrainerDao.getListByUserName(userName)).thenReturn(List.of());
+        Mockito.when(mockTraineeDao.getUserCountByUserName(firstName, lastName)).thenReturn(1L);
+        Mockito.when(mockTrainerDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
 
         Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
 
@@ -140,7 +146,7 @@ class TraineeServiceTest {
         assertEquals(firstName, newTrainee.getFirstName());
         assertEquals(lastName, newTrainee.getLastName());
         assertEquals(expectedUserName, newTrainee.getUserName());
-        assertEquals(10, newTrainee.getPassword().length());
+        assertEquals(passwordLength, newTrainee.getPassword().length());
         assertEquals(address, newTrainee.getAddress());
         assertEquals(dateOfBirth, newTrainee.getDateOfBirth());
     }

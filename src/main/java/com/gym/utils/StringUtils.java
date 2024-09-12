@@ -5,13 +5,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtils {
+    private static final int START_NUMERALS_INTERVAL = 48;
+    private static final int END_NUMERALS_INTERVAL = 57;
+    private static final int START_BIG_LETTERS_INTERVAL = 65;
+    private static final int END_BIG_LETTERS_INTERVAL = 90;
+    private static final int START_SMALL_LETTERS_INTERVAL = 97;
+    private static final int END_SMALL_LETTERS_INTERVAL = 122;
+
     public static String generateRandomString(int length){
-        int leftLimit = 48;
-        int rightLimit = 122;
         Random random = new Random();
 
-        return random.ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+        return random.ints(START_NUMERALS_INTERVAL, END_SMALL_LETTERS_INTERVAL + 1)
+                .filter(i -> (i <= END_NUMERALS_INTERVAL || i >= START_BIG_LETTERS_INTERVAL) &&
+                        (i <= END_BIG_LETTERS_INTERVAL || i >= START_SMALL_LETTERS_INTERVAL))
                 .limit(length)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();

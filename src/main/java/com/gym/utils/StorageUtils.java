@@ -3,11 +3,9 @@ package com.gym.utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.model.User;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,9 +31,17 @@ public class StorageUtils {
         return maxValue + 1;
     }
 
-    public static <T extends User> List<T> findByUserName(Map<String, T> storageMap, String userName) {
+    public static <T extends User> long getUserCountByUserName(Map<String, T> storageMap, String userName) {
         return storageMap.values().stream()
                 .filter(s -> StringUtils.isMatch(s.getUserName(), "^" + userName + "\\d*+\\z"))
-                .toList();
+                .count();
+    }
+
+    public static String generateUserName(String firstName, String lastName, long existUserCount) {
+        String userName = firstName + "." + lastName;
+        if (existUserCount > 0) {
+            userName = userName + existUserCount;
+        }
+        return userName;
     }
 }
