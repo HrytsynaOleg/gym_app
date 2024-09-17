@@ -1,5 +1,6 @@
 package com.gym.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,10 +8,11 @@ import javax.persistence.*;
 @Entity
 @Table(name="user")
 @Data
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-//    @Column(name="user_id")
+    @Column(name="id")
     private Long id;
     @Column(name="first_name")
     private String firstName;
@@ -22,6 +24,8 @@ public class User {
     private String password;
     @Column(name="is_active")
     private boolean isActive;
+    @OneToOne(mappedBy = "user")
+    private Trainer trainer;
 
     public boolean getIsActive() {
         return this.isActive;

@@ -8,7 +8,7 @@ import lombok.extern.jackson.Jacksonized;
 @Data
 @SuperBuilder
 @Jacksonized
-public class Trainer extends User{
+public class TrainerModel extends UserModel {
     long id;
     TrainingType trainingType;
 }

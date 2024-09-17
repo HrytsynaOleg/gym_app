@@ -1,7 +1,7 @@
 package com.gym.service.impl;
 
 import com.gym.dao.impl.TrainingDao;
-import com.gym.model.Training;
+import com.gym.model.TrainingModel;
 import com.gym.model.TrainingType;
 import com.gym.service.ITrainingService;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TrainingServiceTest {
+class TrainingModelServiceTest {
     private final ITrainingService trainingService;
     private final TrainingDao mockTrainingDao;
     private final long trainerId = 256;
@@ -25,7 +25,7 @@ class TrainingServiceTest {
     private final TrainingType trainingType = TrainingType.FITNESS;
     private int duration = 60;
 
-    public TrainingServiceTest() {
+    public TrainingModelServiceTest() {
         this.trainingService = new TrainingService();
         this.mockTrainingDao = Mockito.mock(TrainingDao.class);
 
@@ -43,7 +43,7 @@ class TrainingServiceTest {
 
     @Test
     void createTraineeTest() {
-        Training serviceCreatedTraining = Training.builder()
+        TrainingModel serviceCreatedTrainingModel = TrainingModel.builder()
                 .id(0)
                 .traineeId(traineeId)
                 .trainerId(trainerId)
@@ -52,7 +52,7 @@ class TrainingServiceTest {
                 .trainingDate(trainingDate)
                 .duration(duration)
                 .build();
-        Training daoResponseTraining = Training.builder()
+        TrainingModel daoResponseTrainingModel = TrainingModel.builder()
                 .id(256)
                 .traineeId(traineeId)
                 .trainerId(trainerId)
@@ -62,17 +62,17 @@ class TrainingServiceTest {
                 .duration(duration)
                 .build();
 
-        Mockito.when(mockTrainingDao.create(serviceCreatedTraining)).thenReturn(daoResponseTraining);
+        Mockito.when(mockTrainingDao.create(serviceCreatedTrainingModel)).thenReturn(daoResponseTrainingModel);
 
-        Training newTraining = trainingService.createTraining(traineeId, trainerId, trainingName,
+        TrainingModel newTrainingModel = trainingService.createTraining(traineeId, trainerId, trainingName,
                 trainingTypeString, trainingDateInString, duration);
 
-        assertEquals(256, newTraining.getId());
-        assertEquals(traineeId, newTraining.getTraineeId());
-        assertEquals(trainerId, newTraining.getTrainerId());
-        assertEquals(trainingName, newTraining.getTrainingName());
-        assertEquals(trainingType, newTraining.getTrainingType());
-        assertEquals(trainingDate, newTraining.getTrainingDate());
-        assertEquals(duration, newTraining.getDuration());
+        assertEquals(256, newTrainingModel.getId());
+        assertEquals(traineeId, newTrainingModel.getTraineeId());
+        assertEquals(trainerId, newTrainingModel.getTrainerId());
+        assertEquals(trainingName, newTrainingModel.getTrainingName());
+        assertEquals(trainingType, newTrainingModel.getTrainingType());
+        assertEquals(trainingDate, newTrainingModel.getTrainingDate());
+        assertEquals(duration, newTrainingModel.getDuration());
     }
 }

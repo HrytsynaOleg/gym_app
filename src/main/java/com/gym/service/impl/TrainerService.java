@@ -2,7 +2,7 @@ package com.gym.service.impl;
 
 import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
-import com.gym.model.Trainer;
+import com.gym.model.TrainerModel;
 import com.gym.model.TrainingType;
 import com.gym.service.ITrainerService;
 import com.gym.utils.StorageUtils;
@@ -23,13 +23,13 @@ public class TrainerService implements ITrainerService {
     private Integer passwordLength;
 
     @Override
-    public Trainer createTrainer(String firstName, String lastName, String trainingTypeString) {
+    public TrainerModel createTrainer(String firstName, String lastName, String trainingTypeString) {
         long usersCount = trainerDao.getUserCountByUserName(firstName, lastName) +
                 traineeDao.getUserCountByUserName(firstName, lastName);
         String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
         String password = StringUtils.generateRandomString(passwordLength);
         TrainingType trainingType = TrainingType.valueOf(trainingTypeString);
-        Trainer trainer = Trainer.builder()
+        TrainerModel trainerModel = TrainerModel.builder()
                 .id(0)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -38,18 +38,18 @@ public class TrainerService implements ITrainerService {
                 .isActive(true)
                 .trainingType(trainingType)
                 .build();
-        Trainer newTrainer = trainerDao.create(trainer);
+        TrainerModel newTrainerModel = trainerDao.create(trainerModel);
         log.info("New trainer created");
-        return newTrainer;
+        return newTrainerModel;
     }
 
     @Override
-    public void update(Trainer trainer) {
-        trainerDao.update(trainer);
+    public void update(TrainerModel trainerModel) {
+        trainerDao.update(trainerModel);
     }
 
     @Override
-    public Trainer getById(long id) {
+    public TrainerModel getById(long id) {
         return trainerDao.get(id);
     }
 }

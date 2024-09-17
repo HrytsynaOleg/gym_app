@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 @SuperBuilder
 @Jacksonized
-public class Trainee extends User{
+public class TraineeModel extends UserModel {
     long id;
     String address;
     @JsonFormat(pattern = "yyyy-MM-dd")

@@ -2,7 +2,7 @@ package com.gym.service.impl;
 
 import com.gym.dao.impl.TraineeDao;
 import com.gym.dao.impl.TrainerDao;
-import com.gym.model.Trainer;
+import com.gym.model.TrainerModel;
 import com.gym.model.TrainingType;
 import com.gym.service.ITrainerService;
 import com.gym.utils.StringUtils;
@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TrainerServiceTest {
+class TrainerModelServiceTest {
     private final ITrainerService trainerService;
     private final TraineeDao mockTraineeDao;
     private final TrainerDao mockTrainerDao;
@@ -30,7 +30,7 @@ class TrainerServiceTest {
     private MockedStatic<StringUtils> mockStringUtil;
     private final Integer passwordLength = 10;
 
-    TrainerServiceTest() {
+    TrainerModelServiceTest() {
         this.trainerService = new TrainerService();
         this.mockTraineeDao = Mockito.mock(TraineeDao.class);
         this.mockTrainerDao = Mockito.mock(TrainerDao.class);
@@ -73,7 +73,7 @@ class TrainerServiceTest {
 
     @Test
     void createTrainerTest() {
-        Trainer serviceCreatedTrainer = Trainer.builder()
+        TrainerModel serviceCreatedTrainerModel = TrainerModel.builder()
                 .id(0)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -82,7 +82,7 @@ class TrainerServiceTest {
                 .isActive(true)
                 .trainingType(trainingType)
                 .build();
-        Trainer daoResponseTrainer = Trainer.builder()
+        TrainerModel daoResponseTrainerModel = TrainerModel.builder()
                 .id(25)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -92,24 +92,24 @@ class TrainerServiceTest {
                 .trainingType(trainingType)
                 .build();
 
-        Mockito.when(mockTrainerDao.create(serviceCreatedTrainer)).thenReturn(daoResponseTrainer);
+        Mockito.when(mockTrainerDao.create(serviceCreatedTrainerModel)).thenReturn(daoResponseTrainerModel);
         Mockito.when(mockTraineeDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
         Mockito.when(mockTrainerDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
 
-        Trainer newTrainer = trainerService.createTrainer(firstName, lastName, trainingTypeString);
+        TrainerModel newTrainerModel = trainerService.createTrainer(firstName, lastName, trainingTypeString);
 
-        assertEquals(25, newTrainer.getId());
-        assertEquals(firstName, newTrainer.getFirstName());
-        assertEquals(lastName, newTrainer.getLastName());
-        assertEquals(userName, newTrainer.getUserName());
-        assertEquals(passwordLength, newTrainer.getPassword().length());
-        assertEquals(trainingType, newTrainer.getTrainingType());
+        assertEquals(25, newTrainerModel.getId());
+        assertEquals(firstName, newTrainerModel.getFirstName());
+        assertEquals(lastName, newTrainerModel.getLastName());
+        assertEquals(userName, newTrainerModel.getUserName());
+        assertEquals(passwordLength, newTrainerModel.getPassword().length());
+        assertEquals(trainingType, newTrainerModel.getTrainingType());
     }
 
     @Test
     void createTrainerIfUserExistTest() {
         String expectedUserName = userName + 1;
-        Trainer serviceCreatedTrainer = Trainer.builder()
+        TrainerModel serviceCreatedTrainerModel = TrainerModel.builder()
                 .id(0)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -118,7 +118,7 @@ class TrainerServiceTest {
                 .isActive(true)
                 .trainingType(trainingType)
                 .build();
-        Trainer daoResponseTrainer = Trainer.builder()
+        TrainerModel daoResponseTrainerModel = TrainerModel.builder()
                 .id(25)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -128,18 +128,18 @@ class TrainerServiceTest {
                 .trainingType(trainingType)
                 .build();
 
-        Mockito.when(mockTrainerDao.create(serviceCreatedTrainer)).thenReturn(daoResponseTrainer);
+        Mockito.when(mockTrainerDao.create(serviceCreatedTrainerModel)).thenReturn(daoResponseTrainerModel);
         Mockito.when(mockTraineeDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
         Mockito.when(mockTrainerDao.getUserCountByUserName(firstName, lastName)).thenReturn(1L);
 
-        Trainer newTrainer = trainerService.createTrainer(firstName, lastName, trainingTypeString);
+        TrainerModel newTrainerModel = trainerService.createTrainer(firstName, lastName, trainingTypeString);
 
-        assertEquals(25, newTrainer.getId());
-        assertEquals(firstName, newTrainer.getFirstName());
-        assertEquals(lastName, newTrainer.getLastName());
-        assertEquals(expectedUserName, newTrainer.getUserName());
-        assertEquals(passwordLength, newTrainer.getPassword().length());
-        assertEquals(trainingType, newTrainer.getTrainingType());
+        assertEquals(25, newTrainerModel.getId());
+        assertEquals(firstName, newTrainerModel.getFirstName());
+        assertEquals(lastName, newTrainerModel.getLastName());
+        assertEquals(expectedUserName, newTrainerModel.getUserName());
+        assertEquals(passwordLength, newTrainerModel.getPassword().length());
+        assertEquals(trainingType, newTrainerModel.getTrainingType());
 
     }
 }

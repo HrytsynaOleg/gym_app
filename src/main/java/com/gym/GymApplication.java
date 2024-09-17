@@ -5,7 +5,7 @@ import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
 import com.gym.dao.impl.TraineeDao;
 import com.gym.dao.impl.TrainerJpaDao;
-import com.gym.model.Trainer;
+import com.gym.model.TrainerModel;
 import com.gym.service.ITraineeService;
 import com.gym.service.impl.TraineeService;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +18,7 @@ public class GymApplication {
         ITraineeDao traineeDao = applicationContext.getBean(TraineeDao.class);
         ITrainerDao trainerJdbcDao = applicationContext.getBean(TrainerJpaDao.class);
         ITraineeService traineeService = applicationContext.getBean(TraineeService.class);
-        trainerJdbcDao.create(Trainer.builder().build());
+        trainerJdbcDao.create(TrainerModel.builder().build());
         System.out.println();
     }
 }

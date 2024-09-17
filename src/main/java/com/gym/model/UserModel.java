@@ -5,7 +5,7 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-public class User {
+public class UserModel {
     String firstName;
     String lastName;
     String userName;

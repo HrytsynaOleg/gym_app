@@ -1,11 +1,11 @@
 package com.gym.service;
 
-import com.gym.model.Trainee;
+import com.gym.model.TraineeModel;
 
 
 public interface ITraineeService {
-    Trainee createTrainee(String firstName, String lastName, String address, String dateOfBirth);
-    void update(Trainee trainee);
+    TraineeModel createTrainee(String firstName, String lastName, String address, String dateOfBirth);
+    void update(TraineeModel traineeModel);
     void delete(long id);
-    Trainee getById(long id);
+    TraineeModel getById(long id);
 }

@@ -1,7 +1,7 @@
 package com.gym.dao.impl;
 
 import com.gym.dao.ITrainerDao;
-import com.gym.model.Trainer;
+import com.gym.model.TrainerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.gym.utils.StorageUtils;
@@ -11,28 +11,28 @@ import java.util.Map;
 @Repository
 public class TrainerDao implements ITrainerDao {
 
-    private final Map<String, Trainer> storage;
+    private final Map<String, TrainerModel> storage;
 
     @Autowired
-    public TrainerDao(Map<String, Trainer> storage) {
+    public TrainerDao(Map<String, TrainerModel> storage) {
         this.storage = storage;
     }
 
     @Override
-    public Trainer create(Trainer trainer) {
+    public TrainerModel create(TrainerModel trainerModel) {
         long id = StorageUtils.generateId(storage);
-        trainer.setId(id);
-        storage.put(String.valueOf(id), trainer);
-        return trainer;
+        trainerModel.setId(id);
+        storage.put(String.valueOf(id), trainerModel);
+        return trainerModel;
     }
 
     @Override
-    public void update(Trainer trainer) {
-        storage.put(String.valueOf(trainer.getId()), trainer);
+    public void update(TrainerModel trainerModel) {
+        storage.put(String.valueOf(trainerModel.getId()), trainerModel);
     }
 
     @Override
-    public Trainer get(long id) {
+    public TrainerModel get(long id) {
         return storage.get(String.valueOf(id));
     }
 

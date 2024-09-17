@@ -1,8 +1,10 @@
 package com.gym.dao.impl;
 
 import com.gym.dao.ITrainerDao;
+import com.gym.entity.Trainer;
 import com.gym.entity.User;
-import com.gym.model.Trainer;
+import com.gym.model.TrainerModel;
+import com.gym.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 @Repository("trainerJpaDao")
-
 public class TrainerJpaDao implements ITrainerDao {
 
     private final EntityManagerFactory entityManagerFactory;
@@ -21,27 +22,25 @@ public class TrainerJpaDao implements ITrainerDao {
     }
 
     @Override
-    public Trainer create(Trainer trainer) {
+    public TrainerModel create(TrainerModel trainerModel) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        User user = new User();
-        user.setFirstName("firstName");
-        user.setLastName("lastName");
-        user.setUserName("userName");
-        user.setPassword("123456");
-        user.setIsActive(true);
+        Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
+        User user = trainer.getUser();
         entityManager.getTransaction().begin();
         entityManager.persist(user);
+        trainer.setUser(user);
+        entityManager.persist(trainer);
         entityManager.getTransaction().commit();
         entityManager.close();
-        return null;
+        return Mapper.mapTrainerEntityToTrainerModel(trainer);
     }
 
     @Override
-    public void update(Trainer trainer) {
+    public void update(TrainerModel trainerModel) {
     }
 
     @Override
-    public Trainer get(long id) {
+    public TrainerModel get(long id) {
         return null;
     }
 

@@ -1,9 +1,9 @@
 package com.gym.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.model.Trainee;
-import com.gym.model.Trainer;
-import com.gym.model.Training;
+import com.gym.model.TraineeModel;
+import com.gym.model.TrainerModel;
+import com.gym.model.TrainingModel;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,10 +15,10 @@ class SerializationTest {
     @Test
     void trainingDeserializationTest(){
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("training.json")) {
-            Training training = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
+            TrainingModel trainingModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
-            assertNotNull(training);
-            assertEquals(Training.class, training.getClass());
+            assertNotNull(trainingModel);
+            assertEquals(TrainingModel.class, trainingModel.getClass());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -27,10 +27,10 @@ class SerializationTest {
     @Test
     void trainerDeserializationTest(){
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
-            Trainer trainer = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
+            TrainerModel trainerModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
-            assertNotNull(trainer);
-            assertEquals(Trainer.class, trainer.getClass());
+            assertNotNull(trainerModel);
+            assertEquals(TrainerModel.class, trainerModel.getClass());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -39,10 +39,10 @@ class SerializationTest {
     @Test
     void traineeDeserializationTest(){
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainee.json")) {
-            Trainee trainee = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
+            TraineeModel traineeModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
-            assertNotNull(trainee);
-            assertEquals(Trainee.class, trainee.getClass());
+            assertNotNull(traineeModel);
+            assertEquals(TraineeModel.class, traineeModel.getClass());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
