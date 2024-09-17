@@ -13,6 +13,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import javax.persistence.EntityManagerFactory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -93,5 +95,11 @@ class StorageConfigTest {
         TrainingService trainingService = applicationContext.getBean(TrainingService.class);
         assertNotNull(trainingService);
         assertEquals(TrainingService.class, trainingService.getClass());
+    }
+
+    @Test
+    void entityManagerFactoryTest(){
+        EntityManagerFactory factory = applicationContext.getBean(EntityManagerFactory.class);
+        assertNotNull(factory);
     }
 }

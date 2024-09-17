@@ -835,3 +835,206 @@ java.lang.IllegalStateException: Cannot get a connection as the driver manager i
 2024-09-16 02:27:44 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
 2024-09-16 02:27:44 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@632cf7d3] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 2024-09-16 02:27:45 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 22:08:05 INFO Start storage initialization
+2024-09-16 22:08:05 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:08:05 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:08:05 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:08:05 INFO Finish storage initialization
+2024-09-16 22:08:06 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.entity]
+2024-09-16 22:08:07 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-16 22:08:07 INFO HHH000205: Loaded properties from resource hibernate.properties: {hibernate.bytecode.use_reflection_optimizer=false, hibernate.dialect=org.hibernate.dialect.MySQL8Dialect, hibernate.show_sql=true}
+2024-09-16 22:08:10 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-16 22:08:10 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-16 22:08:10 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-16 22:08:10 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-16 22:08:10 INFO HHH10001003: Autocommit mode: false
+2024-09-16 22:08:10 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-16 22:08:11 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-16 22:08:11 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@54f2df29] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-16 22:08:11 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 22:09:05 INFO Start storage initialization
+2024-09-16 22:09:05 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:09:05 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:09:05 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:09:05 INFO Finish storage initialization
+2024-09-16 22:09:06 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.entity]
+2024-09-16 22:09:06 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-16 22:09:06 INFO HHH000205: Loaded properties from resource hibernate.properties: {hibernate.bytecode.use_reflection_optimizer=false, hibernate.dialect=org.hibernate.dialect.MySQL8Dialect, hibernate.show_sql=true}
+2024-09-16 22:09:06 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-16 22:09:06 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'getEntityManagerFactory' defined in com.gym.config.HibernateConfig: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.persistence.EntityManagerFactory]: Factory method 'getEntityManagerFactory' threw exception; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+2024-09-16 22:10:15 INFO Start storage initialization
+2024-09-16 22:10:15 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:10:15 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:10:15 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:10:15 INFO Finish storage initialization
+2024-09-16 22:11:02 INFO Start storage initialization
+2024-09-16 22:11:02 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:11:02 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:11:02 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:11:02 INFO Finish storage initialization
+2024-09-16 22:31:20 INFO Start storage initialization
+2024-09-16 22:31:20 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:31:20 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:31:20 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:31:20 INFO Finish storage initialization
+2024-09-16 22:31:20 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-16 22:31:20 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-16 22:31:20 INFO HHH000205: Loaded properties from resource hibernate.properties: {hibernate.bytecode.use_reflection_optimizer=false, hibernate.dialect=org.hibernate.dialect.MySQL8Dialect, hibernate.show_sql=true}
+2024-09-16 22:31:21 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-16 22:31:21 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-16 22:31:21 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-16 22:31:21 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-16 22:31:21 INFO HHH10001003: Autocommit mode: false
+2024-09-16 22:31:21 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-16 22:31:21 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-16 22:31:22 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@54f2df29] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-16 22:31:22 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 22:36:53 INFO Start storage initialization
+2024-09-16 22:36:53 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:36:53 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:36:53 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:36:53 INFO Finish storage initialization
+2024-09-16 22:36:53 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-16 22:36:54 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-16 22:36:54 INFO HHH000205: Loaded properties from resource hibernate.properties: {hibernate.bytecode.use_reflection_optimizer=false, hibernate.dialect=org.hibernate.dialect.MySQL8Dialect, hibernate.show_sql=true}
+2024-09-16 22:36:54 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-16 22:36:54 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-16 22:36:54 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-16 22:36:54 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-16 22:36:54 INFO HHH10001003: Autocommit mode: false
+2024-09-16 22:36:54 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-16 22:36:54 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-16 22:36:55 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6df791a4] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-16 22:36:55 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 22:42:46 INFO Start storage initialization
+2024-09-16 22:42:46 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:42:46 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:42:46 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:42:46 INFO Finish storage initialization
+2024-09-16 22:43:32 INFO Start storage initialization
+2024-09-16 22:43:32 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:43:32 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:43:32 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:43:32 INFO Finish storage initialization
+2024-09-16 22:46:26 INFO Start storage initialization
+2024-09-16 22:46:26 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:46:26 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:46:26 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:46:26 INFO Finish storage initialization
+2024-09-16 22:49:24 INFO Start storage initialization
+2024-09-16 22:49:24 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:49:24 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:49:24 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:49:24 INFO Finish storage initialization
+2024-09-16 22:52:03 INFO Start storage initialization
+2024-09-16 22:52:04 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:52:04 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:52:04 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:52:04 INFO Finish storage initialization
+2024-09-16 22:54:59 INFO Start storage initialization
+2024-09-16 22:54:59 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:54:59 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:54:59 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:54:59 INFO Finish storage initialization
+2024-09-16 22:55:48 INFO Start storage initialization
+2024-09-16 22:55:48 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 22:55:48 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 22:55:48 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 22:55:48 INFO Finish storage initialization
+2024-09-16 23:11:09 INFO Start storage initialization
+2024-09-16 23:11:10 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 23:11:10 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 23:11:10 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 23:11:10 INFO Finish storage initialization
+2024-09-16 23:11:10 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-16 23:11:10 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-16 23:11:10 INFO HHH000205: Loaded properties from resource hibernate.properties: {hibernate.bytecode.use_reflection_optimizer=false, hibernate.dialect=org.hibernate.dialect.MySQL8Dialect, hibernate.show_sql=true}
+2024-09-16 23:11:10 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-16 23:11:10 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-16 23:11:10 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-16 23:11:10 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-16 23:11:10 INFO HHH10001003: Autocommit mode: false
+2024-09-16 23:11:10 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-16 23:11:11 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-16 23:11:11 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4628a02b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-16 23:11:11 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 23:14:38 INFO Start storage initialization
+2024-09-16 23:14:38 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 23:14:38 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 23:14:38 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 23:14:38 INFO Finish storage initialization
+2024-09-16 23:14:38 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-16 23:14:38 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-16 23:14:38 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-16 23:14:39 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-16 23:14:39 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-16 23:14:39 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-16 23:14:39 INFO HHH10001003: Autocommit mode: false
+2024-09-16 23:14:39 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-16 23:14:39 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-16 23:14:39 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7e0f9528] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-16 23:14:39 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 23:23:14 INFO Start storage initialization
+2024-09-16 23:23:15 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 23:23:15 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 23:23:15 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 23:23:15 INFO Finish storage initialization
+2024-09-16 23:23:15 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-16 23:23:15 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-16 23:23:15 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-16 23:23:15 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-16 23:23:15 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-16 23:23:15 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-16 23:23:15 INFO HHH10001003: Autocommit mode: false
+2024-09-16 23:23:15 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-16 23:23:15 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-16 23:23:16 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@776015fc] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-16 23:23:16 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-16 23:34:51 INFO Start storage initialization
+2024-09-16 23:34:51 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-16 23:34:51 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-16 23:34:51 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-16 23:34:51 INFO Finish storage initialization
+2024-09-16 23:34:51 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-16 23:34:51 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-16 23:34:52 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-16 23:34:52 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-16 23:34:52 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-16 23:34:52 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-16 23:34:52 INFO HHH10001003: Autocommit mode: false
+2024-09-16 23:34:52 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-16 23:34:52 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-16 23:34:53 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@539fc5d1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-16 23:34:53 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-17 22:21:48 INFO Start storage initialization
+2024-09-17 22:21:48 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-17 22:21:48 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-17 22:21:48 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-17 22:21:48 INFO Finish storage initialization
+2024-09-17 22:21:48 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-17 22:21:48 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-17 22:21:48 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-17 22:21:49 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-17 22:21:49 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-17 22:21:49 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-17 22:21:49 INFO HHH10001003: Autocommit mode: false
+2024-09-17 22:21:49 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-17 22:21:49 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-17 22:21:49 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2cc75b25] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-17 22:21:49 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-17 22:23:13 INFO Start storage initialization
+2024-09-17 22:23:13 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-17 22:23:13 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-17 22:23:13 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-17 22:23:13 INFO Finish storage initialization
+2024-09-17 22:23:13 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-17 22:23:13 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-17 22:23:13 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-17 22:23:14 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-17 22:23:14 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-17 22:23:14 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-17 22:23:14 INFO HHH10001003: Autocommit mode: false
+2024-09-17 22:23:14 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-17 22:23:14 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-17 22:23:14 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2cc75b25] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-17 22:23:14 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]

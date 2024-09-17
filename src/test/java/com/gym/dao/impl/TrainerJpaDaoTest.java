@@ -1,12 +1,9 @@
 package com.gym.dao.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.config.HibernateConfig;
-import com.gym.dao.ITrainerDao;
+import com.gym.config.StorageConfig;
 import com.gym.model.Trainer;
-import com.gym.model.TrainingType;
 import com.gym.utils.JsonUtils;
-import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,19 +12,16 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
-class TrainerJdbcDaoTest {
+class TrainerJpaDaoTest {
     private static ApplicationContext applicationContext;
 
-    private final TrainerJdbcDao dao;
+    private final TrainerJpaDao dao;
     private Trainer serviceInputTrainer;
 
-    TrainerJdbcDaoTest() {
-        this.dao = (TrainerJdbcDao) applicationContext.getBean("trainerJdbcDao");
+    TrainerJpaDaoTest() {
+        this.dao = (TrainerJpaDao) applicationContext.getBean("trainerJdbcDao");
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
             this.serviceInputTrainer = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
@@ -38,7 +32,7 @@ class TrainerJdbcDaoTest {
 
     @BeforeAll
     public static void init() {
-        applicationContext = new AnnotationConfigApplicationContext(HibernateConfig.class);
+        applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
     }
 
     @Test

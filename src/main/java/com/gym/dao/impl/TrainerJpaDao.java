@@ -8,24 +8,21 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
 
-@Repository("trainerJdbcDao")
-public class TrainerJdbcDao implements ITrainerDao {
+@Repository("trainerJpaDao")
 
-    @PersistenceContext(unitName = "com.gym.entity")
-    private EntityManager entityManager;
+public class TrainerJpaDao implements ITrainerDao {
 
-//    private final EntityManagerFactory entityManagerFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
-//    @Autowired
-//    public TrainerJdbcDao(EntityManagerFactory entityManagerFactory) {
-//        this.entityManagerFactory = entityManagerFactory;
-//    }
+    @Autowired
+    public TrainerJpaDao(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
     @Override
     public Trainer create(Trainer trainer) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         User user = new User();
         user.setFirstName("firstName");
         user.setLastName("lastName");

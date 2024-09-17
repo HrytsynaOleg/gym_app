@@ -13,6 +13,8 @@ import org.springframework.context.annotation.PropertySource;
 import com.gym.utils.StorageUtils;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.Map;
 
 @Configuration
@@ -44,6 +46,11 @@ public class StorageConfig {
     @Bean(name="trainingStorage")
     public  Map<String,Training> trainingStorage(){
         return trainingStorage;
+    }
+
+    @Bean
+    public EntityManagerFactory getEntityManagerFactory(){
+        return Persistence.createEntityManagerFactory("com.gym");
     }
 
     @PostConstruct
