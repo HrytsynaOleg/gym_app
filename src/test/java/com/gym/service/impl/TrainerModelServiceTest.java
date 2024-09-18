@@ -3,7 +3,7 @@ package com.gym.service.impl;
 import com.gym.dao.impl.TraineeDao;
 import com.gym.dao.impl.TrainerDao;
 import com.gym.model.TrainerModel;
-import com.gym.model.TrainingType;
+import com.gym.model.TrainingTypeEnum;
 import com.gym.service.ITrainerService;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +25,7 @@ class TrainerModelServiceTest {
     private final String lastName = "King";
     private final String userName = "Kerry.King";
     private final String password = "1234567890";
-    private final TrainingType trainingType = TrainingType.YOGA;
+    private final TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.YOGA;
     private final String trainingTypeString = "YOGA";
     private MockedStatic<StringUtils> mockStringUtil;
     private final Integer passwordLength = 10;
@@ -80,7 +80,7 @@ class TrainerModelServiceTest {
                 .userName(userName)
                 .password(password)
                 .isActive(true)
-                .trainingType(trainingType)
+                .trainingType(trainingTypeEnum)
                 .build();
         TrainerModel daoResponseTrainerModel = TrainerModel.builder()
                 .id(25)
@@ -89,7 +89,7 @@ class TrainerModelServiceTest {
                 .userName(userName)
                 .password(password)
                 .isActive(true)
-                .trainingType(trainingType)
+                .trainingType(trainingTypeEnum)
                 .build();
 
         Mockito.when(mockTrainerDao.create(serviceCreatedTrainerModel)).thenReturn(daoResponseTrainerModel);
@@ -103,7 +103,7 @@ class TrainerModelServiceTest {
         assertEquals(lastName, newTrainerModel.getLastName());
         assertEquals(userName, newTrainerModel.getUserName());
         assertEquals(passwordLength, newTrainerModel.getPassword().length());
-        assertEquals(trainingType, newTrainerModel.getTrainingType());
+        assertEquals(trainingTypeEnum, newTrainerModel.getTrainingType());
     }
 
     @Test
@@ -116,7 +116,7 @@ class TrainerModelServiceTest {
                 .userName(expectedUserName)
                 .password(password)
                 .isActive(true)
-                .trainingType(trainingType)
+                .trainingType(trainingTypeEnum)
                 .build();
         TrainerModel daoResponseTrainerModel = TrainerModel.builder()
                 .id(25)
@@ -125,7 +125,7 @@ class TrainerModelServiceTest {
                 .userName(expectedUserName)
                 .password(password)
                 .isActive(true)
-                .trainingType(trainingType)
+                .trainingType(trainingTypeEnum)
                 .build();
 
         Mockito.when(mockTrainerDao.create(serviceCreatedTrainerModel)).thenReturn(daoResponseTrainerModel);
@@ -139,7 +139,7 @@ class TrainerModelServiceTest {
         assertEquals(lastName, newTrainerModel.getLastName());
         assertEquals(expectedUserName, newTrainerModel.getUserName());
         assertEquals(passwordLength, newTrainerModel.getPassword().length());
-        assertEquals(trainingType, newTrainerModel.getTrainingType());
+        assertEquals(trainingTypeEnum, newTrainerModel.getTrainingType());
 
     }
 }

@@ -15,7 +15,7 @@ public class TrainingModel {
     long traineeId;
     long trainerId;
     String trainingName;
-    TrainingType trainingType;
+    TrainingTypeEnum trainingType;
     @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate trainingDate;
     int duration;

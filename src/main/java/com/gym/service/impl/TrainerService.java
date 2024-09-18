@@ -3,7 +3,7 @@ package com.gym.service.impl;
 import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
 import com.gym.model.TrainerModel;
-import com.gym.model.TrainingType;
+import com.gym.model.TrainingTypeEnum;
 import com.gym.service.ITrainerService;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
@@ -28,7 +28,7 @@ public class TrainerService implements ITrainerService {
                 traineeDao.getUserCountByUserName(firstName, lastName);
         String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
         String password = StringUtils.generateRandomString(passwordLength);
-        TrainingType trainingType = TrainingType.valueOf(trainingTypeString);
+        TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.valueOf(trainingTypeString);
         TrainerModel trainerModel = TrainerModel.builder()
                 .id(0)
                 .firstName(firstName)
@@ -36,7 +36,7 @@ public class TrainerService implements ITrainerService {
                 .userName(userName)
                 .password(password)
                 .isActive(true)
-                .trainingType(trainingType)
+                .trainingType(trainingTypeEnum)
                 .build();
         TrainerModel newTrainerModel = trainerDao.create(trainerModel);
         log.info("New trainer created");

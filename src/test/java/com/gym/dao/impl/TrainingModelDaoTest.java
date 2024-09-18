@@ -3,7 +3,7 @@ package com.gym.dao.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainingDao;
 import com.gym.model.TrainingModel;
-import com.gym.model.TrainingType;
+import com.gym.model.TrainingTypeEnum;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
@@ -59,7 +59,7 @@ class TrainingModelDaoTest {
         assertEquals(124, trainingModel.getTrainerId());
         assertEquals(215, trainingModel.getTraineeId());
         assertEquals("first training", trainingModel.getTrainingName());
-        assertEquals(TrainingType.YOGA, trainingModel.getTrainingType());
+        assertEquals(TrainingTypeEnum.YOGA, trainingModel.getTrainingType());
         assertEquals(LocalDate.of(2024, 8, 16), trainingModel.getTrainingDate());
         assertEquals(30, trainingModel.getDuration());
     }

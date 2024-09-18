@@ -2,7 +2,7 @@ package com.gym.service.impl;
 
 import com.gym.dao.impl.TrainingDao;
 import com.gym.model.TrainingModel;
-import com.gym.model.TrainingType;
+import com.gym.model.TrainingTypeEnum;
 import com.gym.service.ITrainingService;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.ReflectionUtils;
@@ -22,7 +22,7 @@ class TrainingModelServiceTest {
     private final LocalDate trainingDate = LocalDate.of(2024, 9, 18);
     private final String trainingName = "My first training";
     private final String trainingTypeString = "FITNESS";
-    private final TrainingType trainingType = TrainingType.FITNESS;
+    private final TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.FITNESS;
     private int duration = 60;
 
     public TrainingModelServiceTest() {
@@ -48,7 +48,7 @@ class TrainingModelServiceTest {
                 .traineeId(traineeId)
                 .trainerId(trainerId)
                 .trainingName(trainingName)
-                .trainingType(trainingType)
+                .trainingType(trainingTypeEnum)
                 .trainingDate(trainingDate)
                 .duration(duration)
                 .build();
@@ -57,7 +57,7 @@ class TrainingModelServiceTest {
                 .traineeId(traineeId)
                 .trainerId(trainerId)
                 .trainingName(trainingName)
-                .trainingType(trainingType)
+                .trainingType(trainingTypeEnum)
                 .trainingDate(trainingDate)
                 .duration(duration)
                 .build();
@@ -71,7 +71,7 @@ class TrainingModelServiceTest {
         assertEquals(traineeId, newTrainingModel.getTraineeId());
         assertEquals(trainerId, newTrainingModel.getTrainerId());
         assertEquals(trainingName, newTrainingModel.getTrainingName());
-        assertEquals(trainingType, newTrainingModel.getTrainingType());
+        assertEquals(trainingTypeEnum, newTrainingModel.getTrainingType());
         assertEquals(trainingDate, newTrainingModel.getTrainingDate());
         assertEquals(duration, newTrainingModel.getDuration());
     }

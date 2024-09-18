@@ -10,5 +10,5 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class TrainerModel extends UserModel {
     long id;
-    TrainingType trainingType;
+    TrainingTypeEnum trainingType;
 }

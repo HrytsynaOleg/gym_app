@@ -3,7 +3,7 @@ package com.gym.dao.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainerDao;
 import com.gym.model.TrainerModel;
-import com.gym.model.TrainingType;
+import com.gym.model.TrainingTypeEnum;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -48,11 +48,11 @@ class TrainerModelDaoTest {
     @Test
     void updateTrainerTest() {
         TrainerModel trainerModel = dao.get(124);
-        assertEquals(TrainingType.YOGA, trainerModel.getTrainingType());
-        trainerModel.setTrainingType(TrainingType.STRETCHING);
+        assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
+        trainerModel.setTrainingType(TrainingTypeEnum.STRETCHING);
         dao.update(trainerModel);
         TrainerModel updatedTrainerModel = dao.get(124);
-        assertEquals(TrainingType.STRETCHING, updatedTrainerModel.getTrainingType());
+        assertEquals(TrainingTypeEnum.STRETCHING, updatedTrainerModel.getTrainingType());
     }
 
     @Test
@@ -63,7 +63,7 @@ class TrainerModelDaoTest {
         assertEquals("Sirenko", trainerModel.getLastName());
         assertEquals("Dmytro.Sirenko", trainerModel.getUserName());
         assertEquals("123456", trainerModel.getPassword());
-        assertEquals(TrainingType.YOGA, trainerModel.getTrainingType());
+        assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
         assertTrue(trainerModel.getIsActive());
     }
 
