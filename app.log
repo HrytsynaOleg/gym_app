@@ -2927,3 +2927,814 @@ org.hibernate.InstantiationException: No default constructor for entity:  : com.
 2024-09-19 01:34:32 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 2024-09-19 01:34:32 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
 2024-09-19 01:34:32 INFO Trainer id = 56 created in database
+2024-09-20 00:00:24 INFO Start storage initialization
+2024-09-20 00:00:25 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:00:25 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:00:25 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:00:25 INFO Finish storage initialization
+2024-09-20 00:00:25 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:00:25 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:00:26 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:00:26 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:00:26 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:00:26 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:00:26 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:00:26 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:00:26 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:00:27 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:00:27 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:00:27 ERROR line 1:14: unexpected token: )
+2024-09-20 00:00:27 ERROR line 1:14: unexpected token: )
+antlr.NoViableAltException: unexpected token: )
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.aggregate(HqlBaseParser.java:5599) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.identPrimary(HqlBaseParser.java:4856) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.primaryExpression(HqlBaseParser.java:1090) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.atom(HqlBaseParser.java:3866) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.unaryExpression(HqlBaseParser.java:3703) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.multiplyExpression(HqlBaseParser.java:3570) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.additiveExpression(HqlBaseParser.java:3197) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.concatenation(HqlBaseParser.java:682) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.relationalExpression(HqlBaseParser.java:2959) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.equalityExpression(HqlBaseParser.java:2815) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.negatedExpression(HqlBaseParser.java:2774) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.logicalAndExpression(HqlBaseParser.java:2685) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.logicalOrExpression(HqlBaseParser.java:2645) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.expression(HqlBaseParser.java:2323) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.aliasedExpression(HqlBaseParser.java:2594) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.selectedPropertiesList(HqlBaseParser.java:1517) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.selectClause(HqlBaseParser.java:1417) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.selectFrom(HqlBaseParser.java:1142) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.queryRule(HqlBaseParser.java:825) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.selectStatement(HqlBaseParser.java:336) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.statement(HqlBaseParser.java:200) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.parse(QueryTranslatorImpl.java:294) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:189) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:144) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.query.spi.HQLQueryPlan.<init>(HQLQueryPlan.java:113) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.query.spi.HQLQueryPlan.<init>(HQLQueryPlan.java:73) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.query.spi.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:162) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.getQueryPlan(AbstractSharedSessionContract.java:604) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:716) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:816) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.internal.AbstractSessionImpl.createQuery(AbstractSessionImpl.java:23) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at com.gym.dao.impl.TrainerJpaDao.getUserCountByUserName(TrainerJpaDao.java:59) ~[classes/:?]
+	at com.gym.dao.impl.TrainerEntityDaoTest.getUsersCountByUserNameTest(TrainerEntityDaoTest.java:69) ~[test-classes/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725) ~[junit-platform-commons-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55) [junit-rt.jar:?]
+2024-09-20 00:00:27 WARN HHH000203: processEqualityExpression() : No expression to process!
+2024-09-20 00:02:18 INFO Start storage initialization
+2024-09-20 00:02:18 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:02:18 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:02:18 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:02:18 INFO Finish storage initialization
+2024-09-20 00:02:18 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:02:18 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:02:19 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:02:19 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:02:19 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:02:19 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:02:19 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:02:19 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:02:20 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:02:20 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:02:20 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:02:21 ERROR line 1:14: unexpected token: )
+2024-09-20 00:02:21 ERROR line 1:14: unexpected token: )
+antlr.NoViableAltException: unexpected token: )
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.aggregate(HqlBaseParser.java:5599) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.identPrimary(HqlBaseParser.java:4856) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.primaryExpression(HqlBaseParser.java:1090) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.atom(HqlBaseParser.java:3866) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.unaryExpression(HqlBaseParser.java:3703) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.multiplyExpression(HqlBaseParser.java:3570) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.additiveExpression(HqlBaseParser.java:3197) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.concatenation(HqlBaseParser.java:682) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.relationalExpression(HqlBaseParser.java:2959) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.equalityExpression(HqlBaseParser.java:2815) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.negatedExpression(HqlBaseParser.java:2774) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.logicalAndExpression(HqlBaseParser.java:2685) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.logicalOrExpression(HqlBaseParser.java:2645) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.expression(HqlBaseParser.java:2323) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.aliasedExpression(HqlBaseParser.java:2594) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.selectedPropertiesList(HqlBaseParser.java:1517) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.selectClause(HqlBaseParser.java:1417) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.selectFrom(HqlBaseParser.java:1142) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.queryRule(HqlBaseParser.java:825) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.selectStatement(HqlBaseParser.java:336) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.antlr.HqlBaseParser.statement(HqlBaseParser.java:200) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.parse(QueryTranslatorImpl.java:294) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:189) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:144) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.query.spi.HQLQueryPlan.<init>(HQLQueryPlan.java:113) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.query.spi.HQLQueryPlan.<init>(HQLQueryPlan.java:73) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.query.spi.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:162) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.getQueryPlan(AbstractSharedSessionContract.java:604) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:716) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:816) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.internal.AbstractSessionImpl.createQuery(AbstractSessionImpl.java:23) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at com.gym.dao.impl.TrainerJpaDao.getUserCountByUserName(TrainerJpaDao.java:60) ~[classes/:?]
+	at com.gym.dao.impl.TrainerEntityDaoTest.getUsersCountByUserNameTest(TrainerEntityDaoTest.java:69) ~[test-classes/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725) ~[junit-platform-commons-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65) ~[junit-jupiter-engine-5.7.0.jar:5.7.0]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55) [junit-rt.jar:?]
+2024-09-20 00:02:21 WARN HHH000203: processEqualityExpression() : No expression to process!
+2024-09-20 00:06:41 INFO Start storage initialization
+2024-09-20 00:06:41 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:06:41 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:06:41 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:06:41 INFO Finish storage initialization
+2024-09-20 00:06:41 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:06:42 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:06:42 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:06:42 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:06:42 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:06:42 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:06:42 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:06:42 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:06:42 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:06:43 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:06:43 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:07:23 INFO Start storage initialization
+2024-09-20 00:07:23 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:07:23 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:07:23 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:07:23 INFO Finish storage initialization
+2024-09-20 00:07:23 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:07:23 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:07:24 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:07:24 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:07:24 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:07:24 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:07:24 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:07:24 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:07:24 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:07:25 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:07:25 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:07:52 INFO Start storage initialization
+2024-09-20 00:07:52 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:07:52 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:07:52 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:07:52 INFO Finish storage initialization
+2024-09-20 00:07:53 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:07:53 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:07:53 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:07:53 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:07:53 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:07:53 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:07:53 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:07:53 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:07:53 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:07:54 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@22b7ef2b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:07:54 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:09:08 INFO Start storage initialization
+2024-09-20 00:09:08 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:09:08 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:09:08 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:09:08 INFO Finish storage initialization
+2024-09-20 00:09:08 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:09:08 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:09:08 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:09:08 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:09:08 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:09:08 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:09:08 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:09:08 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:09:08 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:09:09 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:09:09 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:09:44 INFO Start storage initialization
+2024-09-20 00:09:44 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:09:45 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:09:45 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:09:45 INFO Finish storage initialization
+2024-09-20 00:09:45 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:09:45 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:09:45 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:09:45 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:09:45 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:09:45 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:09:45 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:09:45 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:09:45 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:09:46 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:09:46 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:10:21 INFO Start storage initialization
+2024-09-20 00:10:21 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:10:21 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:10:21 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:10:21 INFO Finish storage initialization
+2024-09-20 00:10:22 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:10:22 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:10:22 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:10:22 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:10:22 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:10:22 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:10:22 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:10:22 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:10:22 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:10:23 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:10:23 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:12:13 INFO Start storage initialization
+2024-09-20 00:12:13 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:12:13 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:12:13 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:12:13 INFO Finish storage initialization
+2024-09-20 00:12:13 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:12:13 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:12:14 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:12:14 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:12:14 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:12:14 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:12:14 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:12:14 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:12:14 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:12:15 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:12:15 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:27:06 INFO Start storage initialization
+2024-09-20 00:27:06 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:27:06 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:27:06 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:27:06 INFO Finish storage initialization
+2024-09-20 00:27:06 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:27:07 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:27:07 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:27:07 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:27:07 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:27:07 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:27:07 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:27:07 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:27:07 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:27:08 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:27:08 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:34:34 INFO Start storage initialization
+2024-09-20 00:34:34 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:34:34 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:34:34 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:34:34 INFO Finish storage initialization
+2024-09-20 00:34:34 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:34:34 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:34:35 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:34:35 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:34:35 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:34:35 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:34:35 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:34:35 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:34:35 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:34:36 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d421fe] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:34:36 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:35:05 INFO Start storage initialization
+2024-09-20 00:35:05 INFO Storage from C:/GYM/trainers.json was built successfully
+2024-09-20 00:35:05 INFO Storage from C:/GYM/trainees.json was built successfully
+2024-09-20 00:35:05 INFO Storage from C:/GYM/training.json was built successfully
+2024-09-20 00:35:05 INFO Finish storage initialization
+2024-09-20 00:35:05 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:35:05 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:35:05 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:35:05 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:35:05 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:35:05 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:35:05 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:35:05 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:35:06 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:35:06 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@22b7ef2b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:35:06 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 00:55:34 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.gym.config.StorageConfig]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'trainerJpaDao' for bean class [com.gym.dao.impl.TrainerJpaDao] conflicts with existing, non-compatible bean definition of same name and class [com.gym.dao.impl.TrainerDao]
+2024-09-20 00:56:39 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 00:56:39 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 00:56:40 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 00:56:40 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 00:56:40 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 00:56:40 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 00:56:40 INFO HHH10001003: Autocommit mode: false
+2024-09-20 00:56:40 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 00:56:40 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 00:56:41 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@27898e13] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 00:56:41 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 01:00:15 INFO New trainer created
+2024-09-20 01:00:15 INFO New trainer created
+2024-09-20 01:06:18 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 01:06:18 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 01:06:18 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 01:06:18 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 01:06:18 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 01:06:18 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 01:06:18 INFO HHH10001003: Autocommit mode: false
+2024-09-20 01:06:18 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 01:06:18 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 01:06:19 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@58a3d521] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 01:06:19 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 01:06:20 INFO Trainer id = 60 created in database
+2024-09-20 01:07:38 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 01:07:38 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 01:07:39 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 01:07:39 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 01:07:39 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 01:07:39 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 01:07:39 INFO HHH10001003: Autocommit mode: false
+2024-09-20 01:07:39 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 01:07:39 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 01:07:40 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@58a3d521] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 01:07:40 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 01:07:40 INFO Trainer id = 62 created in database
+2024-09-20 01:09:37 INFO New trainer created
+2024-09-20 01:11:37 INFO New trainer created
+2024-09-20 01:15:14 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 01:15:14 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 01:15:14 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 01:15:15 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 01:15:15 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 01:15:15 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 01:15:15 INFO HHH10001003: Autocommit mode: false
+2024-09-20 01:15:15 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 01:15:15 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 01:15:15 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1c2dd89b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 01:15:16 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 01:15:16 INFO Trainer id = 64 created in database
+2024-09-20 01:15:16 INFO New trainer created
+2024-09-20 01:16:41 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 01:16:41 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 01:16:41 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 01:16:41 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 01:16:41 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 01:16:41 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 01:16:41 INFO HHH10001003: Autocommit mode: false
+2024-09-20 01:16:41 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 01:16:41 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 01:16:42 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7dd91ffc] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 01:16:42 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 01:16:42 INFO Trainer id = 66 created in database
+2024-09-20 01:16:42 INFO New trainer created
+2024-09-20 01:17:30 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 01:17:30 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 01:17:30 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 01:17:30 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 01:17:30 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 01:17:30 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 01:17:30 INFO HHH10001003: Autocommit mode: false
+2024-09-20 01:17:30 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 01:17:30 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 01:17:31 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1c2dd89b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 01:17:31 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 01:17:31 INFO Trainer id = 68 created in database
+2024-09-20 01:17:31 INFO New trainer created
+2024-09-20 01:18:13 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 01:18:13 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 01:18:14 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 01:18:14 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 01:18:14 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 01:18:14 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 01:18:14 INFO HHH10001003: Autocommit mode: false
+2024-09-20 01:18:14 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 01:18:14 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 01:18:14 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1c2dd89b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 01:18:15 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 01:18:15 INFO Trainer id = 70 created in database
+2024-09-20 01:18:15 INFO New trainer created
+2024-09-20 01:20:41 INFO New trainer created in  trainer service
+2024-09-20 01:20:41 INFO New trainer created in  trainer service
+2024-09-20 01:35:06 INFO New trainer created in  trainer service
+2024-09-20 01:37:08 INFO New trainer created in  trainer service
+2024-09-20 01:39:45 INFO New trainer created in  trainer service
+2024-09-20 01:42:24 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$fed1c31b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 01:42:24 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2024-09-20 01:48:19 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$fed1c31b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 01:48:19 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2024-09-20 01:59:19 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$dd0eb16d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 01:59:19 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2024-09-20 22:59:24 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$2c338972] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 22:59:24 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2024-09-20 23:22:39 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$dd0eb16d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 23:22:39 INFO HV000001: Hibernate Validator 6.0.13.Final
+2024-09-20 23:22:39 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-20 23:24:19 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$2c338972] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 23:24:19 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2024-09-20 23:31:28 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$dd0eb16d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 23:31:28 INFO HV000001: Hibernate Validator 6.2.5.Final
+2024-09-20 23:31:28 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-20 23:42:07 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 23:42:07 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 23:42:07 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 23:42:07 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 23:42:07 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 23:42:07 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 23:42:07 INFO HHH10001003: Autocommit mode: false
+2024-09-20 23:42:07 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 23:42:08 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 23:42:08 INFO HV000001: Hibernate Validator 6.2.5.Final
+2024-09-20 23:42:09 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@634e1b39] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 23:42:09 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 23:42:54 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 23:42:54 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 23:42:55 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 23:42:55 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 23:42:55 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 23:42:55 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 23:42:55 INFO HHH10001003: Autocommit mode: false
+2024-09-20 23:42:55 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 23:42:55 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 23:42:55 INFO HV000001: Hibernate Validator 6.2.5.Final
+2024-09-20 23:42:55 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7848321e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 23:42:56 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 23:42:56 INFO Trainer id = 72 created in database
+2024-09-20 23:42:56 INFO New trainer created in  trainer service
+2024-09-20 23:44:17 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$2c338972] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 23:44:17 INFO HV000001: Hibernate Validator 6.2.5.Final
+2024-09-20 23:44:17 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-20 23:51:37 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f847a98] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-20 23:51:37 INFO HV000001: Hibernate Validator 6.2.5.Final
+2024-09-20 23:51:37 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.validation.beanvalidation.MethodValidationPostProcessor]: Factory method 'methodValidationPostProcessor' threw exception; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'validator' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-20 23:56:56 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-20 23:56:56 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-20 23:56:56 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-20 23:56:57 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-20 23:56:57 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-20 23:56:57 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-20 23:56:57 INFO HHH10001003: Autocommit mode: false
+2024-09-20 23:56:57 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-20 23:56:57 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-20 23:56:57 INFO HV000001: Hibernate Validator 6.2.5.Final
+2024-09-20 23:56:58 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6b2aafbc] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-20 23:56:58 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-20 23:56:58 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'validator' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-20 23:56:58 INFO HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:05:37 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$4d614fb7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:05:37 INFO HV000001: Hibernate Validator 6.2.5.Final
+2024-09-21 00:05:37 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-21 00:07:08 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$2c338972] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:07:09 INFO HV000001: Hibernate Validator 6.2.5.Final
+2024-09-21 00:07:09 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-21 00:13:08 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$25303dff] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:13:08 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:13:09 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-21 00:25:40 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$a1ec78b9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:25:40 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:25:40 WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'methodValidationPostProcessor' defined in com.gym.config.StorageConfig: Invocation of init method failed; nested exception is javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead
+2024-09-21 00:27:22 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$210a18b3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:27:22 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:27:22 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:27:22 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:27:22 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:27:23 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:27:23 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:27:23 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:27:23 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:27:23 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:27:23 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:27:24 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@18d30e7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:27:24 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:30:40 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$d3998b5e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:30:40 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:30:41 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:30:41 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:30:41 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:30:41 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:30:41 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:30:41 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:30:41 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:30:41 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:30:41 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:30:42 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6a902015] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:30:42 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:32:22 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ed4eeafe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:32:22 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:32:22 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:32:23 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:32:23 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:32:23 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:32:23 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:32:23 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:32:23 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:32:23 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:32:23 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:32:24 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45424c0] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:32:24 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:44:45 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$55d6cbfa] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:44:45 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:44:45 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:44:45 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:44:46 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:44:46 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:44:46 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:44:46 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:44:46 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:44:46 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:44:46 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:44:47 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5f193335] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:44:47 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:46:07 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ed4eeafe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:46:07 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:46:08 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:46:08 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:46:08 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:46:08 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:46:08 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:46:08 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:46:08 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:46:08 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:46:08 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:46:09 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@b8b2184] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:46:09 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:47:13 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ed4eeafe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:47:13 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:47:13 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:47:13 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:47:13 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:47:13 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:47:13 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:47:13 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:47:13 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:47:13 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:47:13 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:47:14 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@b8b2184] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:47:14 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:47:40 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$4c2e14b2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:47:41 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:47:41 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:47:41 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:47:41 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:47:41 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:47:41 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:47:41 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:47:41 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:47:41 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:47:41 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:47:42 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6921cfa] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:47:42 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:47:42 INFO Trainer id = 74 created in database
+2024-09-21 00:47:42 INFO New trainer created in  trainer service
+2024-09-21 00:49:56 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ed4eeafe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:49:56 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:49:57 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:49:57 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:49:57 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:49:57 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:49:57 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:49:57 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:49:57 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:49:57 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:49:58 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:49:58 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@b8b2184] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:49:58 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:51:10 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$55d6cbfa] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:51:10 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:51:10 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:51:10 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:51:10 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:51:10 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:51:10 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:51:10 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:51:10 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:51:10 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:51:11 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:51:11 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5f193335] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:51:11 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 00:55:13 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f797b768] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 00:55:13 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 00:55:13 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 00:55:13 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 00:55:13 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 00:55:14 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 00:55:14 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 00:55:14 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 00:55:14 INFO HHH10001003: Autocommit mode: false
+2024-09-21 00:55:14 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 00:55:14 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 00:55:14 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@22ae32ba] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 00:55:14 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:00:51 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f797b768] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 01:00:51 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 01:00:51 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 01:00:51 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 01:00:51 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 01:00:52 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 01:00:52 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 01:00:52 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 01:00:52 INFO HHH10001003: Autocommit mode: false
+2024-09-21 01:00:52 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 01:00:52 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 01:00:53 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@22ae32ba] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 01:00:53 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:02:15 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ed4eeafe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 01:02:15 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 01:02:16 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 01:02:16 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 01:02:16 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 01:02:16 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 01:02:16 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 01:02:16 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 01:02:16 INFO HHH10001003: Autocommit mode: false
+2024-09-21 01:02:16 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 01:02:16 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 01:02:17 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45424c0] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 01:02:17 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:03:50 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ed4eeafe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 01:03:50 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 01:03:50 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 01:03:50 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 01:03:50 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 01:03:50 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 01:03:50 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 01:03:50 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 01:03:50 INFO HHH10001003: Autocommit mode: false
+2024-09-21 01:03:50 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 01:03:51 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 01:03:52 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@b8b2184] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 01:03:53 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:44:29 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$546575b9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 01:44:29 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 01:44:29 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 01:44:29 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 01:44:29 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 01:44:30 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 01:44:30 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 01:44:30 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 01:44:30 INFO HHH10001003: Autocommit mode: false
+2024-09-21 01:44:30 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 01:44:30 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 01:44:31 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@e2b3026] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 01:44:31 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:49:31 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$a12a51ea] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 01:49:31 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 01:49:32 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 01:49:32 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 01:49:32 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 01:49:32 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 01:49:32 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 01:49:32 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 01:49:32 INFO HHH10001003: Autocommit mode: false
+2024-09-21 01:49:32 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 01:49:32 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 01:49:33 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4eb1943b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 01:49:33 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:51:10 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$a12a51ea] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 01:51:10 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 01:51:10 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 01:51:10 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 01:51:10 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 01:51:10 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 01:51:10 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 01:51:10 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 01:51:10 INFO HHH10001003: Autocommit mode: false
+2024-09-21 01:51:10 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 01:51:10 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 01:51:11 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4eb1943b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 01:51:11 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:51:12 INFO Trainer id = 76 created in database
+2024-09-21 01:51:12 INFO New trainer created in  trainer service
+2024-09-21 01:55:12 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$7ac9a633] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 01:55:12 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 01:55:12 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 01:55:12 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 01:55:12 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 01:55:13 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 01:55:13 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 01:55:13 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 01:55:13 INFO HHH10001003: Autocommit mode: false
+2024-09-21 01:55:13 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 01:55:13 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 01:55:14 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@27dfd12b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 01:55:14 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:55:33 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$a12a51ea] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-21 01:55:34 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-21 01:55:34 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym]
+2024-09-21 01:55:34 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-21 01:55:34 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-21 01:55:34 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-21 01:55:34 INFO HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/gym?serverTimezone=             Europe/Kyiv&verifyServerCertificate=false&useSSL=false]
+2024-09-21 01:55:34 INFO HHH10001001: Connection properties: {password=****, user=root}
+2024-09-21 01:55:34 INFO HHH10001003: Autocommit mode: false
+2024-09-21 01:55:34 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-21 01:55:34 INFO HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-09-21 01:55:35 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4eb1943b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-21 01:55:35 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-21 01:55:35 INFO Trainer id = 78 created in database
+2024-09-21 01:55:35 INFO New trainer created in  trainer service

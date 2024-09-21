@@ -1,6 +1,6 @@
 package com.gym.service.impl;
 
-import com.gym.dao.impl.TraineeDao;
+import com.gym.config.StorageConfig;
 import com.gym.dao.impl.TrainerDao;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingTypeEnum;
@@ -12,14 +12,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.ReflectionUtils;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TrainerModelServiceTest {
+class TrainerServiceTest {
     private final ITrainerService trainerService;
-    private final TraineeDao mockTraineeDao;
     private final TrainerDao mockTrainerDao;
     private final String firstName = "Kerry";
     private final String lastName = "King";
@@ -30,20 +31,14 @@ class TrainerModelServiceTest {
     private MockedStatic<StringUtils> mockStringUtil;
     private final Integer passwordLength = 10;
 
-    TrainerModelServiceTest() {
+    TrainerServiceTest() {
         this.trainerService = new TrainerService();
-        this.mockTraineeDao = Mockito.mock(TraineeDao.class);
         this.mockTrainerDao = Mockito.mock(TrainerDao.class);
         Field trainerDaoField = ReflectionUtils
                 .findFields(TrainerService.class, f -> f.getName().equals("trainerDao"),
                         ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
                 .get(0);
         trainerDaoField.setAccessible(true);
-        Field traineeDaoField = ReflectionUtils
-                .findFields(TrainerService.class, f -> f.getName().equals("traineeDao"),
-                        ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
-                .get(0);
-        traineeDaoField.setAccessible(true);
         Field passwordLengthField = ReflectionUtils
                 .findFields(TrainerService.class, f -> f.getName().equals("passwordLength"),
                         ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
@@ -51,7 +46,6 @@ class TrainerModelServiceTest {
         passwordLengthField.setAccessible(true);
         try {
             trainerDaoField.set(trainerService, mockTrainerDao);
-            traineeDaoField.set(trainerService, mockTraineeDao);
             passwordLengthField.set(trainerService, passwordLength);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -93,7 +87,6 @@ class TrainerModelServiceTest {
                 .build();
 
         Mockito.when(mockTrainerDao.create(serviceCreatedTrainerModel)).thenReturn(daoResponseTrainerModel);
-        Mockito.when(mockTraineeDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
         Mockito.when(mockTrainerDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
 
         TrainerModel newTrainerModel = trainerService.createTrainer(firstName, lastName, trainingTypeString);
@@ -129,7 +122,6 @@ class TrainerModelServiceTest {
                 .build();
 
         Mockito.when(mockTrainerDao.create(serviceCreatedTrainerModel)).thenReturn(daoResponseTrainerModel);
-        Mockito.when(mockTraineeDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
         Mockito.when(mockTrainerDao.getUserCountByUserName(firstName, lastName)).thenReturn(1L);
 
         TrainerModel newTrainerModel = trainerService.createTrainer(firstName, lastName, trainingTypeString);
@@ -140,6 +132,14 @@ class TrainerModelServiceTest {
         assertEquals(expectedUserName, newTrainerModel.getUserName());
         assertEquals(passwordLength, newTrainerModel.getPassword().length());
         assertEquals(trainingTypeEnum, newTrainerModel.getTrainingType());
+    }
 
+    @Test
+    void createTrainerValidationTest(){
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        ITrainerService contextTrainerService = applicationContext.getBean(TrainerService.class);
+
+        TrainerModel newTrainerModel = contextTrainerService.createTrainer(" ", lastName, trainingTypeString);
     }
 }

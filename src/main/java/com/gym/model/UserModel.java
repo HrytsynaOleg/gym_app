@@ -3,9 +3,12 @@ package com.gym.model;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @SuperBuilder
 public class UserModel {
+    @NotBlank
     String firstName;
     String lastName;
     String userName;

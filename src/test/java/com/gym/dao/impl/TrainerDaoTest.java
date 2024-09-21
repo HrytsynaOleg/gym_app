@@ -17,19 +17,19 @@ import java.io.InputStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
-class TrainerEntityDaoTest {
+class TrainerDaoTest {
     private static ApplicationContext applicationContext;
 
-    private final TrainerJpaDao dao;
+    private final TrainerDao dao;
     private TrainerModel serviceInputTrainerModel;
 
-    TrainerEntityDaoTest() {
-        this.dao = (TrainerJpaDao) applicationContext.getBean("trainerJpaDao");
+    TrainerDaoTest() {
+        this.dao = (TrainerDao) applicationContext.getBean("trainerDao");
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
             this.serviceInputTrainerModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
         } catch (IOException ex) {
-            log.error("Error reading source file");
+            log.error("Error reading resource file");
         }
     }
 
@@ -52,7 +52,7 @@ class TrainerEntityDaoTest {
     }
 
     @Test
-    void getTrainerModelById(){
+    void getTrainerModelByIdTest(){
         TrainerModel trainerModel = dao.get(36L);
         assertNotNull(trainerModel);
         assertEquals("Kerry", trainerModel.getFirstName());
@@ -62,5 +62,11 @@ class TrainerEntityDaoTest {
         assertTrue(trainerModel.getIsActive());
         assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
 
+    }
+
+    @Test
+    void getUsersCountByUserNameTest(){
+        long userCountByUserName = dao.getUserCountByUserName("Kerry", "King");
+        System.out.println(userCountByUserName);
     }
 }
