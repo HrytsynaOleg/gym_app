@@ -9,6 +9,7 @@ import com.gym.model.TrainingTypeEnum;
 public class Mapper {
     public static User mapTrainerModelToUser(TrainerModel trainerModel){
         User user = new User();
+        user.setId(trainerModel.getUserId());
         user.setFirstName(trainerModel.getFirstName());
         user.setLastName(trainerModel.getLastName());
         user.setUserName(trainerModel.getUserName());
@@ -20,6 +21,7 @@ public class Mapper {
     public static TrainerModel mapTrainerEntityToTrainerModel(Trainer trainer){
         return TrainerModel.builder()
                 .id(trainer.getId())
+                .userId(trainer.getUser().getId())
                 .firstName(trainer.getUser().getFirstName())
                 .lastName(trainer.getUser().getLastName())
                 .userName(trainer.getUser().getUserName())

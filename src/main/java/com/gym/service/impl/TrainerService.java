@@ -1,9 +1,10 @@
 package com.gym.service.impl;
 
 import com.gym.dao.ITrainerDao;
-import com.gym.entity.User;
+import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingTypeEnum;
+import com.gym.model.UserCredentials;
 import com.gym.service.ITrainerService;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
@@ -11,18 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.gym.utils.StringUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Log4j2
 @Service
-//@Validated
 public class TrainerService implements ITrainerService {
     @Autowired
     private ITrainerDao trainerDao;
@@ -33,13 +30,14 @@ public class TrainerService implements ITrainerService {
 
     @Override
     public TrainerModel createTrainer(String firstName, String lastName,
-                                      String trainingTypeString) {
+                                      String trainingTypeString) throws ValidationException {
         long usersCount = trainerDao.getUserCountByUserName(firstName, lastName);
         String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
         String password = StringUtils.generateRandomString(passwordLength);
         TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.valueOf(trainingTypeString);
         TrainerModel trainerModel = TrainerModel.builder()
                 .id(0)
+                .userId(0)
                 .firstName(firstName)
                 .lastName(lastName)
                 .userName(userName)
@@ -50,12 +48,8 @@ public class TrainerService implements ITrainerService {
 
         Set<ConstraintViolation<TrainerModel>> validate = localValidatorFactoryBean.getValidator().validate(trainerModel);
         if (!validate.isEmpty()) {
-            for (ConstraintViolation<TrainerModel> violation : validate) {
-                System.out.println(violation.getMessage());
-            }
-            throw new ValidationException("Validation failed");
-        } else {
-            System.out.println("User is valid");
+            log.error("Trainer validation error");
+            throw new ValidationException("Trainer validation failed");
         }
 
         TrainerModel newTrainerModel = trainerDao.create(trainerModel);
@@ -64,12 +58,49 @@ public class TrainerService implements ITrainerService {
     }
 
     @Override
-    public void updateTrainer(TrainerModel trainerModel) {
+    public boolean isCredentialsNotMatch(UserCredentials credentials) {
+        TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
+        if (trainer == null) {
+            return true;
+        }
+        return !trainer.getPassword().equals(credentials.getPassword());
+    }
+
+    @Override
+    public TrainerModel getTrainerProfile(UserCredentials credentials) throws IncorrectCredentialException {
+        if (isCredentialsNotMatch(credentials)){
+            throw new IncorrectCredentialException("User name or password incorrect");
+        }
+        return trainerDao.getByUserName(credentials.getUserName());
+    }
+
+    @Override
+    public void updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws ValidationException,
+            IncorrectCredentialException {
+        if (isCredentialsNotMatch(credentials)){
+            throw new IncorrectCredentialException("User name or password incorrect");
+        }
+        Set<ConstraintViolation<TrainerModel>> validate = localValidatorFactoryBean.getValidator().validate(trainerModel);
+        if (!validate.isEmpty()) {
+            log.error("Trainer profile validation error");
+            throw new ValidationException("Trainer validation failed");
+        }
         trainerDao.update(trainerModel);
     }
 
     @Override
-    public TrainerModel getById(long id) {
+    public void updateTrainerPassword(UserCredentials credentials, String password) throws IncorrectCredentialException {
+        if (isCredentialsNotMatch(credentials)){
+            throw new IncorrectCredentialException("User name or password incorrect");
+        }
+        TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
+        trainer.setPassword(password);
+        trainerDao.update(trainer);
+        log.info("Password changed");
+    }
+
+    @Override
+    public TrainerModel get(long id) {
         return trainerDao.get(id);
     }
 }

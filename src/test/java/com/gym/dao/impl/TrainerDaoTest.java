@@ -69,4 +69,40 @@ class TrainerDaoTest {
         long userCountByUserName = dao.getUserCountByUserName("Kerry", "King");
         System.out.println(userCountByUserName);
     }
+
+    @Test
+    void getTrainerIfNotExistTest(){
+        TrainerModel trainerModel = dao.get(1L);
+        assertNull(trainerModel);
+    }
+
+
+    @Test
+    void getTrainerByUserNameTest(){
+        TrainerModel trainerModel = dao.getByUserName("Kerry.King");
+        assertNotNull(trainerModel);
+        assertEquals("Kerry", trainerModel.getFirstName());
+        assertEquals("King", trainerModel.getLastName());
+        assertEquals("Kerry.King", trainerModel.getUserName());
+        assertTrue(trainerModel.getIsActive());
+        assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
+    }
+
+    @Test
+    void getTrainerByUserNameIfNotExistTest(){
+        TrainerModel trainerModel = dao.getByUserName("112");
+        assertNull(trainerModel);
+    }
+
+    @Test
+    void updateTrainerTest(){
+        TrainerModel trainerModel = dao.getByUserName("Kerry.King");
+        trainerModel.setFirstName("Jan");
+        trainerModel.setLastName("Holm");
+        dao.update(trainerModel);
+        TrainerModel updatedTrainer = dao.getByUserName("Kerry.King");
+
+        assertEquals("Jan", updatedTrainer.getFirstName());
+        assertEquals("Holm", updatedTrainer.getLastName());
+    }
 }

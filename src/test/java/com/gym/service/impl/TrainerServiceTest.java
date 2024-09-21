@@ -2,8 +2,10 @@ package com.gym.service.impl;
 
 import com.gym.config.StorageConfig;
 import com.gym.dao.impl.TrainerDao;
+import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingTypeEnum;
+import com.gym.model.UserCredentials;
 import com.gym.service.ITrainerService;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -15,6 +17,7 @@ import org.mockito.Mockito;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.validation.ValidationException;
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -135,11 +138,70 @@ class TrainerServiceTest {
     }
 
     @Test
-    void createTrainerValidationTest(){
+    void createTrainerValidationTest() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
-        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         ITrainerService contextTrainerService = applicationContext.getBean(TrainerService.class);
+        assertThrows(ValidationException.class, () ->
+                contextTrainerService.createTrainer(" ", lastName, trainingTypeString));
+        assertThrows(ValidationException.class, () ->
+                contextTrainerService.createTrainer(firstName, " ", trainingTypeString));
+    }
 
-        TrainerModel newTrainerModel = contextTrainerService.createTrainer(" ", lastName, trainingTypeString);
+    @Test
+    void getTrainerProfileTest() {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
+        ITrainerService contextTrainerService = applicationContext.getBean(TrainerService.class);
+        TrainerModel trainerProfile;
+        UserCredentials credentials = UserCredentials.builder()
+                .userName("Kerry.King")
+                .password("Wl0MyDxPTk")
+                .build();
+        try {
+            trainerProfile = contextTrainerService.getTrainerProfile(credentials);
+        } catch (IncorrectCredentialException e) {
+            throw new RuntimeException(e);
+        }
+        assertNotNull(trainerProfile);
+        assertEquals("Kerry", trainerProfile.getFirstName());
+        assertEquals("King", trainerProfile.getLastName());
+        assertEquals("Kerry.King", trainerProfile.getUserName());
+        assertEquals("Wl0MyDxPTk", trainerProfile.getPassword());
+        assertEquals(TrainingTypeEnum.YOGA, trainerProfile.getTrainingType());
+    }
+
+    @Test
+    void getTrainerProfileIfWrongCredentialsTest() {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
+        ITrainerService contextTrainerService = applicationContext.getBean(TrainerService.class);
+        UserCredentials credentials = UserCredentials.builder()
+                .userName("Kerry.King")
+                .password("Wl0M")
+                .build();
+        assertThrows(IncorrectCredentialException.class, () -> {
+            contextTrainerService.getTrainerProfile(credentials);
+        });
+    }
+
+    @Test
+    void updateTrainerPasswordTest() {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
+        ITrainerService contextTrainerService = applicationContext.getBean(TrainerService.class);
+        UserCredentials credentials = UserCredentials.builder()
+                .userName("Kerry.King")
+                .password("Wl0MyDxPTk")
+                .build();
+        TrainerModel updatedTrainer;
+        try {
+            contextTrainerService.updateTrainerPassword(credentials, "123");
+            credentials.setPassword("123");
+            updatedTrainer = contextTrainerService.getTrainerProfile(credentials);
+            contextTrainerService.updateTrainerPassword(credentials, "Wl0MyDxPTk");
+        } catch (IncorrectCredentialException e) {
+            throw new RuntimeException(e);
+        }
+
+        assertEquals("123", updatedTrainer.getPassword());
+
+
     }
 }
