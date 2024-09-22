@@ -18,10 +18,10 @@ public enum TrainingTypeEnum {
     @JsonProperty("RESISTANCE")
     RESISTANCE(14, "Resistance");
 
-    private final long id;
+    private final int id;
     private final String name;
 
-    TrainingTypeEnum(long id, String name) {
+    TrainingTypeEnum(int id, String name) {
         this.id = id;
         this.name = name;
     }
