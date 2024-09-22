@@ -1,5 +1,6 @@
 package com.gym.config;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +14,12 @@ import javax.persistence.Persistence;
 @Configuration
 @ComponentScan(basePackages = "com.gym")
 @PropertySource("classpath:application.properties")
+@Log4j2
 public class StorageConfig {
 
     @Bean
     public EntityManagerFactory getEntityManagerFactory() {
-        return Persistence.createEntityManagerFactory("com.gym");
+        return Persistence.createEntityManagerFactory("com.gym.h2");
     }
 
     @Bean
@@ -26,7 +28,7 @@ public class StorageConfig {
     }
 
     @Bean
-    public LocalValidatorFactoryBean validator(){
+    public LocalValidatorFactoryBean validator() {
         return new LocalValidatorFactoryBean();
     }
 }

@@ -22,4 +22,10 @@ class StorageConfigTest {
         EntityManagerFactory factory = applicationContext.getBean(EntityManagerFactory.class);
         assertNotNull(factory);
     }
+
+    @Test
+    void databaseConnection(){
+
+
+    }
 }

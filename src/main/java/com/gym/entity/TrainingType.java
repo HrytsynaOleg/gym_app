@@ -13,10 +13,10 @@ import java.util.List;
 public class TrainingType {
     @Id
     @Column(name = "id")
-    private long id;
+    private int id;
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "trainingType", cascade = CascadeType.ALL)
-    private List<Trainer> trainerList;
+    private List<Trainer> trainerList = new java.util.ArrayList<>();
 
 }
