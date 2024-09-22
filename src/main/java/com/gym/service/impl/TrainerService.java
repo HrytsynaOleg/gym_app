@@ -16,15 +16,16 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
+import javax.validation.Validator;
 import java.util.Set;
 
 @Log4j2
-@Service
+@Service("trainerService")
 public class TrainerService implements ITrainerService {
     @Autowired
     private ITrainerDao trainerDao;
     @Autowired
-    LocalValidatorFactoryBean localValidatorFactoryBean;
+    private LocalValidatorFactoryBean localValidatorFactoryBean;
     @Value("${password.length}")
     private Integer passwordLength;
 
@@ -46,7 +47,8 @@ public class TrainerService implements ITrainerService {
                 .trainingType(trainingTypeEnum)
                 .build();
 
-        Set<ConstraintViolation<TrainerModel>> validate = localValidatorFactoryBean.getValidator().validate(trainerModel);
+        Validator validator = localValidatorFactoryBean.getValidator();
+        Set<ConstraintViolation<TrainerModel>> validate = validator.validate(trainerModel);
         if (!validate.isEmpty()) {
             log.error("Trainer validation error");
             throw new ValidationException("Trainer validation failed");

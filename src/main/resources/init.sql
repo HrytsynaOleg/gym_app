@@ -1,4 +1,4 @@
-DROP SCHEMA IF EXISTS gym;
+DROP SCHEMA IF EXISTS gym CASCADE;
 
 -- -----------------------------------------------------
 -- Schema gym
