@@ -1,11 +1,11 @@
 package com.gym.dao;
 
-import com.gym.model.Trainee;
+import com.gym.model.TraineeModel;
 
 public interface ITraineeDao {
-    Trainee add(Trainee trainee);
-    void update(Trainee trainee);
+    TraineeModel add(TraineeModel traineeModel);
+    void update(TraineeModel traineeModel);
     void delete(long id);
-    Trainee getById(long id);
+    TraineeModel getById(long id);
     long getUserCountByUserName(String firstName, String lastName);
 }

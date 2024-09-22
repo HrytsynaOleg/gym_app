@@ -1,8 +1,8 @@
 package com.gym.dao;
 
-import com.gym.model.Training;
+import com.gym.model.TrainingModel;
 
 public interface ITrainingDao {
-    Training create(Training training);
-    Training get(long id);
+    TrainingModel create(TrainingModel trainingModel);
+    TrainingModel get(long id);
 }

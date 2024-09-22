@@ -1,8 +1,8 @@
 package com.gym.service.impl;
 
 import com.gym.dao.ITrainingDao;
-import com.gym.model.Training;
-import com.gym.model.TrainingType;
+import com.gym.model.TrainingModel;
+import com.gym.model.TrainingTypeEnum;
 import com.gym.service.ITrainingService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +18,27 @@ public class TrainingService implements ITrainingService {
     private ITrainingDao trainingDao;
 
     @Override
-    public Training createTraining(long traineeId, long trainerId, String trainingName, String trainingTypeString,
-                                   String trainingDateString, int duration) {
+    public TrainingModel createTraining(long traineeId, long trainerId, String trainingName, String trainingTypeString,
+                                        String trainingDateString, int duration) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate trainingDate = LocalDate.parse(trainingDateString, formatter);
-        TrainingType trainingType = TrainingType.valueOf(trainingTypeString);
-        Training training = Training.builder()
+        TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.valueOf(trainingTypeString);
+        TrainingModel trainingModel = TrainingModel.builder()
                 .id(0)
                 .trainerId(trainerId)
                 .traineeId(traineeId)
                 .trainingName(trainingName)
-                .trainingType(trainingType)
+                .trainingType(trainingTypeEnum)
                 .trainingDate(trainingDate)
                 .duration(duration)
                 .build();
-        Training newTraining = trainingDao.create(training);
+        TrainingModel newTrainingModel = trainingDao.create(trainingModel);
         log.info("New training created");
-        return newTraining;
+        return newTrainingModel;
     }
 
     @Override
-    public Training getById(long id) {
+    public TrainingModel getById(long id) {
         return trainingDao.get(id);
     }
 }

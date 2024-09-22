@@ -2,7 +2,7 @@ package com.gym.service.impl;
 
 import com.gym.dao.impl.TraineeDao;
 import com.gym.dao.impl.TrainerDao;
-import com.gym.model.Trainee;
+import com.gym.model.TraineeModel;
 import com.gym.service.ITraineeService;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TraineeServiceTest {
+class TraineeModelServiceTest {
     private final ITraineeService traineeService;
     private final TraineeDao mockTraineeDao;
     private final TrainerDao mockTrainerDao;
@@ -32,7 +32,7 @@ class TraineeServiceTest {
     private final Integer passwordLength = 10;
     private MockedStatic<StringUtils> mockStringUtil;
 
-    public TraineeServiceTest() {
+    public TraineeModelServiceTest() {
         this.traineeService = new TraineeService();
         this.mockTraineeDao = Mockito.mock(TraineeDao.class);
         this.mockTrainerDao = Mockito.mock(TrainerDao.class);
@@ -76,7 +76,7 @@ class TraineeServiceTest {
 
     @Test
     void createTraineeTest() {
-        Trainee serviceCreatedTrainee = Trainee.builder()
+        TraineeModel serviceCreatedTraineeModel = TraineeModel.builder()
                 .id(0)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -86,7 +86,7 @@ class TraineeServiceTest {
                 .address(address)
                 .dateOfBirth(dateOfBirth)
                 .build();
-        Trainee daoResponseTrainee = Trainee.builder()
+        TraineeModel daoResponseTraineeModel = TraineeModel.builder()
                 .id(18)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -97,25 +97,25 @@ class TraineeServiceTest {
                 .dateOfBirth(dateOfBirth)
                 .build();
 
-        Mockito.when(mockTraineeDao.add(serviceCreatedTrainee)).thenReturn(daoResponseTrainee);
+        Mockito.when(mockTraineeDao.add(serviceCreatedTraineeModel)).thenReturn(daoResponseTraineeModel);
         Mockito.when(mockTraineeDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
         Mockito.when(mockTrainerDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
 
-        Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
+        TraineeModel newTraineeModel = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
 
-        assertEquals(18, newTrainee.getId());
-        assertEquals(firstName, newTrainee.getFirstName());
-        assertEquals(lastName, newTrainee.getLastName());
-        assertEquals(userName, newTrainee.getUserName());
-        assertEquals(passwordLength, newTrainee.getPassword().length());
-        assertEquals(address, newTrainee.getAddress());
-        assertEquals(dateOfBirth, newTrainee.getDateOfBirth());
+        assertEquals(18, newTraineeModel.getId());
+        assertEquals(firstName, newTraineeModel.getFirstName());
+        assertEquals(lastName, newTraineeModel.getLastName());
+        assertEquals(userName, newTraineeModel.getUserName());
+        assertEquals(passwordLength, newTraineeModel.getPassword().length());
+        assertEquals(address, newTraineeModel.getAddress());
+        assertEquals(dateOfBirth, newTraineeModel.getDateOfBirth());
     }
 
     @Test
     void createTraineeIfUserExistTest() {
         String expectedUserName = userName + 1;
-        Trainee serviceCreatedTrainee = Trainee.builder()
+        TraineeModel serviceCreatedTraineeModel = TraineeModel.builder()
                 .id(0)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -125,7 +125,7 @@ class TraineeServiceTest {
                 .address(address)
                 .dateOfBirth(dateOfBirth)
                 .build();
-        Trainee daoResponseTrainee = Trainee.builder()
+        TraineeModel daoResponseTraineeModel = TraineeModel.builder()
                 .id(18)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -136,18 +136,18 @@ class TraineeServiceTest {
                 .dateOfBirth(dateOfBirth)
                 .build();
 
-        Mockito.when(mockTraineeDao.add(serviceCreatedTrainee)).thenReturn(daoResponseTrainee);
+        Mockito.when(mockTraineeDao.add(serviceCreatedTraineeModel)).thenReturn(daoResponseTraineeModel);
         Mockito.when(mockTraineeDao.getUserCountByUserName(firstName, lastName)).thenReturn(1L);
         Mockito.when(mockTrainerDao.getUserCountByUserName(firstName, lastName)).thenReturn(0L);
 
-        Trainee newTrainee = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
+        TraineeModel newTraineeModel = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
 
-        assertEquals(18, newTrainee.getId());
-        assertEquals(firstName, newTrainee.getFirstName());
-        assertEquals(lastName, newTrainee.getLastName());
-        assertEquals(expectedUserName, newTrainee.getUserName());
-        assertEquals(passwordLength, newTrainee.getPassword().length());
-        assertEquals(address, newTrainee.getAddress());
-        assertEquals(dateOfBirth, newTrainee.getDateOfBirth());
+        assertEquals(18, newTraineeModel.getId());
+        assertEquals(firstName, newTraineeModel.getFirstName());
+        assertEquals(lastName, newTraineeModel.getLastName());
+        assertEquals(expectedUserName, newTraineeModel.getUserName());
+        assertEquals(passwordLength, newTraineeModel.getPassword().length());
+        assertEquals(address, newTraineeModel.getAddress());
+        assertEquals(dateOfBirth, newTraineeModel.getDateOfBirth());
     }
 }

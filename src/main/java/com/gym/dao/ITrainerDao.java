@@ -1,10 +1,11 @@
 package com.gym.dao;
 
-import com.gym.model.Trainer;
+import com.gym.model.TrainerModel;
 
 public interface ITrainerDao {
-    Trainer create(Trainer trainer);
-    void update(Trainer trainer);
-    Trainer get(long id);
+    TrainerModel create(TrainerModel trainerModel);
+    TrainerModel getByUserName(String username);
+    void update(TrainerModel trainerModel);
+    TrainerModel get(long id);
     long getUserCountByUserName(String firstName, String lastName);
 }

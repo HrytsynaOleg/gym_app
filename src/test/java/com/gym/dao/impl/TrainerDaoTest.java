@@ -1,75 +1,108 @@
 package com.gym.dao.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.dao.ITrainerDao;
-import com.gym.model.Trainer;
-import com.gym.model.TrainingType;
-import com.gym.utils.StorageUtils;
-import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.Test;
+import com.gym.config.StorageConfig;
+import com.gym.model.TrainerModel;
+import com.gym.model.TrainingTypeEnum;
 import com.gym.utils.JsonUtils;
+import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @Log4j2
 class TrainerDaoTest {
+    private static ApplicationContext applicationContext;
 
-    private final ITrainerDao dao;
-    private Trainer serviceInputTrainer;
+    private final TrainerDao dao;
+    private TrainerModel serviceInputTrainerModel;
 
     TrainerDaoTest() {
-        Map<String, Trainer> storage = StorageUtils.buildMapFromFile("C:/GYM/trainers.json",
-                new TypeReference<>() {
-                });
-        this.dao = new TrainerDao(storage);
+        this.dao = (TrainerDao) applicationContext.getBean("trainerDao");
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
-            this.serviceInputTrainer = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
+            this.serviceInputTrainerModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
         } catch (IOException ex) {
-            log.error("Error reading source file");
+            log.error("Error reading resource file");
         }
+    }
+
+    @BeforeAll
+    public static void init() {
+        applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
     }
 
     @Test
     void createTrainerTest() {
-            Trainer newTrainer = dao.create(serviceInputTrainer);
-            Trainer testNewTrainer = dao.get(newTrainer.getId());
-
-            assertNotNull(testNewTrainer);
-            assertEquals(newTrainer.getId(), testNewTrainer.getId());
-            assertEquals(serviceInputTrainer.getFirstName(), testNewTrainer.getFirstName());
-            assertEquals(serviceInputTrainer.getLastName(), testNewTrainer.getLastName());
-            assertEquals(serviceInputTrainer.getTrainingType(), testNewTrainer.getTrainingType());
+        TrainerModel newTrainer =  dao.create(serviceInputTrainerModel);
+        TrainerModel checkTrainer = dao.get(newTrainer.getId());
+        assertNotNull(checkTrainer);
+        assertEquals(serviceInputTrainerModel.getFirstName(), checkTrainer.getFirstName());
+        assertEquals(serviceInputTrainerModel.getLastName(), checkTrainer.getLastName());
+        assertEquals(serviceInputTrainerModel.getUserName(), checkTrainer.getUserName());
+        assertEquals(serviceInputTrainerModel.getPassword(), checkTrainer.getPassword());
+        assertEquals(serviceInputTrainerModel.getIsActive(), checkTrainer.getIsActive());
+        assertEquals(serviceInputTrainerModel.getTrainingType(), checkTrainer.getTrainingType());
     }
 
     @Test
-    void updateTrainerTest() {
-        Trainer trainer = dao.get(124);
-        assertEquals(TrainingType.YOGA, trainer.getTrainingType());
-        trainer.setTrainingType(TrainingType.STRETCHING);
-        dao.update(trainer);
-        Trainer updatedTrainer = dao.get(124);
-        assertEquals(TrainingType.STRETCHING, updatedTrainer.getTrainingType());
+    void getTrainerModelByIdTest(){
+        TrainerModel trainerModel = dao.get(36L);
+        assertNotNull(trainerModel);
+        assertEquals("Kerry", trainerModel.getFirstName());
+        assertEquals("King", trainerModel.getLastName());
+        assertEquals("Kerry.King", trainerModel.getUserName());
+        assertEquals("123456", trainerModel.getPassword());
+        assertTrue(trainerModel.getIsActive());
+        assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
+
     }
 
     @Test
-    void getTest() {
-        Trainer trainer = dao.get(125);
-        assertEquals(125, trainer.getId());
-        assertEquals("Dmytro", trainer.getFirstName());
-        assertEquals("Sirenko", trainer.getLastName());
-        assertEquals("Dmytro.Sirenko", trainer.getUserName());
-        assertEquals("123456", trainer.getPassword());
-        assertEquals(TrainingType.YOGA, trainer.getTrainingType());
-        assertTrue(trainer.getIsActive());
+    void getUsersCountByUserNameTest(){
+        long userCountByUserName = dao.getUserCountByUserName("Kerry", "King");
+        System.out.println(userCountByUserName);
     }
 
     @Test
-    void getIfNotExistTest() {
-        Trainer trainer = dao.get(180);
-        assertNull(trainer);
+    void getTrainerIfNotExistTest(){
+        TrainerModel trainerModel = dao.get(1L);
+        assertNull(trainerModel);
+    }
+
+
+    @Test
+    void getTrainerByUserNameTest(){
+        TrainerModel trainerModel = dao.getByUserName("Kerry.King");
+        assertNotNull(trainerModel);
+        assertEquals("Kerry", trainerModel.getFirstName());
+        assertEquals("King", trainerModel.getLastName());
+        assertEquals("Kerry.King", trainerModel.getUserName());
+        assertTrue(trainerModel.getIsActive());
+        assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
+    }
+
+    @Test
+    void getTrainerByUserNameIfNotExistTest(){
+        TrainerModel trainerModel = dao.getByUserName("112");
+        assertNull(trainerModel);
+    }
+
+    @Test
+    void updateTrainerTest(){
+        TrainerModel trainerModel = dao.getByUserName("Kerry.King");
+        trainerModel.setFirstName("Jan");
+        trainerModel.setLastName("Holm");
+        dao.update(trainerModel);
+        TrainerModel updatedTrainer = dao.getByUserName("Kerry.King");
+
+        assertEquals("Jan", updatedTrainer.getFirstName());
+        assertEquals("Holm", updatedTrainer.getLastName());
     }
 }

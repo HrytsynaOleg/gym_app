@@ -2,7 +2,7 @@ package com.gym.service.impl;
 
 import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
-import com.gym.model.Trainee;
+import com.gym.model.TraineeModel;
 import com.gym.service.ITraineeService;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
@@ -25,14 +25,14 @@ public class TraineeService implements ITraineeService {
     private Integer passwordLength;
 
     @Override
-    public Trainee createTrainee(String firstName, String lastName, String address, String dateOfBirth) {
+    public TraineeModel createTrainee(String firstName, String lastName, String address, String dateOfBirth) {
         long usersCount = trainerDao.getUserCountByUserName(firstName, lastName) +
                 traineeDao.getUserCountByUserName(firstName, lastName);
         String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
         String password = StringUtils.generateRandomString(passwordLength);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dateOfBirth, formatter);
-        Trainee trainee = Trainee.builder()
+        TraineeModel traineeModel = TraineeModel.builder()
                 .id(0)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -42,14 +42,14 @@ public class TraineeService implements ITraineeService {
                 .address(address)
                 .dateOfBirth(localDate)
                 .build();
-        Trainee newTrainee = traineeDao.add(trainee);
+        TraineeModel newTraineeModel = traineeDao.add(traineeModel);
         log.info("New trainee created");
-        return newTrainee;
+        return newTraineeModel;
     }
 
     @Override
-    public void update(Trainee trainee) {
-        traineeDao.update(trainee);
+    public void update(TraineeModel traineeModel) {
+        traineeDao.update(traineeModel);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public Trainee getById(long id) {
+    public TraineeModel getById(long id) {
         return traineeDao.getById(id);
     }
 }

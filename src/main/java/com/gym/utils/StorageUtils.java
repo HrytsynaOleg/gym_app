@@ -1,7 +1,7 @@
 package com.gym.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.model.User;
+import com.gym.model.UserModel;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.FileInputStream;
@@ -31,7 +31,7 @@ public class StorageUtils {
         return maxValue + 1;
     }
 
-    public static <T extends User> long getUserCountByUserName(Map<String, T> storageMap, String userName) {
+    public static <T extends UserModel> long getUserCountByUserName(Map<String, T> storageMap, String userName) {
         return storageMap.values().stream()
                 .filter(s -> StringUtils.isMatch(s.getUserName(), "^" + userName + "\\d*+\\z"))
                 .count();

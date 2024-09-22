@@ -10,12 +10,12 @@ import java.time.LocalDate;
 @Data
 @Builder
 @Jacksonized
-public class Training {
+public class TrainingModel {
     long id;
     long traineeId;
     long trainerId;
     String trainingName;
-    TrainingType trainingType;
+    TrainingTypeEnum trainingType;
     @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate trainingDate;
     int duration;
