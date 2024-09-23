@@ -13,6 +13,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
@@ -95,13 +97,20 @@ class TrainerDaoTest {
 
     @Test
     void updateTrainerTest(){
-        TrainerModel trainerModel = dao.getByUserName("Harrison.Ford");
+        TrainerModel trainerModel = dao.getByUserName("Dave.Lombardo");
         trainerModel.setFirstName("Jan");
         trainerModel.setLastName("Holm");
         dao.update(trainerModel);
-        TrainerModel updatedTrainer = dao.getByUserName("Harrison.Ford");
+        TrainerModel updatedTrainer = dao.getByUserName("Dave.Lombardo");
 
         assertEquals("Jan", updatedTrainer.getFirstName());
         assertEquals("Holm", updatedTrainer.getLastName());
+    }
+
+    @Test
+    void getNotAssignedTrainerList(){
+        List<TrainerModel> notAssignedTrainerList = dao.getNotAssignedTrainerList();
+        assertEquals(2, notAssignedTrainerList.size());
+        System.out.println();
     }
 }

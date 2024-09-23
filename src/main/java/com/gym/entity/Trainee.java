@@ -1,33 +1,39 @@
 package com.gym.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "trainer")
+@Table(name = "trainee")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Trainer {
+public class Trainee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
+
+    @Column(name = "address")
+    private String address;
+
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "training_type_id")
-    private TrainingType trainingType;
-
-    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
     private List<Training> trainingList = new java.util.ArrayList<>();
 
-    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
     private List<TrainerTrainee> trainerTraineeList = new java.util.ArrayList<>();
 }

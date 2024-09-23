@@ -3,6 +3,7 @@ package com.gym.service.impl;
 import com.gym.config.StorageConfig;
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
+import com.gym.model.TrainingModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.model.UserCredentials;
 import com.gym.service.ITrainerService;
@@ -17,6 +18,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.validation.ValidationException;
+
+import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,16 +73,22 @@ class TrainerServiceTest {
     @Test
     void createTrainerIfUserExistTest() {
         String expectedUserName = userName + 1;
+        String expectedSecondUserName = userName + 2;
 
         TrainerModel responseTrainerModel = trainerService.createTrainer(firstName, lastName, trainingTypeString);
         TrainerModel newTrainerModel = trainerService.get(responseTrainerModel.getId());
+        TrainerModel responseSecondTrainerModel = trainerService.createTrainer(firstName, lastName, trainingTypeString);
+        TrainerModel newSecondTrainerModel = trainerService.get(responseSecondTrainerModel.getId());
 
         assertEquals(responseTrainerModel.getId(), newTrainerModel.getId());
         assertEquals(firstName, newTrainerModel.getFirstName());
         assertEquals(lastName, newTrainerModel.getLastName());
         assertEquals(expectedUserName, newTrainerModel.getUserName());
+        assertEquals(expectedSecondUserName, newSecondTrainerModel.getUserName());
         assertEquals(passwordLength, newTrainerModel.getPassword().length());
         assertEquals(trainingTypeEnum, newTrainerModel.getTrainingType());
+
+
     }
 
     @Test
@@ -134,5 +144,48 @@ class TrainerServiceTest {
             throw new RuntimeException(e);
         }
         assertEquals("123", updatedTrainer.getPassword());
+    }
+
+    @Test
+    void setActiveStatusTest(){
+        UserCredentials credentials = UserCredentials.builder()
+                .userName("Dave.Lombardo")
+                .password("1234567890")
+                .build();
+        try {
+            TrainerModel trainer = trainerService.getTrainerProfile(credentials);
+            boolean statusBeforeChanging = trainer.getIsActive();
+            trainerService.deactivate(credentials);
+            TrainerModel deactivatedTrainer = trainerService.getTrainerProfile(credentials);
+            trainerService.activate(credentials);
+            TrainerModel activatedTrainer = trainerService.getTrainerProfile(credentials);
+
+            assertTrue(statusBeforeChanging);
+            assertFalse(deactivatedTrainer.getIsActive());
+            assertTrue(activatedTrainer.getIsActive());
+        } catch (IncorrectCredentialException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void getTrainingListByDateAndTraineeUserNameTest(){
+        UserCredentials credentials = UserCredentials.builder()
+                .userName("Kerry.King")
+                .password("1234567890")
+                .build();
+
+        LocalDate localDateFrom = LocalDate.of(2024, 9, 11);
+        LocalDate localDateTo = LocalDate.of(2024, 9, 15);
+        String traineeUserName = "Bruce.Dickinson";
+
+        List<TrainingModel> resultList = null;
+        try {
+            resultList = trainerService.getTrainingList(credentials, localDateFrom, localDateTo, traineeUserName);
+        } catch (IncorrectCredentialException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(2, resultList.size());
     }
 }
