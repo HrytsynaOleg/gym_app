@@ -1,4 +1,4 @@
-DROP SCHEMA IF EXISTS gym;
+DROP SCHEMA IF EXISTS gym CASCADE;
 
 -- -----------------------------------------------------
 -- Schema gym
@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS training(
 INSERT INTO training (id, trainer_id, trainee_id, training_type_id, training_name, training_date, training_duration)
 VALUES (856, 116, 234, 10, 'new training', '2024-09-12', 20),
 (857, 116, 234, 10, 'new training', '2024-09-14', 30),
+(863, 116, 248, 10, 'new training', '2024-09-14', 20),
 (858, 117, 248, 9, 'new training', '2024-09-12', 40),
 (859, 117, 253, 9, 'new training', '2024-09-12', 40),
 (860, 117, 258, 9, 'new training', '2024-09-12', 40),
@@ -145,4 +146,4 @@ VALUES (15, 234, 116),
 (17, 253, 117),
 (18, 258, 117),
 (19, 265, 118),
-(20, 268, 119);
+(20, 268, 118);

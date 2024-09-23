@@ -1,9 +1,9 @@
 {
   "id": 0,
   "userId": 0,
-  "firstName": "Kerry",
-  "lastName": "King",
-  "userName": "Kerry.King",
+  "firstName": "Harrison",
+  "lastName": "Ford",
+  "userName": "Harrison.Ford",
   "password": "123456",
   "isActive": true,
   "trainingType": "YOGA"

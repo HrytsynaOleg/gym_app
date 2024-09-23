@@ -1,12 +1,17 @@
 package com.gym.dao.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.gym.config.StorageConfig;
 import com.gym.dao.ITraineeDao;
+import com.gym.dao.ITrainingDao;
 import com.gym.model.TraineeModel;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import com.gym.utils.JsonUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,22 +19,24 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 @Log4j2
-class TraineeModelDaoTest {
-
+class TraineeDaoTest {
+    private static ApplicationContext applicationContext;
     private final ITraineeDao dao;
     private TraineeModel serviceInputTraineeModel;
 
-    TraineeModelDaoTest() {
-        Map<String, TraineeModel> storage = StorageUtils.buildMapFromFile("C:/GYM/trainees.json",
-                new TypeReference<>() {
-                });
-        this.dao = new TraineeDao(storage);
+    TraineeDaoTest() {
+        this.dao = (ITraineeDao) applicationContext.getBean("trainingDao");
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainee.json")) {
             this.serviceInputTraineeModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
         } catch (IOException ex) {
             log.error("Error reading source file");
         }
+    }
+
+    @BeforeAll
+    public static void init() {
+        applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
     }
 
     @Test

@@ -1,9 +1,11 @@
 package com.gym.dao.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainerDao;
 import com.gym.entity.Trainer;
 import com.gym.entity.User;
 import com.gym.model.TrainerModel;
+import com.gym.utils.JsonUtils;
 import com.gym.utils.Mapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository("trainerDao")
 @Log4j2
@@ -46,7 +49,7 @@ public class TrainerDao implements ITrainerDao {
     @Override
     public TrainerModel getByUserName(String username) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String queryString = "select t from Trainer t inner join t.user u where u.userName like ?1";
+        String queryString = "select t from Trainer t where t.user.userName like ?1";
         TypedQuery<Trainer> query = entityManager.createQuery(queryString, Trainer.class);
         query.setParameter(1, username);
         List<Trainer> resultList = query.getResultList();
@@ -84,9 +87,30 @@ public class TrainerDao implements ITrainerDao {
     public long getUserCountByUserName(String firstName, String lastName) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("select count(*) from User u where u.userName like ?1");
-        query.setParameter(1, firstName + "." + lastName);
+        query.setParameter(1, firstName + "." + lastName + "%");
         long result = (long) query.getSingleResult();
         entityManager.close();
         return result;
+    }
+
+    @Override
+    public List<TrainerModel> getNotAssignedTrainerList() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        String queryString = "select count(u.id), t.id from Trainer t left join TrainerTrainee u " +
+                "on t.id = u.trainer.id group by t.id";
+        Query query = entityManager.createQuery(queryString);
+        List resultList = query.getResultList();
+        String json = JsonUtils.convertObjectToJson(resultList);
+        List<List<Long>> values = JsonUtils.parseJsonString(json, new TypeReference<>() {
+        });
+        List<TrainerModel> trainerModelList = values.stream()
+                .filter(i -> i.get(0) == 0)
+                .map(i -> i.get(1))
+                .map(i -> entityManager.find(Trainer.class, i))
+                .map(Mapper::mapTrainerEntityToTrainerModel)
+                .collect(Collectors.toList());
+
+        entityManager.close();
+        return trainerModelList;
     }
 }

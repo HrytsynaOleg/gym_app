@@ -13,6 +13,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,12 +54,12 @@ class TrainerDaoTest {
 
     @Test
     void getTrainerModelByIdTest(){
-        TrainerModel trainerModel = dao.get(36L);
+        TrainerModel trainerModel = dao.get(116L);
         assertNotNull(trainerModel);
         assertEquals("Kerry", trainerModel.getFirstName());
         assertEquals("King", trainerModel.getLastName());
         assertEquals("Kerry.King", trainerModel.getUserName());
-        assertEquals("123456", trainerModel.getPassword());
+        assertEquals("1234567890", trainerModel.getPassword());
         assertTrue(trainerModel.getIsActive());
         assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
 
@@ -67,7 +68,7 @@ class TrainerDaoTest {
     @Test
     void getUsersCountByUserNameTest(){
         long userCountByUserName = dao.getUserCountByUserName("Kerry", "King");
-        System.out.println(userCountByUserName);
+        assertEquals(1, userCountByUserName);
     }
 
     @Test
@@ -96,13 +97,20 @@ class TrainerDaoTest {
 
     @Test
     void updateTrainerTest(){
-        TrainerModel trainerModel = dao.getByUserName("Kerry.King");
+        TrainerModel trainerModel = dao.getByUserName("Dave.Lombardo");
         trainerModel.setFirstName("Jan");
         trainerModel.setLastName("Holm");
         dao.update(trainerModel);
-        TrainerModel updatedTrainer = dao.getByUserName("Kerry.King");
+        TrainerModel updatedTrainer = dao.getByUserName("Dave.Lombardo");
 
         assertEquals("Jan", updatedTrainer.getFirstName());
         assertEquals("Holm", updatedTrainer.getLastName());
+    }
+
+    @Test
+    void getNotAssignedTrainerList(){
+        List<TrainerModel> notAssignedTrainerList = dao.getNotAssignedTrainerList();
+        assertEquals(2, notAssignedTrainerList.size());
+        System.out.println();
     }
 }
