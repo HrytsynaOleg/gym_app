@@ -84,16 +84,6 @@ public class TrainerDao implements ITrainerDao {
     }
 
     @Override
-    public long getUserCountByUserName(String firstName, String lastName) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Query query = entityManager.createQuery("select count(*) from User u where u.userName like ?1");
-        query.setParameter(1, firstName + "." + lastName + "%");
-        long result = (long) query.getSingleResult();
-        entityManager.close();
-        return result;
-    }
-
-    @Override
     public List<TrainerModel> getNotAssignedTrainerList() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         String queryString = "select count(u.id), t.id from Trainer t left join TrainerTrainee u " +

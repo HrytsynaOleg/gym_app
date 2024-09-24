@@ -87,8 +87,6 @@ class TrainerServiceTest {
         assertEquals(expectedSecondUserName, newSecondTrainerModel.getUserName());
         assertEquals(passwordLength, newTrainerModel.getPassword().length());
         assertEquals(trainingTypeEnum, newTrainerModel.getTrainingType());
-
-
     }
 
     @Test
@@ -97,6 +95,15 @@ class TrainerServiceTest {
                 trainerService.createTrainer(" ", lastName, trainingTypeString));
         assertThrows(ValidationException.class, () ->
                 trainerService.createTrainer(firstName, " ", trainingTypeString));
+    }
+
+    @Test
+    void credentialsVerifyingTest(){
+        UserCredentials credentials = UserCredentials.builder()
+                .userName("Kerry.King")
+                .password("Wl0M")
+                .build();
+        assertTrue(trainerService.isCredentialsNotMatch(credentials));
     }
 
     @Test

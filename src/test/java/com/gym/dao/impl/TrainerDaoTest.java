@@ -66,12 +66,6 @@ class TrainerDaoTest {
     }
 
     @Test
-    void getUsersCountByUserNameTest(){
-        long userCountByUserName = dao.getUserCountByUserName("Kerry", "King");
-        assertEquals(1, userCountByUserName);
-    }
-
-    @Test
     void getTrainerIfNotExistTest(){
         TrainerModel trainerModel = dao.get(1L);
         assertNull(trainerModel);

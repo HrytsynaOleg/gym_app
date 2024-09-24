@@ -1,14 +1,12 @@
 package com.gym.dao.impl;
 
 import com.gym.dao.ITrainingDao;
-import com.gym.entity.Trainer;
 import com.gym.entity.Training;
 import com.gym.model.TrainingModel;
 import com.gym.utils.Mapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.gym.utils.StorageUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,6 +41,19 @@ public class TrainingDao implements ITrainingDao {
         for (Map.Entry<String, Object> entry : parameters.entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
+        List<TrainingModel> resultList = query.getResultList().stream()
+                .map(Mapper::mapTrainingToTrainingModel)
+                .collect(Collectors.toList());
+        entityManager.close();
+        return resultList;
+    }
+
+    @Override
+    public List<TrainingModel> getTraineeTrainingList(long traineeId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        String queryString = "select t from Training t where t.trainee.id = :trainee";
+        TypedQuery<Training> query = entityManager.createQuery(queryString, Training.class);
+        query.setParameter("trainee", traineeId);
         List<TrainingModel> resultList = query.getResultList().stream()
                 .map(Mapper::mapTrainingToTrainingModel)
                 .collect(Collectors.toList());

@@ -5,7 +5,7 @@ import com.gym.config.StorageConfig;
 import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainingDao;
 import com.gym.model.TraineeModel;
-import com.gym.utils.StorageUtils;
+import com.gym.model.TrainingModel;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,17 +15,20 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @Log4j2
 class TraineeDaoTest {
     private static ApplicationContext applicationContext;
     private final ITraineeDao dao;
+    private final ITrainingDao trainingDao;
     private TraineeModel serviceInputTraineeModel;
 
     TraineeDaoTest() {
-        this.dao = (ITraineeDao) applicationContext.getBean("trainingDao");
+        this.trainingDao = (ITrainingDao) applicationContext.getBean("trainingDao");
+        this.dao = (ITraineeDao) applicationContext.getBean("traineeDao");
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainee.json")) {
             this.serviceInputTraineeModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
@@ -42,7 +45,7 @@ class TraineeDaoTest {
     @Test
     void addTraineeTest() {
             TraineeModel newTraineeModel = dao.add(serviceInputTraineeModel);
-            TraineeModel testNewTraineeModel = dao.getById(newTraineeModel.getId());
+            TraineeModel testNewTraineeModel = dao.get(newTraineeModel.getId());
 
             assertNotNull(testNewTraineeModel);
             assertEquals(newTraineeModel.getId(), testNewTraineeModel.getId());
@@ -56,39 +59,62 @@ class TraineeDaoTest {
     }
 
     @Test
-    void updateTraineeTest() {
-        TraineeModel traineeModel = dao.getById(215);
-        assertEquals("Serhiy", traineeModel.getFirstName());
-        traineeModel.setFirstName("Petro");
-        dao.update(traineeModel);
-        TraineeModel updatedTraineeModel = dao.getById(215);
-        assertEquals("Petro", updatedTraineeModel.getFirstName());
-    }
-
-    @Test
     void deleteTraineeTest() {
-        TraineeModel traineeModel = dao.getById(216);
-        assertEquals("Maxym", traineeModel.getFirstName());
-        dao.delete(216);
-        TraineeModel deletedTraineeModel = dao.getById(216);
-        assertNull(deletedTraineeModel);
+        List<TrainingModel> trainingList = trainingDao.getTraineeTrainingList(248);
+        dao.delete(248);
+        List<TrainingModel> trainingListAfterDelete = trainingDao.getTraineeTrainingList(248);
+
+        assertNull(dao.get(248));
+        assertEquals(2, trainingList.size());
+        assertEquals(0, trainingListAfterDelete.size());
     }
 
     @Test
-    void getByIdTest() {
-        TraineeModel traineeModel = dao.getById(225);
-        assertEquals(225, traineeModel.getId());
-        assertEquals("Tom", traineeModel.getFirstName());
-        assertEquals("Arraya", traineeModel.getLastName());
-        assertEquals("Tom.Arraya", traineeModel.getUserName());
-        assertEquals("123456", traineeModel.getPassword());
+    void getTest() {
+        TraineeModel traineeModel = dao.get(248);
+        assertEquals(248, traineeModel.getId());
+        assertEquals("Neil", traineeModel.getFirstName());
+        assertEquals("Young", traineeModel.getLastName());
+        assertEquals("Neil.Young", traineeModel.getUserName());
+        assertEquals("1234567890", traineeModel.getPassword());
         assertTrue(traineeModel.getIsActive());
-        assertEquals("123456", traineeModel.getPassword());
+        assertEquals("Toronto", traineeModel.getAddress());
+        assertEquals(LocalDate.of(1965,7,25), traineeModel.getDateOfBirth());
     }
 
     @Test
-    void getByIdIfNotExistTest() {
-        TraineeModel traineeModel = dao.getById(230);
+    void getIfNotExistTest() {
+        TraineeModel traineeModel = dao.get(230);
         assertNull(traineeModel);
+    }
+
+    @Test
+    void getTraineeByUserNameTest(){
+        TraineeModel traineeModel = dao.getByUserName("Neil.Young");
+        assertNotNull(traineeModel);
+        assertEquals("Neil", traineeModel.getFirstName());
+        assertEquals("Young", traineeModel.getLastName());
+        assertEquals("Neil.Young", traineeModel.getUserName());
+        assertTrue(traineeModel.getIsActive());
+        assertEquals("Toronto", traineeModel.getAddress());
+        assertEquals(LocalDate.of(1965,7,25), traineeModel.getDateOfBirth());
+    }
+
+    @Test
+    void getTraineeByUserNameIfNotExistTest(){
+        TraineeModel traineeModel = dao.getByUserName("112");
+        assertNull(traineeModel);
+    }
+
+    @Test
+    void updateTraineeTest(){
+        TraineeModel traineeModel = dao.getByUserName("Kirk.Hammett");
+        traineeModel.setFirstName("Jan");
+        traineeModel.setLastName("Holm");
+        dao.update(traineeModel);
+        TraineeModel updatedTrainee = dao.getByUserName("Kirk.Hammett");
+
+        assertEquals("Jan", updatedTrainee.getFirstName());
+        assertEquals("Holm", updatedTrainee.getLastName());
     }
 }

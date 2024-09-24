@@ -101,7 +101,8 @@ CREATE TABLE IF NOT EXISTS training(
   training_duration INT NULL DEFAULT NULL,
   CONSTRAINT fk_training_trainee1
     FOREIGN KEY (trainee_id)
-    REFERENCES trainee (id),
+    REFERENCES trainee (id)
+    ON DELETE CASCADE,
   CONSTRAINT fk_training_trainer1
     FOREIGN KEY (trainer_id)
     REFERENCES trainer (id),
