@@ -2,13 +2,15 @@ package com.gym.service.impl;
 
 import com.gym.dao.ITrainerDao;
 import com.gym.dao.ITrainingDao;
-import com.gym.dao.impl.TrainerDao;
+import com.gym.dao.IUserDao;
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.model.UserCredentials;
+import com.gym.service.IModelValidator;
 import com.gym.service.ITrainerService;
+import com.gym.service.IUserCredentialsService;
 import com.gym.utils.DateUtils;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
@@ -31,14 +33,18 @@ public class TrainerService implements ITrainerService {
     @Autowired
     private ITrainingDao trainingDao;
     @Autowired
-    private ModelValidator validator;
+    private IUserDao userDao;
+    @Autowired
+    private IModelValidator validator;
+    @Autowired
+    private IUserCredentialsService credentialsService;
     @Value("${password.length}")
     private Integer passwordLength;
 
     @Override
     public TrainerModel createTrainer(String firstName, String lastName,
                                       String trainingTypeString) throws ValidationException {
-        long usersCount = trainerDao.getUserCountByUserName(firstName, lastName);
+        long usersCount = userDao.getUserCount(firstName, lastName);
         String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
         String password = StringUtils.generateRandomString(passwordLength);
         TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.valueOf(trainingTypeString);
@@ -62,23 +68,24 @@ public class TrainerService implements ITrainerService {
 
     @Override
     public boolean isCredentialsNotMatch(UserCredentials credentials) {
-        TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
-        if (trainer == null) {
+        try {
+            credentialsService.verifyCredentials(credentials);
+        } catch (IncorrectCredentialException e) {
             return true;
         }
-        return !trainer.getPassword().equals(credentials.getPassword());
+        return false;
     }
 
     @Override
     public TrainerModel getTrainerProfile(UserCredentials credentials) throws IncorrectCredentialException {
-        checkCredentialsMatching(credentials);
+        credentialsService.verifyCredentials(credentials);
         return trainerDao.getByUserName(credentials.getUserName());
     }
 
     @Override
     public List<TrainingModel> getTrainingList(UserCredentials credentials, LocalDate dateFrom, LocalDate dateTo,
                                                String traineeUserName) throws IncorrectCredentialException {
-        checkCredentialsMatching(credentials);
+        credentialsService.verifyCredentials(credentials);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("trainer", credentials.getUserName());
         parameters.put("trainee", traineeUserName);
@@ -88,28 +95,28 @@ public class TrainerService implements ITrainerService {
     }
 
     @Override
-    public List<TrainerModel> getNotAssignedTrainerList(UserCredentials credentials) throws IncorrectCredentialException{
-        checkCredentialsMatching(credentials);
+    public List<TrainerModel> getNotAssignedTrainerList(UserCredentials credentials) throws IncorrectCredentialException {
+        credentialsService.verifyCredentials(credentials);
         return trainerDao.getNotAssignedTrainerList();
     }
 
     @Override
     public void activate(UserCredentials credentials) throws ValidationException,
             IncorrectCredentialException {
-        checkCredentialsMatching(credentials);
+        credentialsService.verifyCredentials(credentials);
         setActiveStatus(credentials, true);
     }
 
     @Override
     public void deactivate(UserCredentials credentials) throws IncorrectCredentialException {
-        checkCredentialsMatching(credentials);
+        credentialsService.verifyCredentials(credentials);
         setActiveStatus(credentials, false);
     }
 
     @Override
     public void updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws ValidationException,
             IncorrectCredentialException {
-        checkCredentialsMatching(credentials);
+        credentialsService.verifyCredentials(credentials);
         validator.validate(trainerModel);
         trainerDao.update(trainerModel);
     }
@@ -117,7 +124,7 @@ public class TrainerService implements ITrainerService {
     @Override
     public void updateTrainerPassword(UserCredentials credentials, String password) throws ValidationException,
             IncorrectCredentialException {
-        checkCredentialsMatching(credentials);
+        credentialsService.verifyCredentials(credentials);
         TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
         trainer.setPassword(password);
         validator.validate(trainer);
@@ -130,15 +137,9 @@ public class TrainerService implements ITrainerService {
         return trainerDao.get(id);
     }
 
-    private void checkCredentialsMatching(UserCredentials userCredentials) throws IncorrectCredentialException {
-        if (isCredentialsNotMatch(userCredentials)) {
-            throw new IncorrectCredentialException("User name or password incorrect");
-        }
-    }
-
     private void setActiveStatus(UserCredentials credentials, boolean status) throws ValidationException,
             IncorrectCredentialException {
-        checkCredentialsMatching(credentials);
+        credentialsService.verifyCredentials(credentials);
         TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
         trainer.setIsActive(status);
         validator.validate(trainer);

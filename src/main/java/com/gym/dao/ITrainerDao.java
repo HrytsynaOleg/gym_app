@@ -9,6 +9,5 @@ public interface ITrainerDao {
     TrainerModel getByUserName(String username);
     void update(TrainerModel trainerModel);
     TrainerModel get(long id);
-    long getUserCountByUserName(String firstName, String lastName);
     List<TrainerModel> getNotAssignedTrainerList();
 }
