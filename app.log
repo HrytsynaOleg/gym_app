@@ -13230,3 +13230,1055 @@ antlr.SemanticException: left-hand operand of a binary operator was null
 2024-09-25 02:26:24 INFO New trainee created
 2024-09-25 02:26:24 INFO Trainee id = 8 created in database
 2024-09-25 02:26:24 INFO New trainee created
+2024-09-25 22:18:55 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$30aa9c01] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 22:18:55 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 22:18:55 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 22:18:55 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 22:18:56 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 22:18:56 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 22:18:56 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 22:18:56 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 22:18:56 INFO HHH10001003: Autocommit mode: false
+2024-09-25 22:18:56 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 22:18:56 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 22:18:57 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4beae1e3] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 22:18:57 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 22:25:13 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 22:25:13 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 22:25:13 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 22:25:13 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 22:25:13 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 22:25:14 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 22:25:14 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 22:25:14 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 22:25:14 INFO HHH10001003: Autocommit mode: false
+2024-09-25 22:25:14 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 22:25:14 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 22:25:15 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 22:25:15 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 22:25:22 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$7d824df7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 22:25:22 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 22:25:22 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 22:25:23 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 22:25:23 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 22:25:23 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 22:25:23 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 22:25:23 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 22:25:23 INFO HHH10001003: Autocommit mode: false
+2024-09-25 22:25:23 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 22:25:23 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 22:25:24 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@156cfa20] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 22:25:24 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 22:25:24 ERROR Dao error occurred - get training
+2024-09-25 22:25:25 ERROR Dao error occurred - get training
+2024-09-25 22:57:07 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 22:57:07 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 22:57:08 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 22:57:08 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 22:57:08 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 22:57:08 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 22:57:08 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 22:57:08 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 22:57:08 INFO HHH10001003: Autocommit mode: false
+2024-09-25 22:57:08 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 22:57:08 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 22:57:09 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 22:57:09 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 22:57:10 ERROR Dao error occurred - get training
+2024-09-25 22:58:13 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 22:58:13 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 22:58:13 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 22:58:13 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 22:58:13 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 22:58:14 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 22:58:14 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 22:58:14 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 22:58:14 INFO HHH10001003: Autocommit mode: false
+2024-09-25 22:58:14 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 22:58:14 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 22:58:15 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 22:58:15 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 22:58:15 ERROR Dao error occurred - get training
+2024-09-25 23:01:46 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:01:46 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:01:47 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:01:47 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:01:47 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:01:47 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:01:47 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:01:47 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:01:47 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:01:47 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:01:47 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:01:48 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:01:48 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:01:49 ERROR Dao error occurred - get training
+2024-09-25 23:02:26 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:02:26 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:02:26 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:02:26 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:02:26 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:02:27 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:02:27 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:02:27 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:02:27 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:02:27 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:02:27 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:02:28 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:02:28 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:02:28 ERROR Dao error occurred - get training
+2024-09-25 23:04:32 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:04:32 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:04:33 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:04:33 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:04:33 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:04:33 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:04:33 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:04:33 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:04:33 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:04:33 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:04:34 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:04:34 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:04:35 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:04:35 ERROR Dao error occurred - get training
+2024-09-25 23:04:55 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:04:55 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:04:56 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:04:56 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:04:56 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:04:56 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:04:56 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:04:56 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:04:56 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:04:56 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:04:56 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:04:57 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:04:57 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:05:35 ERROR Dao error occurred - get training
+2024-09-25 23:06:06 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:06:06 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:06:06 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:06:07 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:06:07 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:06:07 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:06:07 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:06:07 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:06:07 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:06:07 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:06:07 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:06:08 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:06:08 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:07:21 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:07:21 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:07:21 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:07:21 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:07:21 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:07:22 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:07:22 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:07:22 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:07:22 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:07:22 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:07:22 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:07:23 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:07:23 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:07:55 ERROR Dao error occurred - get training
+2024-09-25 23:08:18 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:08:19 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:08:19 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:08:19 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:08:19 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:08:19 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:08:19 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:08:19 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:08:19 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:08:19 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:08:19 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:08:20 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:08:20 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:13:12 ERROR Dao error occurred - create training null
+2024-09-25 23:13:28 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:13:28 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:13:29 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:13:29 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:13:29 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:13:29 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:13:29 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:13:29 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:13:29 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:13:29 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:13:30 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:13:30 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:13:30 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:13:31 ERROR Dao error occurred - get training
+2024-09-25 23:13:46 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:13:46 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:13:46 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:13:47 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:13:47 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:13:47 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:13:47 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:13:47 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:13:47 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:13:47 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:13:47 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:13:48 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:13:48 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:15:53 ERROR Dao error occurred - get training
+2024-09-25 23:18:54 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:18:54 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:18:55 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:18:55 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:18:55 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:18:55 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:18:55 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:18:55 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:18:55 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:18:55 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:18:55 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:18:56 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:18:57 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:18:57 ERROR Dao error occurred - get training
+2024-09-25 23:19:32 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:19:32 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:19:32 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:19:32 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:19:32 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:19:32 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:19:32 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:19:32 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:19:32 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:19:32 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:19:33 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:19:33 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:19:33 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:19:34 ERROR Dao error occurred - get training
+2024-09-25 23:20:19 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:20:19 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:20:19 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:20:19 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:20:19 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:20:20 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:20:20 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:20:20 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:20:20 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:20:20 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:20:20 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:20:21 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:20:21 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:20:21 ERROR Dao error occurred - get training
+2024-09-25 23:21:36 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:21:36 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:21:36 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:21:36 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:21:36 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:21:36 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:21:36 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:21:36 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:21:36 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:21:36 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:21:37 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:21:37 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:21:37 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:25:49 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:25:49 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:25:49 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:25:49 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:25:49 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:25:49 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:25:49 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:25:49 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:25:49 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:25:49 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:25:50 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:25:50 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:25:51 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:25:59 ERROR Dao error occurred - get training
+2024-09-25 23:26:18 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:26:18 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:26:18 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:26:19 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:26:19 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:26:19 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:26:19 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:26:19 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:26:19 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:26:19 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:26:19 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:26:20 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:26:20 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:27:47 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:27:47 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:27:47 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:27:48 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:27:48 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:27:48 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:27:48 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:27:48 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:27:48 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:27:48 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:27:48 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:27:49 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:27:49 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:29:29 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$7d824df7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:29:29 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:29:29 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:29:29 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:29:29 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:29:30 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:29:30 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:29:30 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:29:30 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:29:30 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:29:30 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:29:31 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@156cfa20] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:29:31 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:29:31 ERROR Dao error occurred - get training
+2024-09-25 23:29:51 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:29:51 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:29:51 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:29:51 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:29:51 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:29:51 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:29:51 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:29:51 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:29:51 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:29:51 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:29:52 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:29:52 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:29:52 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:29:53 ERROR Dao error occurred - get training
+2024-09-25 23:30:42 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:30:42 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:30:42 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:30:42 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:30:42 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:30:42 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:30:42 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:30:42 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:30:42 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:30:42 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:30:43 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:30:43 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:30:43 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:32:25 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:32:25 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:32:25 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:32:25 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:32:25 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:32:25 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:32:25 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:32:25 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:32:25 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:32:25 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:32:26 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:32:26 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:32:26 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:32:56 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:32:56 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:32:56 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:32:56 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:32:57 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:32:57 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:32:57 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:32:57 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:32:57 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:32:57 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:32:57 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:32:58 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:32:58 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:34:25 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:34:25 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:34:25 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:34:25 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:34:25 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:34:26 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:34:26 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:34:26 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:34:26 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:34:26 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:34:26 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:34:26 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:34:27 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:35:21 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:35:21 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:35:21 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:35:22 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:35:22 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:35:22 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:35:22 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:35:22 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:35:22 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:35:22 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:35:22 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:35:23 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:35:23 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:35:56 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:35:56 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:35:57 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:35:57 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:35:57 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:35:57 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:35:57 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:35:57 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:35:57 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:35:57 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:35:57 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:35:58 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:35:58 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:37:51 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:37:51 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:37:51 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:37:51 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:37:51 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:37:52 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:37:52 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:37:52 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:37:52 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:37:52 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:37:52 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:37:53 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:37:53 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:38:29 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:38:29 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:38:30 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:38:30 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:38:30 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:38:30 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:38:30 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:38:30 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:38:30 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:38:30 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:38:30 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:38:31 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:38:31 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:43:16 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:43:16 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:43:16 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:43:16 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:43:16 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:43:16 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:43:16 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:43:16 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:43:16 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:43:16 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:43:17 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:43:17 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:43:18 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:43:18 INFO Trainer id = 2 created in database
+2024-09-25 23:46:17 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:46:17 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:46:18 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:46:18 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:46:18 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:46:18 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:46:18 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:46:18 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:46:18 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:46:18 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:46:18 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:46:19 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45bd4753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:46:19 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:46:19 INFO Trainer id = 2 created in database
+2024-09-25 23:53:32 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$5ff48711] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:53:32 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:53:33 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:53:33 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:53:33 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:53:33 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:53:33 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:53:33 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:53:33 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:53:33 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:53:34 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:53:34 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5d27b4c1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:53:35 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:53:35 INFO Trainer id = 2 created in database
+2024-09-25 23:54:55 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$5ff48711] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:54:55 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:54:55 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:54:55 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:54:56 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:54:56 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:54:56 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:54:56 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:54:56 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:54:56 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:54:56 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:54:57 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5d27b4c1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:54:57 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:54:57 INFO Trainer id = 2 created in database
+2024-09-25 23:56:14 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b788af97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-25 23:56:14 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-25 23:56:14 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-25 23:56:14 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-25 23:56:14 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-25 23:56:15 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-25 23:56:15 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-25 23:56:15 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-25 23:56:15 INFO HHH10001003: Autocommit mode: false
+2024-09-25 23:56:15 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-25 23:56:15 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-25 23:56:15 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7e5e6573] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-25 23:56:16 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-25 23:56:16 INFO Trainee id = 2 created in database
+2024-09-26 00:04:54 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$5ff48711] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:04:54 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:04:55 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:04:55 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:04:55 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:04:55 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:04:55 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:04:55 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:04:55 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:04:55 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:04:56 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:04:56 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5d27b4c1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:04:57 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:04:57 INFO Trainee id = 2 created in database
+2024-09-26 00:10:35 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$7692853b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:10:35 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:10:36 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:10:36 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:10:36 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:10:36 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:10:36 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:10:36 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:10:36 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:10:36 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:10:36 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:10:37 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2e1add6f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:10:37 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:10:38 INFO Trainee id = 2 created in database
+2024-09-26 00:10:38 INFO New trainee created
+2024-09-26 00:10:38 INFO Password changed
+2024-09-26 00:10:38 INFO Password changed
+2024-09-26 00:10:38 ERROR Model validation error
+2024-09-26 00:10:39 ERROR Model validation error
+2024-09-26 00:10:39 INFO Trainee id = 4 created in database
+2024-09-26 00:10:39 INFO New trainee created
+2024-09-26 00:10:39 INFO Trainee id = 6 created in database
+2024-09-26 00:10:39 INFO New trainee created
+2024-09-26 00:10:39 INFO Trainee id = 8 created in database
+2024-09-26 00:10:39 INFO New trainee created
+2024-09-26 00:15:12 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$7d824df7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:15:12 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:15:13 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:15:13 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:15:13 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:15:13 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:15:13 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:15:13 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:15:13 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:15:13 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:15:19 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:15:19 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@156cfa20] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:15:20 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:15:20 ERROR Dao error occurred - get training
+2024-09-26 00:15:31 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$99e492a7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:15:31 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:15:31 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:15:31 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:15:31 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:15:31 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:15:31 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:15:31 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:15:31 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:15:31 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:15:32 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:15:32 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@30c01c37] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:15:33 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:16:16 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$99e492a7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:16:16 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:16:17 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:16:17 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:16:17 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:16:17 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:16:17 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:16:17 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:16:17 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:16:17 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:16:17 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:16:18 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@30c01c37] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:16:18 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:16:18 INFO New training created
+2024-09-26 00:16:42 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$99e492a7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:16:42 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:16:42 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:16:42 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:16:42 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:16:43 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:16:43 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:16:43 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:16:43 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:16:43 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:16:43 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:16:44 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@30c01c37] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:16:44 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:16:44 INFO New training created
+2024-09-26 00:40:51 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$7692853b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:40:51 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:40:52 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:40:52 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:40:52 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:40:52 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:40:52 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:40:52 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:40:52 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:40:52 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:40:52 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:40:53 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2e1add6f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:40:53 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:40:55 INFO Trainee id = 2 created in database
+2024-09-26 00:40:55 INFO New trainee created
+2024-09-26 00:40:55 INFO Password changed
+2024-09-26 00:40:55 INFO Password changed
+2024-09-26 00:40:55 ERROR Model validation error
+2024-09-26 00:40:55 ERROR Model validation error
+2024-09-26 00:40:55 INFO Trainee id = 4 created in database
+2024-09-26 00:40:55 INFO New trainee created
+2024-09-26 00:41:54 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f9c55661] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:41:54 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:41:54 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:41:54 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:41:54 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:41:55 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:41:55 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:41:55 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:41:55 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:41:55 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:41:55 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:41:55 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@41143873] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:41:56 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:41:57 INFO Trainee id = 2 created in database
+2024-09-26 00:41:57 INFO New trainee created
+2024-09-26 00:46:14 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f9c55661] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:46:14 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:46:15 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:46:15 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:46:15 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:46:15 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:46:15 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:46:15 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:46:15 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:46:15 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:46:16 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:46:16 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@41143873] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:46:17 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:46:18 INFO Trainee id = 2 created in database
+2024-09-26 00:46:18 INFO New trainee created
+2024-09-26 00:46:33 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$7692853b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:46:33 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:46:33 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:46:33 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:46:33 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:46:33 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:46:33 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:46:33 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:46:33 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:46:33 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:46:34 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:46:34 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2e1add6f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:46:35 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:46:36 INFO Trainee id = 2 created in database
+2024-09-26 00:46:36 INFO New trainee created
+2024-09-26 00:46:36 INFO Password changed
+2024-09-26 00:46:36 INFO Password changed
+2024-09-26 00:46:36 ERROR Model validation error
+2024-09-26 00:46:36 ERROR Model validation error
+2024-09-26 00:46:36 INFO Trainee id = 4 created in database
+2024-09-26 00:46:36 INFO New trainee created
+2024-09-26 00:46:36 INFO Trainee id = 6 created in database
+2024-09-26 00:46:36 INFO New trainee created
+2024-09-26 00:46:36 INFO Trainee id = 8 created in database
+2024-09-26 00:46:36 INFO New trainee created
+2024-09-26 00:49:43 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f9c55661] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:49:43 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:49:43 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:49:44 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:49:44 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:49:44 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:49:44 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:49:44 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:49:44 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:49:44 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:49:44 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:49:45 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@41143873] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:49:45 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:49:56 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$7692853b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:49:56 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:49:56 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:49:56 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:49:56 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:49:56 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:49:56 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:49:56 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:49:56 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:49:56 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:49:57 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:49:57 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2e1add6f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:49:58 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:49:59 INFO Trainee id = 2 created in database
+2024-09-26 00:49:59 INFO New trainee created
+2024-09-26 00:49:59 INFO Password changed
+2024-09-26 00:49:59 INFO Password changed
+2024-09-26 00:49:59 ERROR Model validation error
+2024-09-26 00:49:59 ERROR Model validation error
+2024-09-26 00:49:59 INFO Trainee id = 4 created in database
+2024-09-26 00:49:59 INFO New trainee created
+2024-09-26 00:49:59 INFO Trainee id = 6 created in database
+2024-09-26 00:49:59 INFO New trainee created
+2024-09-26 00:49:59 INFO Trainee id = 8 created in database
+2024-09-26 00:49:59 INFO New trainee created
+2024-09-26 00:54:46 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$a952e1e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:54:46 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:54:47 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:54:47 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:54:47 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:54:47 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:54:47 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:54:47 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:54:47 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:54:47 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:54:47 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:54:48 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1d6f77d7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:54:48 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:54:49 ERROR Model validation error
+2024-09-26 00:54:49 ERROR Model validation error
+2024-09-26 00:54:49 INFO Trainer id = 2 created in database
+2024-09-26 00:54:49 INFO New trainer created in  trainer service
+2024-09-26 00:54:49 INFO Password changed
+2024-09-26 00:54:50 INFO Password changed
+2024-09-26 00:54:50 INFO Trainer id = 4 created in database
+2024-09-26 00:54:50 INFO New trainer created in  trainer service
+2024-09-26 00:54:50 INFO Trainer id = 6 created in database
+2024-09-26 00:54:50 INFO New trainer created in  trainer service
+2024-09-26 00:55:18 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f9c55661] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:55:18 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:55:18 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:55:18 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:55:18 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:55:18 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:55:18 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:55:18 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:55:18 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:55:18 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:55:19 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:55:19 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@41143873] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:55:19 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:55:29 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$a952e1e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 00:55:29 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 00:55:30 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 00:55:30 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 00:55:30 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 00:55:30 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 00:55:30 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 00:55:30 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 00:55:30 INFO HHH10001003: Autocommit mode: false
+2024-09-26 00:55:30 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 00:55:30 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 00:55:31 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1d6f77d7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 00:55:31 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 00:55:32 ERROR Model validation error
+2024-09-26 00:55:32 ERROR Model validation error
+2024-09-26 00:55:32 INFO Trainer id = 2 created in database
+2024-09-26 00:55:32 INFO New trainer created in  trainer service
+2024-09-26 00:55:33 INFO Password changed
+2024-09-26 00:55:33 INFO Password changed
+2024-09-26 00:55:33 INFO Trainer id = 4 created in database
+2024-09-26 00:55:33 INFO New trainer created in  trainer service
+2024-09-26 00:55:33 INFO Trainer id = 6 created in database
+2024-09-26 00:55:33 INFO New trainer created in  trainer service
+2024-09-26 01:08:09 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:08:09 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 01:08:09 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:08:09 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 01:08:09 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 01:08:10 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:08:10 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:08:10 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:08:10 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:08:10 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:08:10 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:08:11 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@c11332b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:08:11 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:09:31 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:09:31 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 01:09:32 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:09:32 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 01:09:32 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 01:09:32 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:09:32 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:09:32 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:09:32 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:09:32 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:09:32 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:09:33 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@c11332b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:09:33 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:10:01 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b424fe0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:10:01 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 01:10:01 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:10:01 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 01:10:01 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 01:10:01 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:10:01 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:10:01 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:10:01 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:10:01 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:10:02 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:10:02 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@c11332b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:10:02 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:16:59 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f9c55661] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:16:59 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 01:16:59 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:16:59 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 01:16:59 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 01:17:00 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:00 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:00 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:00 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:00 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:00 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:01 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@467af68c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:01 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:17:16 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$a952e1e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:17:16 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 01:17:16 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:17:16 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 01:17:17 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 01:17:17 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:17 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:17 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:17 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:17 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:17 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:18 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@12c76d6e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:18 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:17:19 INFO Trainee id = 2 created in database
+2024-09-26 01:17:19 INFO New trainee created
+2024-09-26 01:17:19 INFO Password changed
+2024-09-26 01:17:19 INFO Password changed
+2024-09-26 01:17:19 ERROR Model validation error
+2024-09-26 01:17:19 ERROR Model validation error
+2024-09-26 01:17:19 INFO Trainee id = 4 created in database
+2024-09-26 01:17:19 INFO New trainee created
+2024-09-26 01:17:19 INFO Trainee id = 6 created in database
+2024-09-26 01:17:19 INFO New trainee created
+2024-09-26 01:17:19 INFO Trainee id = 8 created in database
+2024-09-26 01:17:19 INFO New trainee created
+2024-09-26 01:17:42 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ae90ce3e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:17:42 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 01:17:42 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:17:42 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 01:17:42 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 01:17:42 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:42 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:42 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:42 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:42 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:42 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:43 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@36525ab] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:43 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:17:44 INFO Trainer id = 2 created in database
+2024-09-26 01:17:44 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ae90ce3e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:17:44 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:17:44 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:44 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:44 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:44 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:44 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:44 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:44 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7b10472e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:44 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:17:44 INFO New training created
+2024-09-26 01:17:44 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ae90ce3e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:17:44 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:17:44 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:44 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:44 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:44 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:44 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:44 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:44 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@70f5f57d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:45 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:17:45 ERROR Model validation error
+2024-09-26 01:17:45 ERROR Model validation error
+2024-09-26 01:17:45 INFO Trainer id = 2 created in database
+2024-09-26 01:17:45 INFO New trainer created in  trainer service
+2024-09-26 01:17:45 INFO Password changed
+2024-09-26 01:17:45 INFO Password changed
+2024-09-26 01:17:45 INFO Trainer id = 4 created in database
+2024-09-26 01:17:45 INFO New trainer created in  trainer service
+2024-09-26 01:17:45 INFO Trainer id = 6 created in database
+2024-09-26 01:17:45 INFO New trainer created in  trainer service
+2024-09-26 01:17:45 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ae90ce3e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:17:45 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:17:46 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:46 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:46 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:46 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:46 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:46 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:46 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3dabdd11] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:46 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:17:46 INFO Trainee id = 2 created in database
+2024-09-26 01:17:46 INFO New trainee created
+2024-09-26 01:17:46 INFO Password changed
+2024-09-26 01:17:46 INFO Password changed
+2024-09-26 01:17:46 ERROR Model validation error
+2024-09-26 01:17:46 ERROR Model validation error
+2024-09-26 01:17:46 INFO Trainee id = 4 created in database
+2024-09-26 01:17:46 INFO New trainee created
+2024-09-26 01:17:46 INFO Trainee id = 6 created in database
+2024-09-26 01:17:46 INFO New trainee created
+2024-09-26 01:17:46 INFO Trainee id = 8 created in database
+2024-09-26 01:17:46 INFO New trainee created
+2024-09-26 01:17:46 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ae90ce3e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:17:46 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:17:46 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:46 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:46 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:46 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:46 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:46 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:46 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@28da5c4d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:46 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:17:46 ERROR Dao error occurred - get training
+2024-09-26 01:17:46 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ae90ce3e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:17:46 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:17:46 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:46 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:46 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:46 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:46 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:46 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:46 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5b8ba1d2] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:46 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:17:46 INFO Trainee id = 2 created in database
+2024-09-26 01:17:47 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$ae90ce3e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:17:47 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:17:47 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:17:47 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:17:47 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:17:47 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:17:47 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:17:47 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:17:47 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6015c745] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:17:47 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:18:04 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b6e95fb8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:18:04 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 01:18:05 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:18:05 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 01:18:05 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 01:18:05 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:18:05 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:18:05 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:18:05 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:18:05 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:18:06 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:18:07 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@527a0082] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:18:07 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:18:08 INFO Trainer id = 2 created in database
+2024-09-26 01:18:08 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b6e95fb8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:18:08 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:18:08 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:18:08 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:18:08 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:18:08 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:18:08 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:18:09 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:18:09 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@14ea9b5d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:18:09 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:18:09 INFO New training created
+2024-09-26 01:18:09 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b6e95fb8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:18:09 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:18:09 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:18:09 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:18:09 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:18:09 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:18:09 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:18:09 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:18:09 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@34d0e5c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:18:09 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:18:10 ERROR Model validation error
+2024-09-26 01:18:10 ERROR Model validation error
+2024-09-26 01:18:10 INFO Trainer id = 2 created in database
+2024-09-26 01:18:10 INFO New trainer created in  trainer service
+2024-09-26 01:18:10 INFO Password changed
+2024-09-26 01:18:10 INFO Password changed
+2024-09-26 01:18:10 INFO Trainer id = 4 created in database
+2024-09-26 01:18:10 INFO New trainer created in  trainer service
+2024-09-26 01:18:10 INFO Trainer id = 6 created in database
+2024-09-26 01:18:10 INFO New trainer created in  trainer service
+2024-09-26 01:18:10 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b6e95fb8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:18:10 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:18:10 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:18:10 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:18:10 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:18:10 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:18:10 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:18:10 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:18:11 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5d8788cc] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:18:11 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:18:11 INFO Trainee id = 2 created in database
+2024-09-26 01:18:11 INFO New trainee created
+2024-09-26 01:18:11 INFO Password changed
+2024-09-26 01:18:11 INFO Password changed
+2024-09-26 01:18:11 ERROR Model validation error
+2024-09-26 01:18:11 ERROR Model validation error
+2024-09-26 01:18:11 INFO Trainee id = 4 created in database
+2024-09-26 01:18:11 INFO New trainee created
+2024-09-26 01:18:11 INFO Trainee id = 6 created in database
+2024-09-26 01:18:11 INFO New trainee created
+2024-09-26 01:18:11 INFO Trainee id = 8 created in database
+2024-09-26 01:18:11 INFO New trainee created
+2024-09-26 01:18:11 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b6e95fb8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:18:11 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:18:11 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:18:11 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:18:11 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:18:11 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:18:11 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:18:11 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:18:11 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4fefbd95] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:18:11 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:18:11 ERROR Dao error occurred - get training
+2024-09-26 01:18:11 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b6e95fb8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:18:11 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:18:11 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:18:11 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:18:11 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:18:11 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:18:11 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:18:11 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:18:12 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3a3a4a8b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:18:12 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:18:12 INFO Trainee id = 2 created in database
+2024-09-26 01:18:12 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$b6e95fb8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:18:12 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:18:12 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:18:12 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:18:12 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:18:12 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:18:12 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:18:12 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:18:12 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@e7b13d2] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:18:12 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:35:46 INFO Bean 'storageConfig' of type [com.gym.config.StorageConfig$$EnhancerBySpringCGLIB$$f9c55661] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-09-26 01:35:47 INFO HV000001: Hibernate Validator 6.0.11.Final
+2024-09-26 01:35:48 INFO HHH000204: Processing PersistenceUnitInfo [name: com.gym.h2]
+2024-09-26 01:35:48 INFO HHH000412: Hibernate ORM core version 5.4.24.Final
+2024-09-26 01:35:48 INFO HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-09-26 01:35:49 WARN HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-09-26 01:35:49 INFO HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:gym;INIT=RUNSCRIPT FROM 'src/main/resources/init.sql';]
+2024-09-26 01:35:49 INFO HHH10001001: Connection properties: {password=****, user=sa}
+2024-09-26 01:35:49 INFO HHH10001003: Autocommit mode: false
+2024-09-26 01:35:49 INFO HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-09-26 01:35:49 INFO HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-09-26 01:35:50 INFO HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@467af68c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-09-26 01:35:50 INFO HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-09-26 01:35:51 INFO Trainee id = 2 created in database
+2024-09-26 01:35:51 INFO New trainee created
+2024-09-26 01:35:51 INFO Trainee id = 4 created in database
+2024-09-26 01:35:51 INFO New trainee created
+2024-09-26 01:35:51 INFO Trainee id = 6 created in database
+2024-09-26 01:35:51 INFO New trainee created

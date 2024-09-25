@@ -25,17 +25,25 @@ public class TraineeDao implements ITraineeDao {
     }
 
     @Override
-    public TraineeModel add(TraineeModel traineeModel) {
+    public TraineeModel create(TraineeModel traineeModel) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Trainee trainee = Mapper.mapTraineeModelToTraineeEntity(traineeModel);
-        trainee.setId(null);
         User user = trainee.getUser();
-        user.setId(null);
-        entityManager.getTransaction().begin();
-        entityManager.persist(user);
-        trainee.setUser(user);
-        entityManager.persist(trainee);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(user);
+            trainee.setUser(user);
+            entityManager.persist(trainee);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            log.error("Dao error occurred - create trainee ");
+            return null;
+        } finally {
+            entityManager.close();
+        }
         entityManager.close();
         TraineeModel newTraineeModel = get(trainee.getId());
         log.info(String.format("Trainee id = %s created in database", trainee.getId()));
@@ -48,8 +56,15 @@ public class TraineeDao implements ITraineeDao {
         String queryString = "select t from Trainee t where t.user.userName like ?1";
         TypedQuery<Trainee> query = entityManager.createQuery(queryString, Trainee.class);
         query.setParameter(1, userName);
-        List<Trainee> resultList = query.getResultList();
-        entityManager.close();
+        List<Trainee> resultList;
+        try {
+            resultList = query.getResultList();
+        } catch (Exception e) {
+            log.error("Dao error occurred - get trainee by name");
+            return null;
+        } finally {
+            entityManager.close();
+        }
         if (resultList.size() != 1) {
             return null;
         }
@@ -61,28 +76,51 @@ public class TraineeDao implements ITraineeDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Trainee trainee = Mapper.mapTraineeModelToTraineeEntity(traineeModel);
         User user = trainee.getUser();
-        entityManager.getTransaction().begin();
-        entityManager.merge(user);
-        entityManager.merge(trainee);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(user);
+            entityManager.merge(trainee);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            log.error("Dao error occurred - update trainee ");
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public void delete(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        Trainee trainee = entityManager.find(Trainee.class, id);
-        entityManager.remove(trainee);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        try {
+            entityManager.getTransaction().begin();
+            Trainee trainee = entityManager.find(Trainee.class, id);
+            entityManager.remove(trainee);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            log.error("Dao error occurred - delete trainee");
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public TraineeModel get(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Trainee trainee = entityManager.find(Trainee.class, id);
-        entityManager.close();
+        Trainee trainee;
+        try {
+            trainee = entityManager.find(Trainee.class, id);
+        }catch (Exception e){
+            log.error("Dao error occurred - get trainee");
+            return null;
+        }finally {
+            entityManager.close();
+        }
         if (trainee == null) {
             return null;
         }

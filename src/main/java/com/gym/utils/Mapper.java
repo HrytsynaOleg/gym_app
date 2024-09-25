@@ -6,20 +6,11 @@ import com.gym.model.*;
 import java.time.ZoneId;
 
 public class Mapper {
-//    public static User mapTrainerModelToUser(TrainerModel trainerModel) {
-//        User user = new User();
-//        user.setId(trainerModel.getUserId());
-//        user.setFirstName(trainerModel.getFirstName());
-//        user.setLastName(trainerModel.getLastName());
-//        user.setUserName(trainerModel.getUserName());
-//        user.setPassword(trainerModel.getPassword());
-//        user.setIsActive(trainerModel.getIsActive());
-//        return user;
-//    }
 
     public static <T extends UserModel> User mapModelToUser(T model) {
         User user = new User();
-        user.setId(model.getUserId());
+        long userId = model.getUserId();
+        user.setId(userId == 0 ? null : userId);
         user.setFirstName(model.getFirstName());
         user.setLastName(model.getLastName());
         user.setUserName(model.getUserName());
@@ -27,7 +18,6 @@ public class Mapper {
         user.setIsActive(model.getIsActive());
         return user;
     }
-
 
     public static TrainerModel mapTrainerEntityToTrainerModel(Trainer trainer) {
         return TrainerModel.builder()
@@ -43,19 +33,21 @@ public class Mapper {
     }
 
     public static Trainer mapTrainerModelToTrainerEntity(TrainerModel trainerModel) {
+        long trainerId = trainerModel.getId();
         User user = mapModelToUser(trainerModel);
         TrainingType trainingType = mapTrainingTypeEnumToEntity(trainerModel.getTrainingType());
         Trainer trainer = new Trainer();
-        trainer.setId(trainerModel.getId());
+        trainer.setId(trainerId == 0 ? null : trainerId);
         trainer.setUser(user);
         trainer.setTrainingType(trainingType);
         return trainer;
     }
 
     public static Trainee mapTraineeModelToTraineeEntity(TraineeModel traineeModel) {
+        long traineeId = traineeModel.getId();
         User user = mapModelToUser(traineeModel);
         Trainee trainee = new Trainee();
-        trainee.setId(traineeModel.getId());
+        trainee.setId(traineeId == 0 ? null : traineeId);
         trainee.setUser(user);
         trainee.setDateOfBirth(DateUtils.localDateToDate(traineeModel.getDateOfBirth()));
         trainee.setAddress(traineeModel.getAddress());

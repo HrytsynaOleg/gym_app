@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,15 +33,22 @@ public class TrainerDao implements ITrainerDao {
     public TrainerModel create(TrainerModel trainerModel) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
-        trainer.setId(null);
         User user = trainer.getUser();
-        user.setId(null);
-        entityManager.getTransaction().begin();
-        entityManager.persist(user);
-        trainer.setUser(user);
-        entityManager.persist(trainer);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(user);
+            trainer.setUser(user);
+            entityManager.persist(trainer);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            log.error("Dao error occurred - create trainer ");
+            return null;
+        } finally {
+            entityManager.close();
+        }
         TrainerModel newTrainerModel = get(trainer.getId());
         log.info(String.format("Trainer id = %s created in database", trainer.getId()));
         return newTrainerModel;
@@ -51,9 +59,16 @@ public class TrainerDao implements ITrainerDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         String queryString = "select t from Trainer t where t.user.userName like ?1";
         TypedQuery<Trainer> query = entityManager.createQuery(queryString, Trainer.class);
-        query.setParameter(1, username);
-        List<Trainer> resultList = query.getResultList();
-        entityManager.close();
+        List<Trainer> resultList;
+        try {
+            query.setParameter(1, username);
+            resultList = query.getResultList();
+        } catch (Exception e) {
+            log.error("Dao error occurred - get trainer by name");
+            return null;
+        } finally {
+            entityManager.close();
+        }
         if (resultList.size() != 1) {
             return null;
         }
@@ -65,18 +80,33 @@ public class TrainerDao implements ITrainerDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
         User user = trainer.getUser();
-        entityManager.getTransaction().begin();
-        entityManager.merge(user);
-        entityManager.merge(trainer);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(user);
+            entityManager.merge(trainer);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            log.error("Dao error occurred - update trainer");
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public TrainerModel get(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Trainer trainer = entityManager.find(Trainer.class, id);
-        entityManager.close();
+        Trainer trainer;
+        try {
+            trainer = entityManager.find(Trainer.class, id);
+        } catch (Exception e) {
+            log.error("Dao error occurred - get trainer");
+            return null;
+        } finally {
+            entityManager.close();
+        }
         if (trainer == null) {
             return null;
         }
@@ -89,18 +119,25 @@ public class TrainerDao implements ITrainerDao {
         String queryString = "select count(u.id), t.id from Trainer t left join TrainerTrainee u " +
                 "on t.id = u.trainer.id group by t.id";
         Query query = entityManager.createQuery(queryString);
-        List resultList = query.getResultList();
-        String json = JsonUtils.convertObjectToJson(resultList);
-        List<List<Long>> values = JsonUtils.parseJsonString(json, new TypeReference<>() {
-        });
-        List<TrainerModel> trainerModelList = values.stream()
-                .filter(i -> i.get(0) == 0)
-                .map(i -> i.get(1))
-                .map(i -> entityManager.find(Trainer.class, i))
-                .map(Mapper::mapTrainerEntityToTrainerModel)
-                .collect(Collectors.toList());
-
-        entityManager.close();
+        List<TrainerModel> trainerModelList;
+        try {
+            List resultList = query.getResultList();
+            String json = JsonUtils.convertObjectToJson(resultList);
+            List<List<Long>> values = JsonUtils.parseJsonString(json, new TypeReference<>() {
+            });
+            trainerModelList = values.stream()
+                    .filter(i -> i.get(0) == 0)
+                    .map(i -> i.get(1))
+                    .map(i -> entityManager.find(Trainer.class, i))
+                    .map(Mapper::mapTrainerEntityToTrainerModel)
+                    .collect(Collectors.toList());
+        }catch (Exception e){
+            log.error("Dao error occurred - get not assigned trainer list");
+            return new ArrayList<>();
+        }
+        finally {
+            entityManager.close();
+        }
         return trainerModelList;
     }
 }

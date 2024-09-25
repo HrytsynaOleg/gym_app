@@ -43,8 +43,8 @@ class TraineeDaoTest {
     }
 
     @Test
-    void addTraineeTest() {
-            TraineeModel newTraineeModel = dao.add(serviceInputTraineeModel);
+    void createTraineeTest() {
+            TraineeModel newTraineeModel = dao.create(serviceInputTraineeModel);
             TraineeModel testNewTraineeModel = dao.get(newTraineeModel.getId());
 
             assertNotNull(testNewTraineeModel);
@@ -60,9 +60,9 @@ class TraineeDaoTest {
 
     @Test
     void deleteTraineeTest() {
-        List<TrainingModel> trainingList = trainingDao.getTraineeTrainingList(248);
+        List<TrainingModel> trainingList = trainingDao.getTraineeTrainingListById(248);
         dao.delete(248);
-        List<TrainingModel> trainingListAfterDelete = trainingDao.getTraineeTrainingList(248);
+        List<TrainingModel> trainingListAfterDelete = trainingDao.getTraineeTrainingListById(248);
 
         assertNull(dao.get(248));
         assertEquals(2, trainingList.size());

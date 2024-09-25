@@ -91,7 +91,7 @@ public class TrainerService implements ITrainerService {
         parameters.put("trainee", traineeUserName);
         parameters.put("startDate", DateUtils.localDateToDate(dateFrom));
         parameters.put("endDate", DateUtils.localDateToDate(dateTo));
-        return trainingDao.getTrainerTrainingList(parameters);
+        return trainingDao.getTrainerTrainingListByParameters(parameters);
     }
 
     @Override
@@ -103,13 +103,11 @@ public class TrainerService implements ITrainerService {
     @Override
     public void activate(UserCredentials credentials) throws ValidationException,
             IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
         setActiveStatus(credentials, true);
     }
 
     @Override
     public void deactivate(UserCredentials credentials) throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
         setActiveStatus(credentials, false);
     }
 
@@ -133,7 +131,8 @@ public class TrainerService implements ITrainerService {
     }
 
     @Override
-    public TrainerModel get(long id) {
+    public TrainerModel get(UserCredentials credentials, long id) throws IncorrectCredentialException {
+        credentialsService.verifyCredentials(credentials);
         return trainerDao.get(id);
     }
 
