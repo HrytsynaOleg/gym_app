@@ -7,11 +7,13 @@ import com.gym.model.TrainingModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.model.UserCredentials;
 import com.gym.service.ITrainerService;
+import com.gym.service.IUserCredentialsService;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.ReflectionUtils;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.springframework.context.ApplicationContext;
@@ -19,10 +21,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import javax.validation.ValidationException;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 
 class TrainerServiceTest {
     private final ITrainerService trainerService;
@@ -34,9 +40,23 @@ class TrainerServiceTest {
     private MockedStatic<StringUtils> mockStringUtil;
     private final Integer passwordLength = 10;
     private static ApplicationContext applicationContext;
+    private final IUserCredentialsService mockedCredentialsService;
+    private final UserCredentials credentials;
 
     TrainerServiceTest() {
+        this.credentials = UserCredentials.builder().build();
+        this.mockedCredentialsService = Mockito.mock(UserCredentialsService.class);
         this.trainerService = (ITrainerService) applicationContext.getBean("trainerService");
+        Field userCredentialsServiceField = ReflectionUtils
+                .findFields(TrainerService.class, f -> f.getName().equals("credentialsService"),
+                        ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
+                .get(0);
+        userCredentialsServiceField.setAccessible(true);
+        try {
+            userCredentialsServiceField.set(trainerService, mockedCredentialsService);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @BeforeAll
@@ -57,10 +77,10 @@ class TrainerServiceTest {
     }
 
     @Test
-    void createTrainerTest() {
-
+    void createTrainerTest() throws IncorrectCredentialException {
+        doNothing().when(mockedCredentialsService).verifyCredentials(any());
         TrainerModel responseTrainerModel = trainerService.createTrainer("Tom", "Cruze", trainingTypeString);
-        TrainerModel newTrainerModel = trainerService.get(responseTrainerModel.getId());
+        TrainerModel newTrainerModel = trainerService.get(credentials, responseTrainerModel.getId());
 
         assertEquals(responseTrainerModel.getId(), newTrainerModel.getId());
         assertEquals("Tom", newTrainerModel.getFirstName());
@@ -71,14 +91,14 @@ class TrainerServiceTest {
     }
 
     @Test
-    void createTrainerIfUserExistTest() {
+    void createTrainerIfUserExistTest() throws IncorrectCredentialException {
         String expectedUserName = userName + 1;
         String expectedSecondUserName = userName + 2;
-
+        doNothing().when(mockedCredentialsService).verifyCredentials(any());
         TrainerModel responseTrainerModel = trainerService.createTrainer(firstName, lastName, trainingTypeString);
-        TrainerModel newTrainerModel = trainerService.get(responseTrainerModel.getId());
+        TrainerModel newTrainerModel = trainerService.get(credentials, responseTrainerModel.getId());
         TrainerModel responseSecondTrainerModel = trainerService.createTrainer(firstName, lastName, trainingTypeString);
-        TrainerModel newSecondTrainerModel = trainerService.get(responseSecondTrainerModel.getId());
+        TrainerModel newSecondTrainerModel = trainerService.get(credentials, responseSecondTrainerModel.getId());
 
         assertEquals(responseTrainerModel.getId(), newTrainerModel.getId());
         assertEquals(firstName, newTrainerModel.getFirstName());
@@ -98,11 +118,13 @@ class TrainerServiceTest {
     }
 
     @Test
-    void credentialsVerifyingTest(){
+    void credentialsVerifyingTest() throws IncorrectCredentialException {
         UserCredentials credentials = UserCredentials.builder()
                 .userName("Kerry.King")
                 .password("Wl0M")
                 .build();
+        doThrow(IncorrectCredentialException.class).when(mockedCredentialsService)
+                .verifyCredentials(credentials);
         assertTrue(trainerService.isCredentialsNotMatch(credentials));
     }
 
@@ -127,11 +149,13 @@ class TrainerServiceTest {
     }
 
     @Test
-    void getTrainerProfileIfWrongCredentialsTest() {
+    void getTrainerProfileIfWrongCredentialsTest() throws IncorrectCredentialException {
         UserCredentials credentials = UserCredentials.builder()
                 .userName("Kerry.King")
                 .password("Wl0M")
                 .build();
+        doThrow(IncorrectCredentialException.class).when(mockedCredentialsService)
+                .verifyCredentials(credentials);
         assertThrows(IncorrectCredentialException.class, () -> trainerService.getTrainerProfile(credentials));
     }
 
@@ -176,7 +200,7 @@ class TrainerServiceTest {
     }
 
     @Test
-    void getTrainingListByDateAndTraineeUserNameTest(){
+    void getTrainingListByParametersTest(){
         UserCredentials credentials = UserCredentials.builder()
                 .userName("Kerry.King")
                 .password("1234567890")

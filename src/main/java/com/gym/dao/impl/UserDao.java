@@ -29,8 +29,16 @@ public class UserDao implements IUserDao {
         String queryString = "select u from User u where u.userName like ?1";
         TypedQuery<User> query = entityManager.createQuery(queryString, User.class);
         query.setParameter(1, name);
-        List<User> resultList = query.getResultList();
-        entityManager.close();
+        List<User> resultList;
+        try {
+            resultList = query.getResultList();
+        } catch (Exception e) {
+            log.error("Dao error occurred - getUserByName");
+            return null;
+        }
+        finally {
+            entityManager.close();
+        }
         if (resultList.size() != 1) {
             return null;
         }
@@ -54,8 +62,16 @@ public class UserDao implements IUserDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("select count(*) from User u where u.userName like ?1");
         query.setParameter(1, firstName + "." + lastName + "%");
-        long result = (long) query.getSingleResult();
-        entityManager.close();
+        long result;
+        try {
+            result = (long) query.getSingleResult();
+        }catch (Exception e) {
+            log.error("Dao error occurred - getUserCount");
+            return 0;
+        }
+        finally {
+            entityManager.close();
+        }
         return result;
     }
 }

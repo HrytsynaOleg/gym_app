@@ -3,23 +3,31 @@ package com.gym.service.impl;
 import com.gym.config.StorageConfig;
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
+import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
 import com.gym.service.ITraineeService;
+import com.gym.service.IUserCredentialsService;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.ReflectionUtils;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.validation.ValidationException;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 
 class TraineeServiceTest {
     private final ITraineeService traineeService;
@@ -29,15 +37,28 @@ class TraineeServiceTest {
     private final String firstName = "Valeriy";
     private final String lastName = "Tokar";
     private final String userName = "Valeriy.Tokar";
-    private final String password = "1234567890";
     private final Integer passwordLength = 10;
     private MockedStatic<StringUtils> mockStringUtil;
     private static ApplicationContext applicationContext;
+    private final IUserCredentialsService mockedCredentialsService;
+    private final UserCredentials credentials;
 
     public TraineeServiceTest() {
+        this.credentials = UserCredentials.builder().build();
+        this.mockedCredentialsService = Mockito.mock(UserCredentialsService.class);
         this.traineeService = (ITraineeService) applicationContext.getBean("traineeService");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dateOfBirth = LocalDate.parse(dateOfBirthInString, formatter);
+        Field userCredentialsServiceField = ReflectionUtils
+                .findFields(TraineeService.class, f -> f.getName().equals("credentialsService"),
+                        ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
+                .get(0);
+        userCredentialsServiceField.setAccessible(true);
+        try {
+            userCredentialsServiceField.set(traineeService, mockedCredentialsService);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @BeforeAll
@@ -58,10 +79,10 @@ class TraineeServiceTest {
     }
 
     @Test
-    void createTraineeTest() {
-
+    void createTraineeTest() throws IncorrectCredentialException {
+        doNothing().when(mockedCredentialsService).verifyCredentials(any());
         TraineeModel responseTraineeModel = traineeService.createTrainee(firstName, lastName, address, dateOfBirthInString);
-        TraineeModel newTraineeModel = traineeService.get(responseTraineeModel.getId());
+        TraineeModel newTraineeModel = traineeService.get(credentials, responseTraineeModel.getId());
 
         assertEquals(responseTraineeModel.getId(), newTraineeModel.getId());
         assertEquals(firstName, newTraineeModel.getFirstName());
@@ -73,21 +94,21 @@ class TraineeServiceTest {
     }
 
     @Test
-    void createTraineeIfUserExistTest() {
+    void createTraineeIfUserExistTest() throws IncorrectCredentialException {
         String testFirstName = "Andriy";
         String testLastName = "Kolos";
         String testUserName = "Andriy.Kolos";
         String expectedUserName = testUserName + 1;
         String expectedSecondUserName = testUserName + 2;
-
+        doNothing().when(mockedCredentialsService).verifyCredentials(any());
         TraineeModel responseTraineeModel = traineeService.createTrainee(testFirstName, testLastName, address, dateOfBirthInString);
-        TraineeModel newTraineeModel = traineeService.get(responseTraineeModel.getId());
+        TraineeModel newTraineeModel = traineeService.get(credentials, responseTraineeModel.getId());
         TraineeModel responseSecondTraineeModel = traineeService.createTrainee(testFirstName, testLastName, address, dateOfBirthInString);
-        TraineeModel newSecondTraineeModel = traineeService.get(responseSecondTraineeModel.getId());
+        TraineeModel newSecondTraineeModel = traineeService.get(credentials ,responseSecondTraineeModel.getId());
         TraineeModel responseThirdTraineeModel = traineeService.createTrainee(testFirstName, testLastName, address, dateOfBirthInString);
-        TraineeModel newThirdTraineeModel = traineeService.get(responseThirdTraineeModel.getId());
+        TraineeModel newThirdTraineeModel = traineeService.get(credentials, responseThirdTraineeModel.getId());
 
-        assertEquals(newTraineeModel.getId(), newTraineeModel.getId());
+        assertEquals(responseTraineeModel.getId(), newTraineeModel.getId());
         assertEquals(testFirstName, newTraineeModel.getFirstName());
         assertEquals(testLastName, newTraineeModel.getLastName());
         assertEquals(testUserName, newTraineeModel.getUserName());
@@ -107,11 +128,13 @@ class TraineeServiceTest {
     }
 
     @Test
-    void credentialsVerifyingTest(){
+    void credentialsVerifyingTest() throws IncorrectCredentialException {
         UserCredentials credentials = UserCredentials.builder()
                 .userName("Kerry.King")
                 .password("Wl0M")
                 .build();
+        doThrow(IncorrectCredentialException.class).when(mockedCredentialsService)
+                .verifyCredentials(credentials);
         assertTrue(traineeService.isCredentialsNotMatch(credentials));
     }
 
@@ -133,11 +156,11 @@ class TraineeServiceTest {
         assertEquals("Neil.Young", traineeProfile.getUserName());
         assertEquals("1234567890", traineeProfile.getPassword());
         assertEquals("Toronto", traineeProfile.getAddress());
-        assertEquals(LocalDate.of(1965,7,25), traineeProfile.getDateOfBirth());
+        assertEquals(LocalDate.of(1965, 7, 25), traineeProfile.getDateOfBirth());
     }
 
     @Test
-    void setActiveStatusTest(){
+    void setActiveStatusTest() {
         UserCredentials credentials = UserCredentials.builder()
                 .userName("David.Gilmoure")
                 .password("1234567890")
@@ -177,7 +200,7 @@ class TraineeServiceTest {
     }
 
     @Test
-    void deleteTraineeTest(){
+    void deleteTraineeTest() {
         UserCredentials credentials = UserCredentials.builder()
                 .userName("Neil.Young")
                 .password("1234567890")
@@ -190,6 +213,27 @@ class TraineeServiceTest {
         } catch (IncorrectCredentialException e) {
             throw new RuntimeException(e);
         }
-
     }
+    @Test
+    void getTrainingListByParametersTest(){
+        UserCredentials credentials = UserCredentials.builder()
+                .userName("Bruce.Dickinson")
+                .password("1234567890")
+                .build();
+
+        LocalDate localDateFrom = LocalDate.of(2024, 9, 11);
+        LocalDate localDateTo = LocalDate.of(2024, 9, 15);
+        String trainerUserName = "Kerry.King";
+
+        List<TrainingModel> resultList = null;
+        try {
+            resultList = traineeService.getTrainingList(credentials, localDateFrom, localDateTo,
+                    trainerUserName, 10);
+        } catch (IncorrectCredentialException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(2, resultList.size());
+    }
+
 }

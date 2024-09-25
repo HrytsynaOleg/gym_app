@@ -1,9 +1,8 @@
 {
-  "id": 0,
-  "traineeId": 215,
-  "trainerId": 124,
-  "trainingName": "first training",
-  "trainingType": "YOGA",
-  "trainingDate": "2024-08-16",
-  "duration": 30
+  "traineeId": 265,
+  "trainerId": 117,
+  "trainingName": "new training",
+  "trainingType": "ZUMBA",
+  "trainingDate": "2024-09-24",
+  "duration": 45
 }

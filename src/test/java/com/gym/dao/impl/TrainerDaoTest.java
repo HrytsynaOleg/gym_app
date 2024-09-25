@@ -62,7 +62,6 @@ class TrainerDaoTest {
         assertEquals("1234567890", trainerModel.getPassword());
         assertTrue(trainerModel.getIsActive());
         assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
-
     }
 
     @Test

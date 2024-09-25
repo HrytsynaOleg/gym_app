@@ -3,12 +3,10 @@ package com.gym.dao.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.config.StorageConfig;
 import com.gym.dao.ITrainingDao;
-import com.gym.entity.Training;
 import com.gym.model.TrainingModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.utils.DateUtils;
 import com.gym.utils.JsonUtils;
-import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,7 +16,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,15 +61,15 @@ class TrainingDaoTest {
 
     @Test
     void getTest() {
-        TrainingModel trainingModel = dao.get(365);
+        TrainingModel trainingModel = dao.get(856);
         assertNotNull(trainingModel);
-        assertEquals(365, trainingModel.getId());
-        assertEquals(124, trainingModel.getTrainerId());
-        assertEquals(215, trainingModel.getTraineeId());
-        assertEquals("first training", trainingModel.getTrainingName());
+        assertEquals(856, trainingModel.getId());
+        assertEquals(116, trainingModel.getTrainerId());
+        assertEquals(234, trainingModel.getTraineeId());
+        assertEquals("new training", trainingModel.getTrainingName());
         assertEquals(TrainingTypeEnum.YOGA, trainingModel.getTrainingType());
-        assertEquals(LocalDate.of(2024, 8, 16), trainingModel.getTrainingDate());
-        assertEquals(30, trainingModel.getDuration());
+        assertEquals(LocalDate.of(2024, 9, 12), trainingModel.getTrainingDate());
+        assertEquals(20, trainingModel.getDuration());
     }
 
     @Test
@@ -82,7 +79,7 @@ class TrainingDaoTest {
     }
 
     @Test
-    void getTrainerTrainingListTest() {
+    void getTrainerTrainingListByParametersTest() {
         Map<String, Object> parameters = new HashMap<>();
         LocalDate localDateFrom = LocalDate.of(2024, 9, 11);
         LocalDate localDateTo = LocalDate.of(2024, 9, 15);
@@ -91,7 +88,23 @@ class TrainingDaoTest {
         parameters.put("trainee", "Bruce.Dickinson");
         parameters.put("startDate", DateUtils.localDateToDate(localDateFrom));
         parameters.put("endDate", DateUtils.localDateToDate(localDateTo));
-        List<TrainingModel> resultList = dao.getTrainerTrainingList(parameters);
+        List<TrainingModel> resultList = dao.getTrainerTrainingListByParameters(parameters);
+
+        assertEquals(2, resultList.size());
+    }
+
+    @Test
+    void getTraineeTrainingListByParametersTest() {
+        Map<String, Object> parameters = new HashMap<>();
+        LocalDate localDateFrom = LocalDate.of(2024, 9, 11);
+        LocalDate localDateTo = LocalDate.of(2024, 9, 15);
+
+        parameters.put("trainer", "Kerry.King");
+        parameters.put("trainee", "Bruce.Dickinson");
+        parameters.put("startDate", DateUtils.localDateToDate(localDateFrom));
+        parameters.put("endDate", DateUtils.localDateToDate(localDateTo));
+        parameters.put("trainingType", 10);
+        List<TrainingModel> resultList = dao.getTraineeTrainingListByParameters(parameters);
 
         assertEquals(2, resultList.size());
     }

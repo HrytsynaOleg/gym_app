@@ -2,9 +2,12 @@ package com.gym.service;
 
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
+import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
 
 import javax.validation.ValidationException;
+import java.time.LocalDate;
+import java.util.List;
 
 
 public interface ITraineeService {
@@ -16,5 +19,7 @@ public interface ITraineeService {
     void updateTraineePassword(UserCredentials credentials, String password) throws IncorrectCredentialException;
     void update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException;
     void delete(UserCredentials credentials) throws IncorrectCredentialException;
-    TraineeModel get(long id);
+    TraineeModel get(UserCredentials credentials, long id) throws IncorrectCredentialException;
+    List<TrainingModel> getTrainingList(UserCredentials credentials, LocalDate dateFrom,
+    LocalDate dateTo, String trainerUserName, int trainingType) throws IncorrectCredentialException;
 }
