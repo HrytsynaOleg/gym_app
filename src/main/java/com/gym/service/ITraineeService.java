@@ -2,6 +2,7 @@ package com.gym.service;
 
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
+import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
 
@@ -22,4 +23,6 @@ public interface ITraineeService {
     TraineeModel get(UserCredentials credentials, long id) throws IncorrectCredentialException;
     List<TrainingModel> getTrainingList(UserCredentials credentials, LocalDate dateFrom,
     LocalDate dateTo, String trainerUserName, int trainingType) throws IncorrectCredentialException;
+    List<TrainerModel> getIntendedTrainerList(UserCredentials credentials)throws IncorrectCredentialException;
+    void updateTrainerList(UserCredentials credentials, List<TrainerModel> trainerModelList) throws IncorrectCredentialException;
 }

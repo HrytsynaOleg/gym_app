@@ -5,6 +5,7 @@ import com.gym.dao.ITrainingDao;
 import com.gym.dao.IUserDao;
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
+import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
 import com.gym.service.IModelValidator;
@@ -134,6 +135,22 @@ public class TraineeService implements ITraineeService {
         parameters.put("endDate", DateUtils.localDateToDate(dateTo));
         parameters.put("trainingType", trainingType);
         return trainingDao.getTraineeTrainingListByParameters(parameters);
+    }
+
+    @Override
+    public List<TrainerModel> getIntendedTrainerList(UserCredentials credentials) throws IncorrectCredentialException {
+        credentialsService.verifyCredentials(credentials);
+        TraineeModel traineeModel = traineeDao.getByUserName(credentials.getUserName());
+        return traineeDao.getIntendedTrainerList(traineeModel);
+    }
+
+    @Override
+    public void updateTrainerList(UserCredentials credentials, List<TrainerModel> newTrainerModelList) throws IncorrectCredentialException {
+        credentialsService.verifyCredentials(credentials);
+        TraineeModel traineeModel = traineeDao.getByUserName(credentials.getUserName());
+        List<TrainerModel> existingTrainerList = traineeDao.getIntendedTrainerList(traineeModel);
+        existingTrainerList.forEach(i -> traineeDao.deleteTrainer(traineeModel, i));
+        newTrainerModelList.forEach(i -> traineeDao.intendTrainer(traineeModel, i));
     }
 
     private void setActiveStatus(UserCredentials credentials, boolean status) throws ValidationException,

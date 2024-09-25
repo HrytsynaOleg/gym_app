@@ -3,8 +3,10 @@ package com.gym.dao.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.config.StorageConfig;
 import com.gym.dao.ITraineeDao;
+import com.gym.dao.ITrainerDao;
 import com.gym.dao.ITrainingDao;
 import com.gym.model.TraineeModel;
+import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,10 +26,12 @@ class TraineeDaoTest {
     private static ApplicationContext applicationContext;
     private final ITraineeDao dao;
     private final ITrainingDao trainingDao;
+    private final ITrainerDao trainerDao;
     private TraineeModel serviceInputTraineeModel;
 
     TraineeDaoTest() {
         this.trainingDao = (ITrainingDao) applicationContext.getBean("trainingDao");
+        this.trainerDao = (ITrainerDao) applicationContext.getBean("trainerDao");
         this.dao = (ITraineeDao) applicationContext.getBean("traineeDao");
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainee.json")) {
             this.serviceInputTraineeModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
@@ -116,5 +120,37 @@ class TraineeDaoTest {
 
         assertEquals("Jan", updatedTrainee.getFirstName());
         assertEquals("Holm", updatedTrainee.getLastName());
+    }
+
+    @Test
+    void getIntendedTrainersTest(){
+        TraineeModel traineeModel = dao.get(253);
+        List<TrainerModel> intendedTrainerList = dao.getIntendedTrainerList(traineeModel);
+
+        assertEquals(1, intendedTrainerList.size());
+    }
+
+    @Test
+    void intendTrainerTest(){
+        TraineeModel traineeModel = dao.get(253);
+        TrainerModel trainerModel = trainerDao.get(118);
+        List<TrainerModel> intendedTrainerList = dao.getIntendedTrainerList(traineeModel);
+        dao.intendTrainer(traineeModel, trainerModel);
+        List<TrainerModel> intendedTrainerListAfterIntending = dao.getIntendedTrainerList(traineeModel);
+
+        assertEquals(1, intendedTrainerList.size());
+        assertEquals(2, intendedTrainerListAfterIntending.size());
+    }
+
+    @Test
+    void deleteTrainerTest(){
+        TraineeModel traineeModel = dao.get(258);
+        TrainerModel trainerModel = trainerDao.get(117);
+        List<TrainerModel> intendedTrainerList = dao.getIntendedTrainerList(traineeModel);
+        dao.deleteTrainer(traineeModel, trainerModel);
+        List<TrainerModel> intendedTrainerListAfterDeleting = dao.getIntendedTrainerList(traineeModel);
+
+        assertEquals(1, intendedTrainerList.size());
+        assertEquals(0, intendedTrainerListAfterDeleting.size());
     }
 }

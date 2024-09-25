@@ -3,9 +3,11 @@ package com.gym.service.impl;
 import com.gym.config.StorageConfig;
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
+import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
 import com.gym.service.ITraineeService;
+import com.gym.service.ITrainerService;
 import com.gym.service.IUserCredentialsService;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +24,7 @@ import javax.validation.ValidationException;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +34,7 @@ import static org.mockito.Mockito.doThrow;
 
 class TraineeServiceTest {
     private final ITraineeService traineeService;
+    private final ITrainerService trainerService;
     private final String address = "Los Angeles";
     private final String dateOfBirthInString = "1999-02-15";
     private final LocalDate dateOfBirth;
@@ -47,6 +51,7 @@ class TraineeServiceTest {
         this.credentials = UserCredentials.builder().build();
         this.mockedCredentialsService = Mockito.mock(UserCredentialsService.class);
         this.traineeService = (ITraineeService) applicationContext.getBean("traineeService");
+        this.trainerService = (ITrainerService) applicationContext.getBean("trainerService");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dateOfBirth = LocalDate.parse(dateOfBirthInString, formatter);
         Field userCredentialsServiceField = ReflectionUtils
@@ -234,6 +239,23 @@ class TraineeServiceTest {
         }
 
         assertEquals(2, resultList.size());
+    }
+
+    @Test
+    void updateTrainerListTest() throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName("Bruce.Dickinson")
+                .password("1234567890")
+                .build();
+        List<TrainerModel> newTrainerList = new ArrayList<>();
+        newTrainerList.add(trainerService.get(credentials, 117));
+        newTrainerList.add(trainerService.get(credentials, 118));
+        List<TrainerModel> trainerModelList = traineeService.getIntendedTrainerList(credentials);
+        traineeService.updateTrainerList(credentials, newTrainerList);
+        List<TrainerModel> trainerModelUpdatedList = traineeService.getIntendedTrainerList(credentials);
+
+        assertEquals(1, trainerModelList.size());
+        assertEquals(2, trainerModelUpdatedList.size());
     }
 
 }
