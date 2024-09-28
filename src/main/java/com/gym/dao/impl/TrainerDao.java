@@ -10,11 +10,9 @@ import com.gym.utils.Mapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +21,8 @@ import java.util.stream.Collectors;
 @Log4j2
 public class TrainerDao implements ITrainerDao {
     private final EntityManagerFactory entityManagerFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     public TrainerDao(EntityManagerFactory entityManagerFactory) {
@@ -30,8 +30,8 @@ public class TrainerDao implements ITrainerDao {
     }
 
     @Override
+    @Transactional
     public TrainerModel create(TrainerModel trainerModel) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
         User user = trainer.getUser();
         try {
@@ -41,13 +41,8 @@ public class TrainerDao implements ITrainerDao {
             entityManager.persist(trainer);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - create trainer ");
             return null;
-        } finally {
-            entityManager.close();
         }
         TrainerModel newTrainerModel = get(trainer.getId());
         log.info(String.format("Trainer id = %s created in database", trainer.getId()));
