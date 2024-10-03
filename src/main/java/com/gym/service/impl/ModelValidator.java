@@ -1,14 +1,13 @@
 package com.gym.service.impl;
 
-import com.gym.model.TrainerModel;
 import com.gym.service.IModelValidator;
+import jakarta.validation.ConstraintViolation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.util.Set;
 
 @Service

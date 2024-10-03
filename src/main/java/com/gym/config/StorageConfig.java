@@ -7,20 +7,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
+@EnableWebMvc
 @ComponentScan(basePackages = "com.gym")
 @PropertySource("classpath:application.properties")
 @Log4j2
 public class StorageConfig {
-
-    @Bean
-    public EntityManagerFactory getEntityManagerFactory() {
-        return Persistence.createEntityManagerFactory("com.gym.h2");
-    }
 
     @Bean
     public MethodValidationPostProcessor methodValidationPostProcessor() {

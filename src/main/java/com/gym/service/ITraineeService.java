@@ -6,7 +6,7 @@ import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.time.LocalDate;
 import java.util.List;
 

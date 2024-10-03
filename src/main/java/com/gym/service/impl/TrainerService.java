@@ -18,8 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.gym.utils.StringUtils;
+import org.springframework.validation.annotation.Validated;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,7 @@ public class TrainerService implements ITrainerService {
     private Integer passwordLength;
 
     @Override
+    @Validated
     public TrainerModel createTrainer(String firstName, String lastName,
                                       String trainingTypeString) throws ValidationException {
         long usersCount = userDao.getUserCount(firstName, lastName);

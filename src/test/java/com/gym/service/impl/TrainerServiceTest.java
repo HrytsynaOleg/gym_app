@@ -19,7 +19,7 @@ import org.mockito.Mockito;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -218,5 +218,10 @@ class TrainerServiceTest {
         }
 
         assertEquals(2, resultList.size());
+    }
+
+    @Test
+    void validateMethodParameters(){
+        TrainerModel responseTrainerModel = trainerService.createTrainer("", "Cruze", trainingTypeString);
     }
 }

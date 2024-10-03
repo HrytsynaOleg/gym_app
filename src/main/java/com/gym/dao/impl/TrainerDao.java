@@ -8,30 +8,23 @@ import com.gym.model.TrainerModel;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.Mapper;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository("trainerDao")
 @Log4j2
+@Transactional
 public class TrainerDao implements ITrainerDao {
-    private final EntityManagerFactory entityManagerFactory;
-
-    @Autowired
-    public TrainerDao(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public TrainerModel create(TrainerModel trainerModel) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
         User user = trainer.getUser();
         try {
@@ -56,7 +49,6 @@ public class TrainerDao implements ITrainerDao {
 
     @Override
     public TrainerModel getByUserName(String username) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         String queryString = "select t from Trainer t where t.user.userName like ?1";
         TypedQuery<Trainer> query = entityManager.createQuery(queryString, Trainer.class);
         List<Trainer> resultList;
@@ -77,7 +69,6 @@ public class TrainerDao implements ITrainerDao {
 
     @Override
     public void update(TrainerModel trainerModel) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
         User user = trainer.getUser();
         try {
@@ -97,7 +88,6 @@ public class TrainerDao implements ITrainerDao {
 
     @Override
     public TrainerModel get(long id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         Trainer trainer;
         try {
             trainer = entityManager.find(Trainer.class, id);
@@ -115,7 +105,6 @@ public class TrainerDao implements ITrainerDao {
 
     @Override
     public List<TrainerModel> getNotAssignedTrainerList() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         String queryString = "select count(u.id), t.id from Trainer t left join TrainerTrainee u " +
                 "on t.id = u.trainer.id group by t.id";
         Query query = entityManager.createQuery(queryString);

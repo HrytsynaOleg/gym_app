@@ -4,28 +4,22 @@ import com.gym.dao.IUserDao;
 import com.gym.entity.User;
 import com.gym.model.UserCredentials;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Repository("userDao")
 @Log4j2
+@Transactional
 public class UserDao implements IUserDao {
-    private final EntityManagerFactory entityManagerFactory;
 
-    @Autowired
-    public UserDao(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public User getByName(String name) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         String queryString = "select u from User u where u.userName like ?1";
         TypedQuery<User> query = entityManager.createQuery(queryString, User.class);
         query.setParameter(1, name);
@@ -59,7 +53,6 @@ public class UserDao implements IUserDao {
 
     @Override
     public long getUserCount(String firstName, String lastName) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("select count(*) from User u where u.userName like ?1");
         query.setParameter(1, firstName + "." + lastName + "%");
         long result;
