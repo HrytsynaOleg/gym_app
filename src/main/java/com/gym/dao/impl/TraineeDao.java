@@ -21,7 +21,6 @@ import java.util.List;
 
 @Repository("traineeDao")
 @Log4j2
-@Transactional
 public class TraineeDao implements ITraineeDao {
 
     @PersistenceContext
@@ -37,9 +36,6 @@ public class TraineeDao implements ITraineeDao {
             trainee.setUser(user);
             entityManager.persist(trainee);
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - create trainee ");
             return null;
         }
@@ -49,7 +45,6 @@ public class TraineeDao implements ITraineeDao {
     }
 
     @Override
-    @Transactional
     public TraineeModel getByUserName(String userName) {
         String queryString = "select t from Trainee t where t.user.userName like ?1";
         TypedQuery<Trainee> query = entityManager.createQuery(queryString, Trainee.class);
@@ -76,9 +71,6 @@ public class TraineeDao implements ITraineeDao {
             entityManager.merge(user);
             entityManager.merge(trainee);
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - update trainee ");
         }
     }
@@ -90,15 +82,11 @@ public class TraineeDao implements ITraineeDao {
             Trainee trainee = entityManager.find(Trainee.class, id);
             entityManager.remove(trainee);
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - delete trainee");
         }
     }
 
     @Override
-    @Transactional
     public TraineeModel get(long id) {
         Trainee trainee;
         try {
@@ -124,9 +112,6 @@ public class TraineeDao implements ITraineeDao {
             newTrainerTrainee.setTrainee(trainee);
             entityManager.persist(newTrainerTrainee);
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - intend trainer");
         }
     }
@@ -141,7 +126,7 @@ public class TraineeDao implements ITraineeDao {
         TypedQuery<TrainerTrainee> query = entityManager.createQuery(queryString, TrainerTrainee.class);
         query.setParameter(1, trainee.getId());
         query.setParameter(2, trainer.getId());
-        List<TrainerTrainee> trainerTraineeList = query.getResultList();
+        List<TrainerTrainee> trainerTraineeList;
         try {
             trainerTraineeList = query.getResultList();
             if (trainerTraineeList.size() == 1) {
@@ -150,15 +135,11 @@ public class TraineeDao implements ITraineeDao {
                 throw new Exception();
             }
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - delete trainer");
         }
     }
 
     @Override
-    @Transactional
     public List<TrainerModel> getIntendedTrainerList(TraineeModel traineeModel) {
         Trainee trainee = Mapper.mapTraineeModelToTraineeEntity(traineeModel);
         List<TrainerModel> trainerModelList;

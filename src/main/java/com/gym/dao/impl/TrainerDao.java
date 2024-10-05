@@ -18,29 +18,22 @@ import java.util.stream.Collectors;
 
 @Repository("trainerDao")
 @Log4j2
-@Transactional
 public class TrainerDao implements ITrainerDao {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public TrainerModel create(TrainerModel trainerModel) {
         Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
         User user = trainer.getUser();
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(user);
             trainer.setUser(user);
             entityManager.persist(trainer);
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - create trainer ");
             return null;
-        } finally {
-            entityManager.close();
         }
         TrainerModel newTrainerModel = get(trainer.getId());
         log.info(String.format("Trainer id = %s created in database", trainer.getId()));
@@ -58,8 +51,6 @@ public class TrainerDao implements ITrainerDao {
         } catch (Exception e) {
             log.error("Dao error occurred - get trainer by name");
             return null;
-        } finally {
-            entityManager.close();
         }
         if (resultList.size() != 1) {
             return null;
@@ -68,21 +59,15 @@ public class TrainerDao implements ITrainerDao {
     }
 
     @Override
+    @Transactional
     public void update(TrainerModel trainerModel) {
         Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
         User user = trainer.getUser();
         try {
-            entityManager.getTransaction().begin();
             entityManager.merge(user);
             entityManager.merge(trainer);
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - update trainer");
-        } finally {
-            entityManager.close();
         }
     }
 
@@ -94,8 +79,6 @@ public class TrainerDao implements ITrainerDao {
         } catch (Exception e) {
             log.error("Dao error occurred - get trainer");
             return null;
-        } finally {
-            entityManager.close();
         }
         if (trainer == null) {
             return null;
@@ -123,9 +106,6 @@ public class TrainerDao implements ITrainerDao {
         }catch (Exception e){
             log.error("Dao error occurred - get not assigned trainer list");
             return new ArrayList<>();
-        }
-        finally {
-            entityManager.close();
         }
         return trainerModelList;
     }

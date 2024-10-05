@@ -7,12 +7,10 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Repository("userDao")
 @Log4j2
-@Transactional
 public class UserDao implements IUserDao {
 
     @PersistenceContext
@@ -29,9 +27,6 @@ public class UserDao implements IUserDao {
         } catch (Exception e) {
             log.error("Dao error occurred - getUserByName");
             return null;
-        }
-        finally {
-            entityManager.close();
         }
         if (resultList.size() != 1) {
             return null;
@@ -61,9 +56,6 @@ public class UserDao implements IUserDao {
         }catch (Exception e) {
             log.error("Dao error occurred - getUserCount");
             return 0;
-        }
-        finally {
-            entityManager.close();
         }
         return result;
     }

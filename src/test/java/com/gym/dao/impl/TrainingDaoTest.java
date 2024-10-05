@@ -1,17 +1,15 @@
 package com.gym.dao.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.config.StorageConfig;
 import com.gym.dao.ITrainingDao;
 import com.gym.model.TrainingModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.utils.DateUtils;
 import com.gym.utils.JsonUtils;
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,24 +21,20 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
+@SpringBootTest
 class TrainingDaoTest {
-    private static ApplicationContext applicationContext;
     private final ITrainingDao dao;
     private TrainingModel serviceInputTrainingModel;
 
-    TrainingDaoTest() {
-        this.dao = (ITrainingDao) applicationContext.getBean("trainingDao");
+    @Autowired
+    TrainingDaoTest(ITrainingDao dao) {
+        this.dao = dao;
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("training.json")) {
             this.serviceInputTrainingModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
         } catch (IOException ex) {
             log.error("Error reading source file");
         }
-    }
-
-    @BeforeAll
-    public static void init() {
-        applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
     }
 
     @Test

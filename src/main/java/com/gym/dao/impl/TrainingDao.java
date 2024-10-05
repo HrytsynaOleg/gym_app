@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 @Repository("trainingDao")
 @Log4j2
-@Transactional
 public class TrainingDao implements ITrainingDao {
     private final ITrainerDao trainerDao;
     private final ITraineeDao traineeDao;
@@ -40,6 +39,7 @@ public class TrainingDao implements ITrainingDao {
     }
 
     @Override
+    @Transactional
     public TrainingModel create(TrainingModel trainingModel) {
         TrainingType trainingType = Mapper.mapTrainingTypeEnumToEntity(trainingModel.getTrainingType());
         Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerDao.get(trainingModel.getTrainerId()));
@@ -52,17 +52,10 @@ public class TrainingDao implements ITrainingDao {
         training.setTrainee(trainee);
         training.setTrainer(trainer);
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(training);
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             log.error("Dao error occurred - create training ");
             return null;
-        } finally {
-            entityManager.close();
         }
         return get(training.getId());
     }
@@ -83,8 +76,6 @@ public class TrainingDao implements ITrainingDao {
         } catch (Exception e) {
             log.error("Dao error occurred - get Trainer's training list");
             return new ArrayList<>();
-        } finally {
-            entityManager.close();
         }
         return resultList;
     }
@@ -102,8 +93,6 @@ public class TrainingDao implements ITrainingDao {
         } catch (Exception e) {
             log.error("Dao error occurred - get Trainee's training list");
             return new ArrayList<>();
-        } finally {
-            entityManager.close();
         }
         return resultList;
     }
@@ -125,8 +114,6 @@ public class TrainingDao implements ITrainingDao {
         } catch (Exception e) {
             log.error("Dao error occurred - get Trainee's training list by parameters");
             return new ArrayList<>();
-        } finally {
-            entityManager.close();
         }
         return resultList;
     }
@@ -139,8 +126,6 @@ public class TrainingDao implements ITrainingDao {
         } catch (Exception e) {
             log.error("Dao error occurred - get training");
             return null;
-        } finally {
-            entityManager.close();
         }
         return trainingModel;
     }
