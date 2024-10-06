@@ -1,15 +1,14 @@
 package com.gym.dao.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.config.StorageConfig;
+import com.gym.dao.ITrainerDao;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.utils.JsonUtils;
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,26 +16,22 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 @Log4j2
 class TrainerDaoTest {
-    private static ApplicationContext applicationContext;
 
-    private final TrainerDao dao;
+    private final ITrainerDao dao;
     private TrainerModel serviceInputTrainerModel;
 
-    TrainerDaoTest() {
-        this.dao = (TrainerDao) applicationContext.getBean("trainerDao");
+    @Autowired
+    TrainerDaoTest(ITrainerDao dao) {
+        this.dao = dao;
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
             this.serviceInputTrainerModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
             });
         } catch (IOException ex) {
             log.error("Error reading resource file");
         }
-    }
-
-    @BeforeAll
-    public static void init() {
-        applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
     }
 
     @Test
@@ -66,7 +61,7 @@ class TrainerDaoTest {
 
     @Test
     void getTrainerIfNotExistTest(){
-        TrainerModel trainerModel = dao.get(1L);
+        TrainerModel trainerModel = dao.get(2L);
         assertNull(trainerModel);
     }
 

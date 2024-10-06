@@ -1,6 +1,5 @@
 package com.gym.service.impl;
 
-import com.gym.config.StorageConfig;
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
@@ -11,16 +10,15 @@ import com.gym.service.ITrainerService;
 import com.gym.service.IUserCredentialsService;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.ReflectionUtils;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +30,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 
+@SpringBootTest
 class TraineeServiceTest {
     private final ITraineeService traineeService;
     private final ITrainerService trainerService;
@@ -43,15 +42,15 @@ class TraineeServiceTest {
     private final String userName = "Valeriy.Tokar";
     private final Integer passwordLength = 10;
     private MockedStatic<StringUtils> mockStringUtil;
-    private static ApplicationContext applicationContext;
     private final IUserCredentialsService mockedCredentialsService;
     private final UserCredentials credentials;
 
-    public TraineeServiceTest() {
+    @Autowired
+    public TraineeServiceTest(ITraineeService traineeService, ITrainerService trainerService) {
+        this.traineeService = traineeService;
+        this.trainerService = trainerService;
         this.credentials = UserCredentials.builder().build();
         this.mockedCredentialsService = Mockito.mock(UserCredentialsService.class);
-        this.traineeService = (ITraineeService) applicationContext.getBean("traineeService");
-        this.trainerService = (ITrainerService) applicationContext.getBean("trainerService");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dateOfBirth = LocalDate.parse(dateOfBirthInString, formatter);
         Field userCredentialsServiceField = ReflectionUtils
@@ -64,11 +63,6 @@ class TraineeServiceTest {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @BeforeAll
-    public static void init() {
-        applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
     }
 
     @BeforeEach

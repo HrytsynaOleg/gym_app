@@ -1,6 +1,5 @@
 package com.gym.service.impl;
 
-import com.gym.config.StorageConfig;
 import com.gym.exceptions.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
@@ -10,16 +9,15 @@ import com.gym.service.ITrainerService;
 import com.gym.service.IUserCredentialsService;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.ReflectionUtils;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -30,6 +28,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 
+@SpringBootTest
 class TrainerServiceTest {
     private final ITrainerService trainerService;
     private final String firstName = "Kerry";
@@ -39,14 +38,14 @@ class TrainerServiceTest {
     private final String trainingTypeString = "YOGA";
     private MockedStatic<StringUtils> mockStringUtil;
     private final Integer passwordLength = 10;
-    private static ApplicationContext applicationContext;
     private final IUserCredentialsService mockedCredentialsService;
     private final UserCredentials credentials;
 
-    TrainerServiceTest() {
+    @Autowired
+    TrainerServiceTest(ITrainerService trainerService) {
+        this.trainerService = trainerService;
         this.credentials = UserCredentials.builder().build();
         this.mockedCredentialsService = Mockito.mock(UserCredentialsService.class);
-        this.trainerService = (ITrainerService) applicationContext.getBean("trainerService");
         Field userCredentialsServiceField = ReflectionUtils
                 .findFields(TrainerService.class, f -> f.getName().equals("credentialsService"),
                         ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
@@ -57,11 +56,6 @@ class TrainerServiceTest {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @BeforeAll
-    public static void init() {
-        applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
     }
 
     @BeforeEach

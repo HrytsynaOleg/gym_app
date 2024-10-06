@@ -1,6 +1,6 @@
 package com.gym.service;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 
 public interface IModelValidator {
     <T> void  validate(T model) throws ValidationException;

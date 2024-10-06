@@ -1,18 +1,17 @@
 package com.gym.service.impl;
 
-import com.gym.config.StorageConfig;
 import com.gym.model.TrainingModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.service.ITrainingService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest
 class TrainingServiceTest {
     private final ITrainingService trainingService;
     private final long trainerId = 117;
@@ -23,15 +22,10 @@ class TrainingServiceTest {
     private final String trainingTypeString = "FITNESS";
     private final TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.FITNESS;
     private final int duration = 60;
-    private static ApplicationContext applicationContext;
 
-    public TrainingServiceTest() {
-        this.trainingService = (ITrainingService) applicationContext.getBean("trainingService");
-    }
-
-    @BeforeAll
-    public static void init() {
-        applicationContext = new AnnotationConfigApplicationContext(StorageConfig.class);
+    @Autowired
+    public TrainingServiceTest(ITrainingService trainingService) {
+        this.trainingService = trainingService;
     }
 
     @Test
