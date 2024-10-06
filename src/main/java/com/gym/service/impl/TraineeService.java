@@ -3,7 +3,7 @@ package com.gym.service.impl;
 import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainingDao;
 import com.gym.dao.IUserDao;
-import com.gym.exceptions.IncorrectCredentialException;
+import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;

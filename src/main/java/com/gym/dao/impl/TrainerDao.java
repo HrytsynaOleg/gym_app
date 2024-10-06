@@ -3,7 +3,9 @@ package com.gym.dao.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainerDao;
 import com.gym.entity.Trainer;
+import com.gym.entity.TrainerTrainee;
 import com.gym.entity.User;
+import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.Mapper;
@@ -108,5 +110,23 @@ public class TrainerDao implements ITrainerDao {
             return new ArrayList<>();
         }
         return trainerModelList;
+    }
+
+    @Override
+    public List<TraineeModel> getAssignedTraineeList(long id) {
+        String queryString = "select t from TrainerTrainee t where t.trainer.id = ?1";
+        List<TraineeModel> traineeModelList;
+        try {
+            TypedQuery<TrainerTrainee> query = entityManager.createQuery(queryString, TrainerTrainee.class);
+            query.setParameter(1, id);
+            traineeModelList = query.getResultList().stream()
+                    .map(TrainerTrainee::getTrainee)
+                    .map(Mapper::mapTraineeEntityToTraineeModel)
+                    .toList();
+        }catch (Exception e) {
+            log.error("Dao error occurred - get assigned trainee list");
+            return new ArrayList<>();
+        }
+        return traineeModelList;
     }
 }

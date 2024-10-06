@@ -3,11 +3,8 @@ package com.gym.service.impl;
 import com.gym.dao.ITrainerDao;
 import com.gym.dao.ITrainingDao;
 import com.gym.dao.IUserDao;
-import com.gym.exceptions.IncorrectCredentialException;
-import com.gym.model.TrainerModel;
-import com.gym.model.TrainingModel;
-import com.gym.model.TrainingTypeEnum;
-import com.gym.model.UserCredentials;
+import com.gym.exception.IncorrectCredentialException;
+import com.gym.model.*;
 import com.gym.service.IModelValidator;
 import com.gym.service.ITrainerService;
 import com.gym.service.IUserCredentialsService;
@@ -136,6 +133,14 @@ public class TrainerService implements ITrainerService {
     public TrainerModel get(UserCredentials credentials, long id) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         return trainerDao.get(id);
+    }
+
+    @Override
+    public List<TraineeModel> getAssignedTraineeList(UserCredentials credentials)
+            throws IncorrectCredentialException {
+        credentialsService.verifyCredentials(credentials);
+        TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
+        return trainerDao.getAssignedTraineeList(trainer.getId());
     }
 
     private void setActiveStatus(UserCredentials credentials, boolean status) throws ValidationException,

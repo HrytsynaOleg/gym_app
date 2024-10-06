@@ -1,6 +1,6 @@
 package com.gym.service;
 
-import com.gym.exceptions.IncorrectCredentialException;
+import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;

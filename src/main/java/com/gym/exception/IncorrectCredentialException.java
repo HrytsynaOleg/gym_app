@@ -1,4 +1,4 @@
-package com.gym.exceptions;
+package com.gym.exception;
 
 public class IncorrectCredentialException extends Exception {
     public IncorrectCredentialException(String errorMessage) {

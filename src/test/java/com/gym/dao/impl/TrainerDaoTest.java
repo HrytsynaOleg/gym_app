@@ -2,6 +2,7 @@ package com.gym.dao.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainerDao;
+import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.utils.JsonUtils;
@@ -99,6 +100,11 @@ class TrainerDaoTest {
     void getNotAssignedTrainerList(){
         List<TrainerModel> notAssignedTrainerList = dao.getNotAssignedTrainerList();
         assertEquals(2, notAssignedTrainerList.size());
-        System.out.println();
+    }
+
+    @Test
+    void getAssignedTraineeList(){
+        List<TraineeModel> assignedTraineeList = dao.getAssignedTraineeList(117);
+        assertEquals(3, assignedTraineeList.size());
     }
 }

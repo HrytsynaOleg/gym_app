@@ -1,6 +1,7 @@
 package com.gym.service;
 
-import com.gym.exceptions.IncorrectCredentialException;
+import com.gym.exception.IncorrectCredentialException;
+import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
@@ -28,4 +29,6 @@ public interface ITrainerService {
     void updateTrainerPassword(UserCredentials credentials, String password) throws IncorrectCredentialException;
 
     TrainerModel get(UserCredentials credentials, long id) throws IncorrectCredentialException;
+
+    List<TraineeModel> getAssignedTraineeList(UserCredentials credentials) throws IncorrectCredentialException;
 }
