@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TrainerCreateDTO {
-    @NotBlank
+    @NotBlank(message = "First name must be not empty")
     private String firstName;
-    @NotBlank
+    @NotBlank(message = "Last name must be not empty")
     private String lastName;
-    @NotBlank
+    @NotBlank(message = "Specialization must be not empty")
     private String specialization;
 }

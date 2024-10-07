@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
+    <Properties>
+        <Property name="log-path">logs</Property>
+        <Property name="logfile-name">app</Property>
+        <Property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</Property>
+        <Property name="LOG_LEVEL_PATTERN">%5p</Property>
+    </Properties>
     <Appenders>
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
             <PatternLayout
                     pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss} %p %m%n}{STYLE=logback}"/>
         </Console>
-        <File name="fileOutput" fileName="app.log" append="true">
-            <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
-            </PatternLayout>
-        </File>
+<!--        <File name="fileOutput" fileName="${log-path}/app.log" append="true">-->
+<!--            <PatternLayout>-->
+<!--                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>-->
+<!--            </PatternLayout>-->
+<!--        </File>-->
+        <RollingFile name="RollingFile" filePattern="${log-path}/${logfile-name}-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %p %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DirectWriteRolloverStrategy/>
+        </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="ERROR">
-            <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="fileOutput"/>
-        </Root>
         <Root level="INFO">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="fileOutput"/>
+<!--            <AppenderRef ref="fileOutput"/>-->
+            <AppenderRef ref="RollingFile"/>
         </Root>
+        <Logger name="info" level="ERROR">
+            <AppenderRef ref="ConsoleAppender"/>
+<!--            <AppenderRef ref="fileOutput"/>-->
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
     </Loggers>
 </Configuration>
