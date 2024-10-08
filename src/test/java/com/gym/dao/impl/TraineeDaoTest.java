@@ -13,8 +13,6 @@ import com.gym.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,19 +23,15 @@ class TraineeDaoTest {
     private final ITraineeDao dao;
     private final ITrainingDao trainingDao;
     private final ITrainerDao trainerDao;
-    private TraineeModel serviceInputTraineeModel;
+    private final TraineeModel serviceInputTraineeModel;
 
     @Autowired
     TraineeDaoTest(ITraineeDao dao, ITrainingDao trainingDao, ITrainerDao trainerDao) {
         this.dao = dao;
         this.trainingDao = trainingDao;
         this.trainerDao = trainerDao;
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainee.json")) {
-            this.serviceInputTraineeModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
-            });
-        } catch (IOException ex) {
-            log.error("Error reading source file");
-        }
+        this.serviceInputTraineeModel = JsonUtils.parseResource("trainee.json", new TypeReference<>() {
+        });
     }
 
     @Test

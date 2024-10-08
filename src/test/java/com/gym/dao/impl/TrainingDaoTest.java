@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -24,17 +22,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class TrainingDaoTest {
     private final ITrainingDao dao;
-    private TrainingModel serviceInputTrainingModel;
+    private final TrainingModel serviceInputTrainingModel;
 
     @Autowired
     TrainingDaoTest(ITrainingDao dao) {
         this.dao = dao;
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("training.json")) {
-            this.serviceInputTrainingModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
-            });
-        } catch (IOException ex) {
-            log.error("Error reading source file");
-        }
+        this.serviceInputTrainingModel = JsonUtils.parseResource("training.json", new TypeReference<>() {
+        });
     }
 
     @Test

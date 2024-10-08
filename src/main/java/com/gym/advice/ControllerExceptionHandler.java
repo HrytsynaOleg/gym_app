@@ -1,5 +1,6 @@
 package com.gym.advice;
 
+import com.gym.exception.IncorrectCredentialException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,13 @@ public class ControllerExceptionHandler {
         List<String> errors = List.of(ex.getMessage());
         log.error("Http request json error: {}", ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IncorrectCredentialException.class)
+    public ResponseEntity<Map<String, List<String>>> handleHttpRequestUnauthorizedErrors(IncorrectCredentialException ex) {
+        List<String> errors = List.of(ex.getMessage());
+        log.error("User unauthorized error: {}", ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.UNAUTHORIZED);
     }
 
     private Map<String, List<String>> getErrorsMap(List<String> errors) {
