@@ -11,6 +11,7 @@ import com.gym.service.IUserCredentialsService;
 import com.gym.utils.DateUtils;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -61,7 +62,7 @@ public class TrainerService implements ITrainerService {
         validator.validate(trainerModel);
 
         TrainerModel newTrainerModel = trainerDao.create(trainerModel);
-        log.info("New trainer created in  trainer service");
+        log.info("New trainer created in trainer service. Transaction Id {}", MDC.get("transactionId"));
         return newTrainerModel;
     }
 
@@ -103,11 +104,13 @@ public class TrainerService implements ITrainerService {
     public void activate(UserCredentials credentials) throws ValidationException,
             IncorrectCredentialException {
         setActiveStatus(credentials, true);
+        log.info("User activated. Transaction Id {}", MDC.get("transactionId"));
     }
 
     @Override
     public void deactivate(UserCredentials credentials) throws IncorrectCredentialException {
         setActiveStatus(credentials, false);
+        log.info("User deactivated. Transaction Id {}", MDC.get("transactionId"));
     }
 
     @Override
@@ -116,6 +119,7 @@ public class TrainerService implements ITrainerService {
         credentialsService.verifyCredentials(credentials);
         validator.validate(trainerModel);
         trainerDao.update(trainerModel);
+        log.info("Trainer profile updated. Transaction Id {}", MDC.get("transactionId"));
     }
 
     @Override
@@ -126,7 +130,7 @@ public class TrainerService implements ITrainerService {
         trainer.setPassword(password);
         validator.validate(trainer);
         trainerDao.update(trainer);
-        log.info("Password changed");
+        log.info("Password changed. Transaction Id {}", MDC.get("transactionId"));
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.gym.model.TrainerModel;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.Mapper;
 import lombok.extern.log4j.Log4j2;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.*;
@@ -34,11 +35,11 @@ public class TrainerDao implements ITrainerDao {
             trainer.setUser(user);
             entityManager.persist(trainer);
         } catch (Exception e) {
-            log.error("Dao error occurred - create trainer ");
+            log.error("Dao error occurred - create trainer. Transaction Id {}", MDC.get("transactionId"));
             return null;
         }
         TrainerModel newTrainerModel = get(trainer.getId());
-        log.info(String.format("Trainer id = %s created in database", trainer.getId()));
+        log.info("Trainer id = {} created in DAO. Transaction Id {}", trainer.getId(), MDC.get("transactionId"));
         return newTrainerModel;
     }
 
@@ -51,7 +52,7 @@ public class TrainerDao implements ITrainerDao {
             query.setParameter(1, username);
             resultList = query.getResultList();
         } catch (Exception e) {
-            log.error("Dao error occurred - get trainer by name");
+            log.error("Dao error occurred - get trainer by name. Transaction Id {}", MDC.get("transactionId"));
             return null;
         }
         if (resultList.size() != 1) {
@@ -69,7 +70,7 @@ public class TrainerDao implements ITrainerDao {
             entityManager.merge(user);
             entityManager.merge(trainer);
         } catch (Exception e) {
-            log.error("Dao error occurred - update trainer");
+            log.error("Dao error occurred - update trainer. Transaction Id {}", MDC.get("transactionId"));
         }
     }
 
@@ -79,7 +80,7 @@ public class TrainerDao implements ITrainerDao {
         try {
             trainer = entityManager.find(Trainer.class, id);
         } catch (Exception e) {
-            log.error("Dao error occurred - get trainer");
+            log.error("Dao error occurred - get trainer. Transaction Id {}", MDC.get("transactionId"));
             return null;
         }
         if (trainer == null) {
@@ -106,7 +107,7 @@ public class TrainerDao implements ITrainerDao {
                     .map(Mapper::mapTrainerEntityToTrainerModel)
                     .collect(Collectors.toList());
         }catch (Exception e){
-            log.error("Dao error occurred - get not assigned trainer list");
+            log.error("Dao error occurred - get not assigned trainer list. Transaction Id {}", MDC.get("transactionId"));
             return new ArrayList<>();
         }
         return trainerModelList;
@@ -124,7 +125,7 @@ public class TrainerDao implements ITrainerDao {
                     .map(Mapper::mapTraineeEntityToTraineeModel)
                     .toList();
         }catch (Exception e) {
-            log.error("Dao error occurred - get assigned trainee list");
+            log.error("Dao error occurred - get assigned trainee list. Transaction Id {}", MDC.get("transactionId"));
             return new ArrayList<>();
         }
         return traineeModelList;
