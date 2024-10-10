@@ -4,6 +4,7 @@ import com.gym.dto.TraineeDTO;
 import com.gym.dto.TrainerCreateDTO;
 import com.gym.dto.TrainerProfileDTO;
 import com.gym.exception.IncorrectCredentialException;
+import com.gym.dto.ResponseErrorBodyDTO;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.model.UserCredentials;
@@ -36,6 +37,25 @@ public class TrainerController {
     private final ITrainerService service;
 
     @PostMapping
+    @Operation(summary = "Create new trainer")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "New trainer successfully created",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = UserCredentials.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Input data for creation is not valid",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
     private ResponseEntity<UserCredentials> createTrainer(@RequestBody @Valid TrainerCreateDTO trainerCreateDTO) {
         TrainerModel trainer = service.createTrainer(trainerCreateDTO.getFirstName(),
                 trainerCreateDTO.getLastName(), trainerCreateDTO.getSpecialization());
@@ -46,7 +66,7 @@ public class TrainerController {
         return new ResponseEntity<>(userCredentials, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{user}")
+    @GetMapping("/{trainer}")
     @Operation(summary = "Gets trainer profile")
     @ApiResponses(value = {
             @ApiResponse(
@@ -63,12 +83,12 @@ public class TrainerController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = UserCredentials.class)))
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
                     })
     })
-    private ResponseEntity<TrainerProfileDTO> getTrainerProfile(@Parameter(description = "User name")
-                                                                    @PathVariable("user") String userName,
-                                                                @Parameter(description = "User password")
+    private ResponseEntity<TrainerProfileDTO> getTrainerProfile(@Parameter(description = "Trainer username")
+                                                                @PathVariable("trainer") String userName,
+                                                                @Parameter(description = "Trainer password")
                                                                 @RequestHeader("password") String password)
             throws IncorrectCredentialException {
         UserCredentials credentials = UserCredentials.builder()

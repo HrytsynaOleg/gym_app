@@ -26,8 +26,6 @@ public interface ITrainerService {
 
     void updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws IncorrectCredentialException;
 
-    void updateTrainerPassword(UserCredentials credentials, String password) throws IncorrectCredentialException;
-
     TrainerModel get(UserCredentials credentials, long id) throws IncorrectCredentialException;
 
     List<TraineeModel> getAssignedTraineeList(UserCredentials credentials) throws IncorrectCredentialException;

@@ -181,24 +181,6 @@ class TraineeServiceTest {
     }
 
     @Test
-    void updateTraineePasswordTest() {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("David.Gilmoure")
-                .password("1234567890")
-                .build();
-        TraineeModel updatedTrainee;
-        try {
-            traineeService.updateTraineePassword(credentials, "123");
-            credentials.setPassword("123");
-            updatedTrainee = traineeService.getTraineeProfile(credentials);
-            traineeService.updateTraineePassword(credentials, "1234567890");
-        } catch (IncorrectCredentialException e) {
-            throw new RuntimeException(e);
-        }
-        assertEquals("123", updatedTrainee.getPassword());
-    }
-
-    @Test
     void deleteTraineeTest() {
         UserCredentials credentials = UserCredentials.builder()
                 .userName("Neil.Young")

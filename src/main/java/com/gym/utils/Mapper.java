@@ -19,6 +19,17 @@ public class Mapper {
         return user;
     }
 
+    public static UserModel mapUserToUserModel(User user){
+        return UserModel.builder()
+                .userId(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .userName(user.getUserName())
+                .password(user.getPassword())
+                .isActive(user.getIsActive())
+                .build();
+    }
+
     public static TrainerModel mapTrainerEntityToTrainerModel(Trainer trainer) {
         return TrainerModel.builder()
                 .id(trainer.getId())

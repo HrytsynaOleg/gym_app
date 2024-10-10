@@ -95,17 +95,6 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public void updateTraineePassword(UserCredentials credentials, String password) throws ValidationException,
-            IncorrectCredentialException{
-        credentialsService.verifyCredentials(credentials);
-        TraineeModel trainee = traineeDao.getByUserName(credentials.getUserName());
-        trainee.setPassword(password);
-        validator.validate(trainee);
-        traineeDao.update(trainee);
-        log.info("Password changed");
-    }
-
-    @Override
     public void update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException{
         credentialsService.verifyCredentials(credentials);
         traineeDao.update(traineeModel);

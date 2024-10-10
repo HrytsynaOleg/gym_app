@@ -123,17 +123,6 @@ public class TrainerService implements ITrainerService {
     }
 
     @Override
-    public void updateTrainerPassword(UserCredentials credentials, String password) throws ValidationException,
-            IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
-        TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
-        trainer.setPassword(password);
-        validator.validate(trainer);
-        trainerDao.update(trainer);
-        log.info("Password changed. Transaction Id {}", MDC.get("transactionId"));
-    }
-
-    @Override
     public TrainerModel get(UserCredentials credentials, long id) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         return trainerDao.get(id);
