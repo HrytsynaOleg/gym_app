@@ -143,5 +143,36 @@ public class TraineeController {
 
         return ResponseEntity.ok(traineeUpdatedProfileDTO);
     }
+
+    @DeleteMapping("/{trainee}")
+    @Operation(summary = "Delete trainee profile")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Trainee profile deleted",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json")
+                    }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Trainee not found or user unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
+    private ResponseEntity deleteTrainee(@Parameter(description = "Trainee username")
+                                         @PathVariable("trainee") String userName,
+                                         @Parameter(description = "Trainee password")
+                                         @RequestHeader("password") String password) throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(userName)
+                .password(password)
+                .build();
+        service.delete(credentials);
+        return ResponseEntity.ok().build();
+    }
 }
 

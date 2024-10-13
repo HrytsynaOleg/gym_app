@@ -9,6 +9,8 @@ import com.gym.model.UserCredentials;
 import com.gym.service.ITraineeService;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.StringUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockedStatic;
@@ -23,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -40,6 +43,19 @@ class TraineeControllerTest {
 
     @MockBean
     private ITraineeService service;
+
+    @BeforeEach
+    public void registerStaticMock() {
+        mockStringUtil = Mockito.mockStatic(StringUtils.class);
+        mockStringUtil.when(() -> StringUtils.generateRandomString(passwordLength))
+                .thenReturn("1234567890");
+    }
+
+    @AfterEach
+    public void unregisterStaticMock() {
+        mockStringUtil.close();
+    }
+
 
     @Test
     void getTraineeProfileTest() {
@@ -91,9 +107,6 @@ class TraineeControllerTest {
     void createTraineeTest() {
         TraineeModel traineeModel = JsonUtils.parseResource("traineeCreateRestTest.json", new TypeReference<>() {
         });
-        mockStringUtil = Mockito.mockStatic(StringUtils.class);
-        mockStringUtil.when(() -> StringUtils.generateRandomString(passwordLength))
-                .thenReturn("1234567890");
         TraineeCreateDTO traineeCreateDTO = TraineeCreateDTO.builder()
                 .firstName("Tom")
                 .lastName("Cruze")
@@ -110,8 +123,6 @@ class TraineeControllerTest {
                     .andExpect(jsonPath("$.password").value("1234567890"));
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            mockStringUtil.close();
         }
     }
 
@@ -125,9 +136,6 @@ class TraineeControllerTest {
                 .userName(traineeModel.getUserName())
                 .password(traineeModel.getPassword())
                 .build();
-        mockStringUtil = Mockito.mockStatic(StringUtils.class);
-        mockStringUtil.when(() -> StringUtils.generateRandomString(passwordLength))
-                .thenReturn("1234567890");
         TraineeUpdateDTO traineeUpdateDTO = TraineeUpdateDTO.builder()
                 .userName("Bruce.Dickinson")
                 .firstName("Neil")
@@ -150,8 +158,22 @@ class TraineeControllerTest {
                     .andExpect(jsonPath("$.firstName").value("Neil"));
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }finally {
-            mockStringUtil.close();
         }
+    }
+
+    @Test
+    void deleteTraineeTest(){
+        TraineeModel traineeModel = JsonUtils.parseResource("traineeRestTest.json", new TypeReference<>() {
+        });
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(traineeModel.getUserName())
+                .password(traineeModel.getPassword())
+                .build();
+        try {
+            doNothing().when(service).delete(credentials);
+        } catch (IncorrectCredentialException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

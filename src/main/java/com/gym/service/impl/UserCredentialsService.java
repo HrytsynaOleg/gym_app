@@ -18,7 +18,7 @@ public class UserCredentialsService implements IUserCredentialsService {
     public void verifyCredentials(UserCredentials credentials) throws IncorrectCredentialException {
         UserModel user = dao.getUserByName(credentials.getUserName());
         if (user == null || !user.getPassword().equals(credentials.getPassword())) {
-            throw new IncorrectCredentialException("User name or password incorrect");
+            throw new IncorrectCredentialException("User not found");
         }
     }
 }
