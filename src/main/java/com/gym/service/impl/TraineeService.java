@@ -95,9 +95,10 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public void update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException{
+    public TraineeModel update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException{
         credentialsService.verifyCredentials(credentials);
         traineeDao.update(traineeModel);
+        return traineeDao.getByUserName(credentials.getUserName());
     }
 
     @Override
@@ -127,7 +128,7 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public List<TrainerModel> getIntendedTrainerList(UserCredentials credentials) throws IncorrectCredentialException {
+    public List<TrainerModel> getAssignedTrainerList(UserCredentials credentials) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         TraineeModel traineeModel = traineeDao.getByUserName(credentials.getUserName());
         return traineeDao.getIntendedTrainerList(traineeModel);

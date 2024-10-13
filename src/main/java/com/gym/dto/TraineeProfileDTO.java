@@ -11,11 +11,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TrainerProfileDTO {
+public class TraineeProfileDTO {
     private String firstName;
     private String lastName;
-    private String specialization;
+    private String dateOfBirth;
+    private String address;
     private boolean isActive;
-    private List<TraineeListItemDTO> traineeList;
+    private List<TrainerListItemDTO> trainerList;
 
 }

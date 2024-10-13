@@ -226,9 +226,9 @@ class TraineeServiceTest {
         List<TrainerModel> newTrainerList = new ArrayList<>();
         newTrainerList.add(trainerService.get(credentials, 117));
         newTrainerList.add(trainerService.get(credentials, 118));
-        List<TrainerModel> trainerModelList = traineeService.getIntendedTrainerList(credentials);
+        List<TrainerModel> trainerModelList = traineeService.getAssignedTrainerList(credentials);
         traineeService.updateTrainerList(credentials, newTrainerList);
-        List<TrainerModel> trainerModelUpdatedList = traineeService.getIntendedTrainerList(credentials);
+        List<TrainerModel> trainerModelUpdatedList = traineeService.getAssignedTrainerList(credentials);
 
         assertEquals(1, trainerModelList.size());
         assertEquals(2, trainerModelUpdatedList.size());

@@ -5,17 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TrainerProfileDTO {
+public class TrainerListItemDTO {
+    private String userName;
     private String firstName;
     private String lastName;
     private String specialization;
-    private boolean isActive;
-    private List<TraineeListItemDTO> traineeList;
-
 }

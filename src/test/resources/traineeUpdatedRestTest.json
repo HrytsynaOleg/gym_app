@@ -1,0 +1,11 @@
+{
+  "id": 234,
+  "userId": 16,
+  "firstName": "Neil",
+  "lastName": "Young",
+  "userName": "Bruce.Dickinson",
+  "password": "1234567890",
+  "isActive": true,
+  "address": "Boston",
+  "dateOfBirth": "1982-09-15"
+}

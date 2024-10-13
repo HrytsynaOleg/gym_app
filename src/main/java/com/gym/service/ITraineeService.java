@@ -17,11 +17,11 @@ public interface ITraineeService {
     TraineeModel getTraineeProfile(UserCredentials credentials) throws IncorrectCredentialException;
     void activate(UserCredentials credentials) throws ValidationException, IncorrectCredentialException;
     void deactivate(UserCredentials credentials) throws ValidationException, IncorrectCredentialException;
-    void update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException;
+    TraineeModel update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException;
     void delete(UserCredentials credentials) throws IncorrectCredentialException;
     TraineeModel get(UserCredentials credentials, long id) throws IncorrectCredentialException;
     List<TrainingModel> getTrainingList(UserCredentials credentials, LocalDate dateFrom,
     LocalDate dateTo, String trainerUserName, int trainingType) throws IncorrectCredentialException;
-    List<TrainerModel> getIntendedTrainerList(UserCredentials credentials)throws IncorrectCredentialException;
+    List<TrainerModel> getAssignedTrainerList(UserCredentials credentials)throws IncorrectCredentialException;
     void updateTrainerList(UserCredentials credentials, List<TrainerModel> trainerModelList) throws IncorrectCredentialException;
 }

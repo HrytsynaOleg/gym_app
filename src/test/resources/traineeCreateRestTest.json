@@ -1,0 +1,11 @@
+{
+  "id": 85,
+  "userId": 8,
+  "firstName": "Tom",
+  "lastName": "Cruze",
+  "userName": "Tom.Cruze",
+  "password": "1234567890",
+  "isActive": true,
+  "dateOfBirth": "1968-03-12",
+  "address": "New York"
+}

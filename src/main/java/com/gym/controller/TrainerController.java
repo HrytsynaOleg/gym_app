@@ -1,6 +1,6 @@
 package com.gym.controller;
 
-import com.gym.dto.TraineeDTO;
+import com.gym.dto.TraineeListItemDTO;
 import com.gym.dto.TrainerCreateDTO;
 import com.gym.dto.TrainerProfileDTO;
 import com.gym.exception.IncorrectCredentialException;
@@ -98,10 +98,10 @@ public class TrainerController {
         TrainerModel trainerProfile = service.getTrainerProfile(credentials);
         List<TraineeModel> assignedTraineeList = service.getAssignedTraineeList(credentials);
         TrainerProfileDTO trainerProfileDTO = DTOMapper.mapTrainerModelToTrainerProfileDTO(trainerProfile);
-        List<TraineeDTO> traineeDTOList = assignedTraineeList.stream()
+        List<TraineeListItemDTO> traineeListItemDTOList = assignedTraineeList.stream()
                 .map(DTOMapper::mapTraineeModelToTraineeDTO)
                 .toList();
-        trainerProfileDTO.setTraineeList(traineeDTOList);
+        trainerProfileDTO.setTraineeList(traineeListItemDTOList);
         return ResponseEntity.ok(trainerProfileDTO);
     }
 }
