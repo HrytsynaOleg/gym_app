@@ -5,6 +5,7 @@ import com.gym.dto.TraineeCreateDTO;
 import com.gym.dto.TraineeUpdateDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
+import com.gym.model.TrainerModel;
 import com.gym.model.UserCredentials;
 import com.gym.service.ITraineeService;
 import com.gym.utils.JsonUtils;
@@ -26,9 +27,7 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -155,7 +154,10 @@ class TraineeControllerTest {
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.userName").value("Bruce.Dickinson"))
-                    .andExpect(jsonPath("$.firstName").value("Neil"));
+                    .andExpect(jsonPath("$.firstName").value("Neil"))
+                    .andExpect(jsonPath("$.lastName").value("Young"))
+                    .andExpect(jsonPath("$.dateOfBirth").value("1982-09-15"))
+                    .andExpect(jsonPath("$.address").value("Boston"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -171,9 +173,33 @@ class TraineeControllerTest {
                 .build();
         try {
             doNothing().when(service).delete(credentials);
-        } catch (IncorrectCredentialException e) {
+            mvc.perform(delete("/trainee/Bruce.Dickinson")
+                            .header("password", "1234567890"))
+                    .andExpect(status().isOk());
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @Test
+    void getNotAssignedTrainerListTest(){
+        TraineeModel traineeModel = JsonUtils.parseResource("traineeRestTest.json", new TypeReference<>() {
+        });
+        TrainerModel trainerModel = JsonUtils.parseResource("trainerRestTest.json", new TypeReference<>() {
+        });
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(traineeModel.getUserName())
+                .password(traineeModel.getPassword())
+                .build();
+        try {
+            given(service.getNotAssignedTrainerList(credentials))
+                    .willReturn(List.of(trainerModel));
+            mvc.perform(get("/trainee/Bruce.Dickinson/not-assigned-trainers")
+                            .header("password", "1234567890"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.trainers.length()").value(1));
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

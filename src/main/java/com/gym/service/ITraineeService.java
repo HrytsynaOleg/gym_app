@@ -23,5 +23,6 @@ public interface ITraineeService {
     List<TrainingModel> getTrainingList(UserCredentials credentials, LocalDate dateFrom,
     LocalDate dateTo, String trainerUserName, int trainingType) throws IncorrectCredentialException;
     List<TrainerModel> getAssignedTrainerList(UserCredentials credentials)throws IncorrectCredentialException;
+    List<TrainerModel> getNotAssignedTrainerList(UserCredentials credentials)throws IncorrectCredentialException;
     void updateTrainerList(UserCredentials credentials, List<TrainerModel> trainerModelList) throws IncorrectCredentialException;
 }

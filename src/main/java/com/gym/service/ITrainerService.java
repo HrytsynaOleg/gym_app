@@ -24,7 +24,7 @@ public interface ITrainerService {
 
     void deactivate(UserCredentials credentials) throws IncorrectCredentialException;
 
-    void updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws IncorrectCredentialException;
+    TrainerModel updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws IncorrectCredentialException;
 
     TrainerModel get(UserCredentials credentials, long id) throws IncorrectCredentialException;
 

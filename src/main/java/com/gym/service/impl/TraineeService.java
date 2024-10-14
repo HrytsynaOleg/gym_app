@@ -14,6 +14,7 @@ import com.gym.service.IUserCredentialsService;
 import com.gym.utils.DateUtils;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,7 @@ public class TraineeService implements ITraineeService {
                 .build();
         validator.validate(traineeModel);
         TraineeModel newTraineeModel = traineeDao.create(traineeModel);
-        log.info("New trainee created");
+        log.info("New trainee created in trainee service. Transaction Id {}", MDC.get("transactionId"));
         return newTraineeModel;
     }
 
@@ -87,18 +88,22 @@ public class TraineeService implements ITraineeService {
     public void activate(UserCredentials credentials) throws ValidationException,
             IncorrectCredentialException {
         setActiveStatus(credentials, true);
+        log.info("User activated. Transaction Id {}", MDC.get("transactionId"));
     }
 
     @Override
     public void deactivate(UserCredentials credentials) throws IncorrectCredentialException {
         setActiveStatus(credentials, false);
+        log.info("User deactivated. Transaction Id {}", MDC.get("transactionId"));
     }
 
     @Override
     public TraineeModel update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException{
         credentialsService.verifyCredentials(credentials);
         traineeDao.update(traineeModel);
-        return traineeDao.getByUserName(credentials.getUserName());
+        TraineeModel updatedTraineeModel = traineeDao.getByUserName(credentials.getUserName());
+        log.info("Trainee profile updated. Transaction Id {}", MDC.get("transactionId"));
+        return updatedTraineeModel;
     }
 
     @Override
@@ -131,14 +136,21 @@ public class TraineeService implements ITraineeService {
     public List<TrainerModel> getAssignedTrainerList(UserCredentials credentials) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         TraineeModel traineeModel = traineeDao.getByUserName(credentials.getUserName());
-        return traineeDao.getIntendedTrainerList(traineeModel);
+        return traineeDao.getAssignedTrainerList(traineeModel);
+    }
+
+    @Override
+    public List<TrainerModel> getNotAssignedTrainerList(UserCredentials credentials) throws IncorrectCredentialException {
+        credentialsService.verifyCredentials(credentials);
+        TraineeModel traineeModel = traineeDao.getByUserName(credentials.getUserName());
+        return traineeDao.getNotAssignedTrainerList(traineeModel);
     }
 
     @Override
     public void updateTrainerList(UserCredentials credentials, List<TrainerModel> newTrainerModelList) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         TraineeModel traineeModel = traineeDao.getByUserName(credentials.getUserName());
-        List<TrainerModel> existingTrainerList = traineeDao.getIntendedTrainerList(traineeModel);
+        List<TrainerModel> existingTrainerList = traineeDao.getAssignedTrainerList(traineeModel);
         existingTrainerList.forEach(i -> traineeDao.deleteTrainer(traineeModel, i));
         newTrainerModelList.forEach(i -> traineeDao.intendTrainer(traineeModel, i));
     }

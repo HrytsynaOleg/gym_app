@@ -1,10 +1,7 @@
 package com.gym.controller;
 
-import com.gym.dto.TraineeListItemDTO;
-import com.gym.dto.TrainerCreateDTO;
-import com.gym.dto.TrainerProfileDTO;
+import com.gym.dto.*;
 import com.gym.exception.IncorrectCredentialException;
-import com.gym.dto.ResponseErrorBodyDTO;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.model.UserCredentials;
@@ -104,5 +101,46 @@ public class TrainerController {
         trainerProfileDTO.setTraineeList(traineeListItemDTOList);
         return ResponseEntity.ok(trainerProfileDTO);
     }
-}
 
+    @PutMapping
+    @Operation(summary = "Update trainer profile")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Trainer profile updated",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = TrainerUpdatedProfileDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Trainer not found or user unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
+    private ResponseEntity<TrainerUpdatedProfileDTO> updateTrainerProfile(@RequestBody @Valid TrainerUpdateDTO trainerUpdateDTO,
+                                                                          @Parameter(description = "Trainee password")
+                                                                          @RequestHeader("password") String password)
+            throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(trainerUpdateDTO.getUserName())
+                .password(password)
+                .build();
+        TrainerModel trainerProfile = service.getTrainerProfile(credentials);
+        DTOMapper.updateTrainerModelFromDTO(trainerProfile, trainerUpdateDTO);
+        TrainerModel updatedTrainerProfile = service.updateTrainerProfile(credentials, trainerProfile);
+        List<TraineeModel> assignedTraineeList = service.getAssignedTraineeList(credentials);
+        TrainerUpdatedProfileDTO trainerUpdatedProfileDTO =
+                DTOMapper.mapTrainerModelToUpdatedTrainerProfileDTO(updatedTrainerProfile);
+        List<TraineeListItemDTO> traineeListItemDTOList = assignedTraineeList.stream()
+                .map(DTOMapper::mapTraineeModelToTraineeListItemDTO)
+                .toList();
+        trainerUpdatedProfileDTO.setTraineeList(traineeListItemDTOList);
+
+        return ResponseEntity.ok(trainerUpdatedProfileDTO);
+    }
+}

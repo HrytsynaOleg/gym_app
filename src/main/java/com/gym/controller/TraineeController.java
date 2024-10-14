@@ -111,7 +111,7 @@ public class TraineeController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = TraineeProfileDTO.class)))
+                                    array = @ArraySchema(schema = @Schema(implementation = TraineeUpdatedProfileDTO.class)))
                     }),
             @ApiResponse(
                     responseCode = "401",
@@ -173,6 +173,46 @@ public class TraineeController {
                 .build();
         service.delete(credentials);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{trainee}/not-assigned-trainers")
+    @Operation(summary = "Gets unassigned trainers on trainee")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Get trainees unassigned trainers list success",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = TraineeNotAssignedTrainerListDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Trainee not found or user unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
+    private ResponseEntity<TraineeNotAssignedTrainerListDTO> getNotAssignedTrainersProfile(
+            @Parameter(description = "Trainee username")
+            @PathVariable("trainee") String userName,
+            @Parameter(description = "Trainee password")
+            @RequestHeader("password") String password)
+            throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(userName)
+                .password(password)
+                .build();
+        List<TrainerListItemDTO> trainerList = service.getNotAssignedTrainerList(credentials).stream()
+                .filter(TrainerModel::getIsActive)
+                .map(DTOMapper::mapTrainerModelToTrainerListItemDTO)
+                .toList();
+        TraineeNotAssignedTrainerListDTO notAssignedActiveTrainerList = TraineeNotAssignedTrainerListDTO.builder()
+                .trainers(trainerList)
+                .build();
+        return ResponseEntity.ok(notAssignedActiveTrainerList);
     }
 }
 

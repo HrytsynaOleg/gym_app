@@ -1,0 +1,10 @@
+{
+  "id": 116,
+  "userId": 12,
+  "firstName": "Patrick",
+  "lastName": "Mean",
+  "userName": "Kerry.King",
+  "password": "1234567890",
+  "isActive": true,
+  "trainingType": "ZUMBA"
+}

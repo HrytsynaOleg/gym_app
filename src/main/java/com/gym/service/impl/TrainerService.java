@@ -114,12 +114,14 @@ public class TrainerService implements ITrainerService {
     }
 
     @Override
-    public void updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws ValidationException,
+    public TrainerModel updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws ValidationException,
             IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         validator.validate(trainerModel);
         trainerDao.update(trainerModel);
+        TrainerModel updatedTrainerModel = trainerDao.getByUserName(credentials.getUserName());
         log.info("Trainer profile updated. Transaction Id {}", MDC.get("transactionId"));
+        return updatedTrainerModel;
     }
 
     @Override

@@ -123,13 +123,11 @@ public class TraineeDao implements ITraineeDao {
     @Override
     @Transactional
     public void deleteTrainer(TraineeModel traineeModel, TrainerModel trainerModel) {
-        Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
-        Trainee trainee = Mapper.mapTraineeModelToTraineeEntity(traineeModel);
         String queryString = "select t from TrainerTrainee t where t.trainee.id = ?1 and " +
                 "t.trainer.id = ?2";
         TypedQuery<TrainerTrainee> query = entityManager.createQuery(queryString, TrainerTrainee.class);
-        query.setParameter(1, trainee.getId());
-        query.setParameter(2, trainer.getId());
+        query.setParameter(1, traineeModel.getId());
+        query.setParameter(2, trainerModel.getId());
         List<TrainerTrainee> trainerTraineeList;
         try {
             trainerTraineeList = query.getResultList();
@@ -144,16 +142,24 @@ public class TraineeDao implements ITraineeDao {
     }
 
     @Override
-    public List<TrainerModel> getIntendedTrainerList(TraineeModel traineeModel) {
-        Trainee trainee = Mapper.mapTraineeModelToTraineeEntity(traineeModel);
+    public List<TrainerModel> getAssignedTrainerList(TraineeModel traineeModel) {
+        String queryString = "select t.trainer from TrainerTrainee t where t.trainee.id = ?1";
+        return getTrainerList(queryString, traineeModel.getId());
+    }
+
+    @Override
+    public List<TrainerModel> getNotAssignedTrainerList(TraineeModel traineeModel) {
+        String queryString = "select t from Trainer t where t.id not in " +
+                "(select p.trainer.id from TrainerTrainee p where p.trainee.id = ?1)";
+        return getTrainerList(queryString, traineeModel.getId());
+    }
+
+    private List<TrainerModel> getTrainerList(String queryString, long traineeId){
         List<TrainerModel> trainerModelList;
         try {
-            String queryString = "select t from TrainerTrainee t where t.trainee.id = ?1";
-            TypedQuery<TrainerTrainee> query = entityManager.createQuery(queryString, TrainerTrainee.class);
-            query.setParameter(1, trainee.getId());
-            List<TrainerTrainee> trainerTraineeList = query.getResultList();
-            trainerModelList = trainerTraineeList.stream()
-                    .map(TrainerTrainee::getTrainer)
+            TypedQuery<Trainer> query = entityManager.createQuery(queryString, Trainer.class);
+            query.setParameter(1, traineeId);
+            trainerModelList = query.getResultList().stream()
                     .map(Mapper::mapTrainerEntityToTrainerModel)
                     .toList();
         } catch (Exception e) {

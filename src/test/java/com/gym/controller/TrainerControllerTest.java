@@ -2,12 +2,15 @@ package com.gym.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dto.TrainerCreateDTO;
+import com.gym.dto.TrainerUpdateDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
 import com.gym.model.UserCredentials;
 import com.gym.service.ITrainerService;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.StringUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockedStatic;
@@ -37,6 +40,18 @@ class TrainerControllerTest {
 
     @MockBean
     private ITrainerService service;
+
+    @BeforeEach
+    public void registerStaticMock() {
+        mockStringUtil = Mockito.mockStatic(StringUtils.class);
+        mockStringUtil.when(() -> StringUtils.generateRandomString(passwordLength))
+                .thenReturn("1234567890");
+    }
+
+    @AfterEach
+    public void unregisterStaticMock() {
+        mockStringUtil.close();
+    }
 
     @Test
     void getTrainerProfileTest() {
@@ -87,9 +102,6 @@ class TrainerControllerTest {
     void createTrainerTest() {
         TrainerModel trainerModel = JsonUtils.parseResource("trainerCreateRestTest.json", new TypeReference<>() {
         });
-        mockStringUtil = Mockito.mockStatic(StringUtils.class);
-        mockStringUtil.when(() -> StringUtils.generateRandomString(passwordLength))
-                .thenReturn("1234567890");
         TrainerCreateDTO trainerCreateDTO = TrainerCreateDTO.builder()
                 .firstName("Tom")
                 .lastName("Cruze")
@@ -104,8 +116,42 @@ class TrainerControllerTest {
                     .andExpect(jsonPath("$.password").value("1234567890"));
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            mockStringUtil.close();
+        }
+    }
+
+    @Test
+    void updateTrainerTest(){
+        TrainerModel trainerModel = JsonUtils.parseResource("trainerRestTest.json", new TypeReference<>() {
+        });
+        TrainerModel trainerUpdatedModel = JsonUtils.parseResource("trainerUpdatedRestTest.json", new TypeReference<>() {
+        });
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(trainerModel.getUserName())
+                .password(trainerModel.getPassword())
+                .build();
+        TrainerUpdateDTO trainerUpdateDTO = TrainerUpdateDTO.builder()
+                .userName("Kerry.King")
+                .firstName("Patrick")
+                .lastName("Mean")
+                .specialization("ZUMBA")
+                .isActive(true)
+                .build();
+        try {
+            given(service.getTrainerProfile(credentials))
+                    .willReturn(trainerModel);
+            given(service.updateTrainerProfile(credentials, trainerUpdatedModel))
+                    .willReturn(trainerUpdatedModel);
+            given(service.getAssignedTraineeList(credentials)).willReturn(List.of());
+            mvc.perform(put("/trainer").contentType(MediaType.APPLICATION_JSON)
+                            .content(JsonUtils.convertObjectToJson(trainerUpdateDTO))
+                            .header("password", "1234567890"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.userName").value("Kerry.King"))
+                    .andExpect(jsonPath("$.firstName").value("Patrick"))
+                    .andExpect(jsonPath("$.lastName").value("Mean"))
+                    .andExpect(jsonPath("$.specialization").value("ZUMBA"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
