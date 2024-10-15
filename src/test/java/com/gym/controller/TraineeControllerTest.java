@@ -3,6 +3,7 @@ package com.gym.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dto.TraineeCreateDTO;
 import com.gym.dto.TraineeUpdateDTO;
+import com.gym.dto.TraineeUpdateTrainerListDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
@@ -198,6 +199,37 @@ class TraineeControllerTest {
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.trainers.length()").value(1));
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void updateTrainerListTest(){
+        TraineeModel traineeModel = JsonUtils.parseResource("traineeRestTest.json", new TypeReference<>() {
+        });
+        List<TrainerModel> updatedTrainerModelList = JsonUtils.parseResource("traineeUpdateTrainerList.json",
+                new TypeReference<>() {
+        });
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(traineeModel.getUserName())
+                .password(traineeModel.getPassword())
+                .build();
+        List<String> newTrainerList = List.of("Kerry.King", "Tom.Arraya");
+
+        TraineeUpdateTrainerListDTO traineeUpdateTrainerListDTO = TraineeUpdateTrainerListDTO.builder()
+                .userName("Bruce.Dickinson")
+                .trainerList(List.of("Kerry.King", "Tom.Arraya"))
+                .build();
+        try {
+            given(service.updateTrainerList(credentials, newTrainerList))
+                    .willReturn(updatedTrainerModelList);
+            mvc.perform(put("/trainee/Bruce.Dickinson/trainers")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(JsonUtils.convertObjectToJson(traineeUpdateTrainerListDTO))
+                            .header("password", "1234567890"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.trainers.length()").value(2));
         }catch (Exception e) {
             throw new RuntimeException(e);
         }

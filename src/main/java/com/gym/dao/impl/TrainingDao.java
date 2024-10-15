@@ -18,6 +18,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -99,10 +100,18 @@ public class TrainingDao implements ITrainingDao {
 
     @Override
     public List<TrainingModel> getTraineeTrainingListByParameters(Map<String, Object> parameters) {
-        String queryString = "select t from Training t where t.trainee.user.userName = :trainee " +
-                "and t.trainingDate between :startDate and :endDate and t.trainer.user.userName like :trainer " +
-                "and t.trainingType.id = :trainingType";
-        TypedQuery<Training> query = entityManager.createQuery(queryString, Training.class);
+        StringBuilder quertStringBuilder =
+                new StringBuilder("select t from Training t where t.trainee.user.userName = :trainee");
+        if (parameters.containsKey("trainer")) {
+            quertStringBuilder.append(" and t.trainer.user.userName like :trainer");
+        }
+        if (parameters.containsKey("startDate") && parameters.containsKey("endDate")) {
+            quertStringBuilder.append(" and t.trainingDate between :startDate and :endDate");
+        }
+        if (parameters.containsKey("trainingType")){
+            quertStringBuilder.append(" and t.trainingType.id = :trainingType");
+        }
+        TypedQuery<Training> query = entityManager.createQuery(quertStringBuilder.toString(), Training.class);
         for (Map.Entry<String, Object> entry : parameters.entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }

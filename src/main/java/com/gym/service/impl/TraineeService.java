@@ -1,16 +1,16 @@
 package com.gym.service.impl;
 
 import com.gym.dao.ITraineeDao;
+import com.gym.dao.ITrainerDao;
 import com.gym.dao.ITrainingDao;
 import com.gym.dao.IUserDao;
+import com.gym.dto.training.TraineeTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
-import com.gym.model.TraineeModel;
-import com.gym.model.TrainerModel;
-import com.gym.model.TrainingModel;
-import com.gym.model.UserCredentials;
+import com.gym.model.*;
 import com.gym.service.IModelValidator;
 import com.gym.service.ITraineeService;
 import com.gym.service.IUserCredentialsService;
+import com.gym.utils.DTOMapper;
 import com.gym.utils.DateUtils;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
@@ -21,8 +21,10 @@ import org.springframework.stereotype.Service;
 import com.gym.utils.StringUtils;
 
 import jakarta.validation.ValidationException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,8 @@ public class TraineeService implements ITraineeService {
     private ITraineeDao traineeDao;
     @Autowired
     private ITrainingDao trainingDao;
+    @Autowired
+    private ITrainerDao trainerDao;
     @Autowired
     private IUserDao userDao;
     @Autowired
@@ -52,16 +56,7 @@ public class TraineeService implements ITraineeService {
         String password = StringUtils.generateRandomString(passwordLength);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         LocalDate localDate = LocalDate.parse(dateOfBirth, formatter);
-        TraineeModel traineeModel = TraineeModel.builder()
-                .id(0)
-                .firstName(firstName)
-                .lastName(lastName)
-                .userName(userName)
-                .password(password)
-                .isActive(true)
-                .address(address)
-                .dateOfBirth(localDate)
-                .build();
+        TraineeModel traineeModel = TraineeModel.builder().id(0).firstName(firstName).lastName(lastName).userName(userName).password(password).isActive(true).address(address).dateOfBirth(localDate).build();
         validator.validate(traineeModel);
         TraineeModel newTraineeModel = traineeDao.create(traineeModel);
         log.info("New trainee created in trainee service. Transaction Id {}", MDC.get("transactionId"));
@@ -85,8 +80,7 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public void activate(UserCredentials credentials) throws ValidationException,
-            IncorrectCredentialException {
+    public void activate(UserCredentials credentials) throws ValidationException, IncorrectCredentialException {
         setActiveStatus(credentials, true);
         log.info("User activated. Transaction Id {}", MDC.get("transactionId"));
     }
@@ -98,7 +92,7 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public TraineeModel update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException{
+    public TraineeModel update(UserCredentials credentials, TraineeModel traineeModel) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         traineeDao.update(traineeModel);
         TraineeModel updatedTraineeModel = traineeDao.getByUserName(credentials.getUserName());
@@ -107,7 +101,7 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public void delete(UserCredentials credentials) throws IncorrectCredentialException{
+    public void delete(UserCredentials credentials) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         TraineeModel traineeModel = traineeDao.getByUserName(credentials.getUserName());
         traineeDao.delete(traineeModel.getId());
@@ -120,16 +114,30 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public List<TrainingModel> getTrainingList(UserCredentials credentials, LocalDate dateFrom, LocalDate dateTo,
-                                               String trainerUserName, int trainingType) throws IncorrectCredentialException {
+    public List<TraineeTrainingListItemDTO> getTrainingList(UserCredentials credentials, String dateFrom, String dateTo, String trainerUserName, String trainingType) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
+
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("trainer", trainerUserName);
         parameters.put("trainee", credentials.getUserName());
-        parameters.put("startDate", DateUtils.localDateToDate(dateFrom));
-        parameters.put("endDate", DateUtils.localDateToDate(dateTo));
-        parameters.put("trainingType", trainingType);
-        return trainingDao.getTraineeTrainingListByParameters(parameters);
+        if (!trainerUserName.isBlank()) {
+            parameters.put("trainer", trainerUserName);
+        }
+        if (!dateFrom.isBlank() && !dateTo.isBlank()) {
+            parameters.put("startDate", DateUtils.parseDate(dateFrom));
+            parameters.put("endDate", DateUtils.parseDate(dateTo));
+        }
+        if (!trainingType.isBlank()) {
+            parameters.put("trainingType", TrainingTypeEnum.valueOf(trainingType).getId());
+        }
+        List<TrainingModel> trainingModelList = trainingDao.getTraineeTrainingListByParameters(parameters);
+        List<TraineeTrainingListItemDTO> resultList = new ArrayList<>();
+        for (TrainingModel trainingModel : trainingModelList) {
+            TraineeTrainingListItemDTO traineeTrainingListItemDTO = DTOMapper.mapTrainingModelToTraineeTrainingItem(trainingModel);
+            String trainerName = trainerDao.get(trainingModel.getTrainerId()).getUserName();
+            traineeTrainingListItemDTO.setTrainerName(trainerName);
+            resultList.add(traineeTrainingListItemDTO);
+        }
+        return resultList;
     }
 
     @Override
@@ -147,16 +155,17 @@ public class TraineeService implements ITraineeService {
     }
 
     @Override
-    public void updateTrainerList(UserCredentials credentials, List<TrainerModel> newTrainerModelList) throws IncorrectCredentialException {
+    public List<TrainerModel> updateTrainerList(UserCredentials credentials, List<String> newTrainerModelList) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
+        List<TrainerModel> newTrainerList = newTrainerModelList.stream().map(trainerDao::getByUserName).toList();
         TraineeModel traineeModel = traineeDao.getByUserName(credentials.getUserName());
         List<TrainerModel> existingTrainerList = traineeDao.getAssignedTrainerList(traineeModel);
         existingTrainerList.forEach(i -> traineeDao.deleteTrainer(traineeModel, i));
-        newTrainerModelList.forEach(i -> traineeDao.intendTrainer(traineeModel, i));
+        newTrainerList.forEach(i -> traineeDao.intendTrainer(traineeModel, i));
+        return traineeDao.getAssignedTrainerList(traineeModel);
     }
 
-    private void setActiveStatus(UserCredentials credentials, boolean status) throws ValidationException,
-            IncorrectCredentialException {
+    private void setActiveStatus(UserCredentials credentials, boolean status) throws ValidationException, IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         TraineeModel trainee = traineeDao.getByUserName(credentials.getUserName());
         trainee.setIsActive(status);

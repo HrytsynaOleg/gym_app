@@ -1,8 +1,10 @@
 package com.gym.utils;
 
 import com.gym.dto.*;
+import com.gym.dto.training.TraineeTrainingListItemDTO;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
+import com.gym.model.TrainingModel;
 import com.gym.model.TrainingTypeEnum;
 
 import java.time.LocalDate;
@@ -96,6 +98,15 @@ public class DTOMapper {
         model.setLastName(dtoModel.getLastName());
         model.setTrainingType(TrainingTypeEnum.valueOf(dtoModel.getSpecialization()));
         model.setIsActive(dtoModel.isActive());
+    }
+
+    public static TraineeTrainingListItemDTO mapTrainingModelToTraineeTrainingItem(TrainingModel trainingModel){
+        return TraineeTrainingListItemDTO.builder()
+                .trainingName(trainingModel.getTrainingName())
+                .trainingDate(DateUtils.parseLocalDateToString(trainingModel.getTrainingDate()))
+                .trainingType(trainingModel.getTrainingType().getName())
+                .trainingDuration(String.valueOf(trainingModel.getDuration()))
+                .build();
     }
 }
 

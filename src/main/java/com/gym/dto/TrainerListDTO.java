@@ -11,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TraineeNotAssignedTrainerListDTO {
+public class TrainerListDTO {
     private List<TrainerListItemDTO> trainers;
 }

@@ -1,6 +1,7 @@
 package com.gym.controller;
 
 import com.gym.dto.*;
+import com.gym.dto.training.TraineeTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
@@ -184,7 +185,7 @@ public class TraineeController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = TraineeNotAssignedTrainerListDTO.class)))
+                                    array = @ArraySchema(schema = @Schema(implementation = TrainerListDTO.class)))
                     }),
             @ApiResponse(
                     responseCode = "401",
@@ -195,7 +196,7 @@ public class TraineeController {
                                     array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
                     })
     })
-    private ResponseEntity<TraineeNotAssignedTrainerListDTO> getNotAssignedTrainersProfile(
+    private ResponseEntity<TrainerListDTO> getNotAssignedTrainersProfile(
             @Parameter(description = "Trainee username")
             @PathVariable("trainee") String userName,
             @Parameter(description = "Trainee password")
@@ -209,10 +210,94 @@ public class TraineeController {
                 .filter(TrainerModel::getIsActive)
                 .map(DTOMapper::mapTrainerModelToTrainerListItemDTO)
                 .toList();
-        TraineeNotAssignedTrainerListDTO notAssignedActiveTrainerList = TraineeNotAssignedTrainerListDTO.builder()
+        TrainerListDTO notAssignedActiveTrainerList = TrainerListDTO.builder()
                 .trainers(trainerList)
                 .build();
         return ResponseEntity.ok(notAssignedActiveTrainerList);
+    }
+
+    @PutMapping("/{trainee}/trainers")
+    @Operation(summary = "Update trainee's trainer list")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Trainer list updated",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = TrainerListDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Trainee not found or user unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
+    private ResponseEntity<TrainerListDTO> updateTraineesTrainerList(
+            @RequestBody @Valid TraineeUpdateTrainerListDTO traineeUpdateTrainerListDTO,
+            @Parameter(description = "Trainee password")
+            @RequestHeader("password") String password)
+            throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(traineeUpdateTrainerListDTO.getUserName())
+                .password(password)
+                .build();
+        List<TrainerModel> newTrainerModelList = service.updateTrainerList(credentials,
+                traineeUpdateTrainerListDTO.getTrainerList());
+        List<TrainerListItemDTO> newTrainerList = newTrainerModelList.stream()
+                .map(DTOMapper::mapTrainerModelToTrainerListItemDTO)
+                .toList();
+        TrainerListDTO trainerListDTO = TrainerListDTO.builder()
+                .trainers(newTrainerList)
+                .build();
+        return ResponseEntity.ok(trainerListDTO);
+    }
+
+    @GetMapping("/{trainee}/trainings")
+    @Operation(summary = "Gets training list")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Get trainees training list success",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = TraineeTrainingListItemDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Trainee not found or user unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
+    private ResponseEntity<List<TraineeTrainingListItemDTO>> getTrainingList(
+            @Parameter(description = "Trainee username")
+            @PathVariable("trainee") String userName,
+            @Parameter(description = "Trainee password")
+            @RequestHeader("password") String password,
+            @Parameter(description = "End date for training list period")
+            @RequestParam(defaultValue  = "", name = "periodTo") String periodTo,
+            @Parameter(description = "Start date for training list period")
+            @RequestParam(defaultValue  = "", name = "periodFrom") String periodFrom,
+            @Parameter(description = "Trainer username for training list period")
+            @RequestParam(defaultValue  = "", name = "trainer") String trainer,
+            @Parameter(description = "Training type for training list period")
+            @RequestParam(defaultValue  = "", name = "trainingType") String trainingType
+    )
+            throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(userName)
+                .password(password)
+                .build();
+        List<TraineeTrainingListItemDTO> trainingList =
+                service.getTrainingList(credentials, periodFrom, periodTo, trainer, trainingType);
+        return ResponseEntity.ok(trainingList);
     }
 }
 
