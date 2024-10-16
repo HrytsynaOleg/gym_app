@@ -1,4 +1,4 @@
-package com.gym.dto;
+package com.gym.dto.trainer;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TraineeUpdateDTO {
+public class TrainerUpdateDTO {
     @NotBlank(message = "User name must be not empty")
     private String userName;
     @NotBlank(message = "First name must be not empty")
     private String firstName;
     @NotBlank(message = "Last name must be not empty")
     private String lastName;
-    private String dateOfBirth;
-    private String address;
+    @NotBlank(message = "Specialization must be not empty")
+    private String specialization;
     @NotNull(message = "Activated status must be not null")
     private boolean isActive;
 }

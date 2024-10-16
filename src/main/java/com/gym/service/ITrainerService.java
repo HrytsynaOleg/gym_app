@@ -1,9 +1,9 @@
 package com.gym.service;
 
+import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
-import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
 
 import java.time.LocalDate;
@@ -16,8 +16,8 @@ public interface ITrainerService {
 
     TrainerModel getTrainerProfile(UserCredentials credentials) throws IncorrectCredentialException;
 
-    List<TrainingModel> getTrainingList(UserCredentials credentials, LocalDate dateFrom,
-                                        LocalDate dateTo, String traineeUserName) throws IncorrectCredentialException;
+    List<TrainerTrainingListItemDTO> getTrainingList(UserCredentials credentials, String dateFrom,
+                                                     String dateTo, String traineeUserName) throws IncorrectCredentialException;
     List<TrainerModel> getNotAssignedTrainerList(UserCredentials credentials) throws IncorrectCredentialException;
 
     void activate(UserCredentials credentials) throws IncorrectCredentialException;

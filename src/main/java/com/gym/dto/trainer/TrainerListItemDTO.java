@@ -1,4 +1,4 @@
-package com.gym.dto;
+package com.gym.dto.trainer;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TraineeListItemDTO {
+public class TrainerListItemDTO {
     private String userName;
     private String firstName;
     private String lastName;
+    private String specialization;
 }

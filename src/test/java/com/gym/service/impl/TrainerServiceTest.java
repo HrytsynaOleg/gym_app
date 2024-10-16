@@ -1,5 +1,6 @@
 package com.gym.service.impl;
 
+import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.*;
 import com.gym.service.ITrainerService;
@@ -179,11 +180,11 @@ class TrainerServiceTest {
                 .password("1234567890")
                 .build();
 
-        LocalDate localDateFrom = LocalDate.of(2024, 9, 11);
-        LocalDate localDateTo = LocalDate.of(2024, 9, 15);
+        String localDateFrom = "2024-09-11";
+        String localDateTo = "2024-09-15";
         String traineeUserName = "Bruce.Dickinson";
 
-        List<TrainingModel> resultList = null;
+        List<TrainerTrainingListItemDTO> resultList = null;
         try {
             resultList = trainerService.getTrainingList(credentials, localDateFrom, localDateTo, traineeUserName);
         } catch (IncorrectCredentialException e) {

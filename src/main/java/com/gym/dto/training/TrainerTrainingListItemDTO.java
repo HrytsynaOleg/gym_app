@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TrainingListItemDTO {
+public class TrainerTrainingListItemDTO {
     private String trainingName;
     private String trainingDate;
     private String trainingType;
     private String trainingDuration;
+    private String traineeName;
 }

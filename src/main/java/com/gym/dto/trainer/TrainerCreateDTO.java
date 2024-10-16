@@ -1,4 +1,4 @@
-package com.gym.dto;
+package com.gym.dto.trainer;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TraineeCreateDTO {
+public class TrainerCreateDTO {
     @NotBlank(message = "First name must be not empty")
     private String firstName;
     @NotBlank(message = "Last name must be not empty")
     private String lastName;
-    private String dateOfBirth;
-    private String address;
+    @NotBlank(message = "Specialization must be not empty")
+    private String specialization;
 }

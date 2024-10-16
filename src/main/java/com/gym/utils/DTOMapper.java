@@ -1,7 +1,15 @@
 package com.gym.utils;
 
-import com.gym.dto.*;
+import com.gym.dto.trainee.TraineeListItemDTO;
+import com.gym.dto.trainee.TraineeProfileDTO;
+import com.gym.dto.trainee.TraineeUpdateDTO;
+import com.gym.dto.trainee.TraineeUpdatedProfileDTO;
+import com.gym.dto.trainer.TrainerListItemDTO;
+import com.gym.dto.trainer.TrainerProfileDTO;
+import com.gym.dto.trainer.TrainerUpdateDTO;
+import com.gym.dto.trainer.TrainerUpdatedProfileDTO;
 import com.gym.dto.training.TraineeTrainingListItemDTO;
+import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingModel;
@@ -102,6 +110,15 @@ public class DTOMapper {
 
     public static TraineeTrainingListItemDTO mapTrainingModelToTraineeTrainingItem(TrainingModel trainingModel){
         return TraineeTrainingListItemDTO.builder()
+                .trainingName(trainingModel.getTrainingName())
+                .trainingDate(DateUtils.parseLocalDateToString(trainingModel.getTrainingDate()))
+                .trainingType(trainingModel.getTrainingType().getName())
+                .trainingDuration(String.valueOf(trainingModel.getDuration()))
+                .build();
+    }
+
+    public static TrainerTrainingListItemDTO mapTrainingModelToTrainerTrainingItem(TrainingModel trainingModel){
+        return TrainerTrainingListItemDTO.builder()
                 .trainingName(trainingModel.getTrainingName())
                 .trainingDate(DateUtils.parseLocalDateToString(trainingModel.getTrainingDate()))
                 .trainingType(trainingModel.getTrainingType().getName())

@@ -1,5 +1,6 @@
-package com.gym.dto;
+package com.gym.dto.trainer;
 
+import com.gym.dto.trainee.TraineeListItemDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TraineeProfileDTO {
+public class TrainerProfileDTO {
     private String firstName;
     private String lastName;
-    private String dateOfBirth;
-    private String address;
+    private String specialization;
     private boolean isActive;
-    private List<TrainerListItemDTO> trainerList;
+    private List<TraineeListItemDTO> traineeList;
 
 }

@@ -11,6 +11,7 @@ import com.gym.model.TrainingModel;
 import com.gym.utils.DateUtils;
 import com.gym.utils.Mapper;
 import lombok.extern.log4j.Log4j2;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -55,7 +56,7 @@ public class TrainingDao implements ITrainingDao {
         try {
             entityManager.persist(training);
         } catch (Exception e) {
-            log.error("Dao error occurred - create training ");
+            log.error("Dao error occurred - create training Transaction Id {}", MDC.get("transactionId"));
             return null;
         }
         return get(training.getId());
@@ -63,9 +64,18 @@ public class TrainingDao implements ITrainingDao {
 
     @Override
     public List<TrainingModel> getTrainerTrainingListByParameters(Map<String, Object> parameters) {
-        String queryString = "select t from Training t where t.trainer.user.userName = :trainer " +
-                "and t.trainingDate between :startDate and :endDate and t.trainee.user.userName = :trainee";
-        TypedQuery<Training> query = entityManager.createQuery(queryString, Training.class);
+        StringBuilder quertStringBuilder =
+                new StringBuilder("select t from Training t where t.trainer.user.userName = :trainer");
+        if (parameters.containsKey("trainee")) {
+            quertStringBuilder.append(" and t.trainee.user.userName = :trainee");
+        }
+        if (parameters.containsKey("startDate") && parameters.containsKey("endDate")) {
+            quertStringBuilder.append(" and t.trainingDate between :startDate and :endDate");
+        }
+        if (parameters.containsKey("trainingType")){
+            quertStringBuilder.append(" and t.trainingType.id = :trainingType");
+        }
+        TypedQuery<Training> query = entityManager.createQuery(quertStringBuilder.toString(), Training.class);
         for (Map.Entry<String, Object> entry : parameters.entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
@@ -75,7 +85,7 @@ public class TrainingDao implements ITrainingDao {
                     .map(Mapper::mapTrainingToTrainingModel)
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            log.error("Dao error occurred - get Trainer's training list");
+            log.error("Dao error occurred - get Trainer's training list Transaction Id {}", MDC.get("transactionId"));
             return new ArrayList<>();
         }
         return resultList;
@@ -92,7 +102,8 @@ public class TrainingDao implements ITrainingDao {
                     .map(Mapper::mapTrainingToTrainingModel)
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            log.error("Dao error occurred - get Trainee's training list");
+            log.error("Dao error occurred - get Trainee's training list Transaction Id {}",
+                    MDC.get("transactionId"));
             return new ArrayList<>();
         }
         return resultList;
@@ -121,7 +132,8 @@ public class TrainingDao implements ITrainingDao {
                     .map(Mapper::mapTrainingToTrainingModel)
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            log.error("Dao error occurred - get Trainee's training list by parameters");
+            log.error("Dao error occurred - get Trainee's training list by parameters Transaction Id {}",
+                    MDC.get("transactionId"));
             return new ArrayList<>();
         }
         return resultList;
@@ -133,7 +145,7 @@ public class TrainingDao implements ITrainingDao {
         try {
             trainingModel = Mapper.mapTrainingToTrainingModel(entityManager.find(Training.class, id));
         } catch (Exception e) {
-            log.error("Dao error occurred - get training");
+            log.error("Dao error occurred - get training Transaction Id {}", MDC.get("transactionId"));
             return null;
         }
         return trainingModel;

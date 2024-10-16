@@ -1,8 +1,8 @@
 package com.gym.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.dto.TrainerCreateDTO;
-import com.gym.dto.TrainerUpdateDTO;
+import com.gym.dto.trainer.TrainerCreateDTO;
+import com.gym.dto.trainer.TrainerUpdateDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
 import com.gym.model.UserCredentials;

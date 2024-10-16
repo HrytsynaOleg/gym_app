@@ -1,13 +1,17 @@
 package com.gym.service.impl;
 
+import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
 import com.gym.dao.ITrainingDao;
 import com.gym.dao.IUserDao;
+import com.gym.dto.training.TraineeTrainingListItemDTO;
+import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.*;
 import com.gym.service.IModelValidator;
 import com.gym.service.ITrainerService;
 import com.gym.service.IUserCredentialsService;
+import com.gym.utils.DTOMapper;
 import com.gym.utils.DateUtils;
 import com.gym.utils.StorageUtils;
 import lombok.extern.log4j.Log4j2;
@@ -19,7 +23,7 @@ import com.gym.utils.StringUtils;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.ValidationException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +35,8 @@ public class TrainerService implements ITrainerService {
     private ITrainerDao trainerDao;
     @Autowired
     private ITrainingDao trainingDao;
+    @Autowired
+    private ITraineeDao traineeDao;
     @Autowired
     private IUserDao userDao;
     @Autowired
@@ -83,15 +89,27 @@ public class TrainerService implements ITrainerService {
     }
 
     @Override
-    public List<TrainingModel> getTrainingList(UserCredentials credentials, LocalDate dateFrom, LocalDate dateTo,
-                                               String traineeUserName) throws IncorrectCredentialException {
+    public List<TrainerTrainingListItemDTO> getTrainingList(UserCredentials credentials, String dateFrom, String dateTo,
+                                                            String traineeUserName) throws IncorrectCredentialException {
         credentialsService.verifyCredentials(credentials);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("trainer", credentials.getUserName());
-        parameters.put("trainee", traineeUserName);
-        parameters.put("startDate", DateUtils.localDateToDate(dateFrom));
-        parameters.put("endDate", DateUtils.localDateToDate(dateTo));
-        return trainingDao.getTrainerTrainingListByParameters(parameters);
+        if (!traineeUserName.isBlank()) {
+            parameters.put("trainee", traineeUserName);
+        }
+        if (!dateFrom.isBlank() && !dateTo.isBlank()) {
+            parameters.put("startDate", DateUtils.parseDate(dateFrom));
+            parameters.put("endDate", DateUtils.parseDate(dateTo));
+        }
+        List<TrainingModel> trainingModelList = trainingDao.getTrainerTrainingListByParameters(parameters);
+        List<TrainerTrainingListItemDTO> resultList = new ArrayList<>();
+        for (TrainingModel trainingModel : trainingModelList) {
+            TrainerTrainingListItemDTO trainerTrainingListItemDTO = DTOMapper.mapTrainingModelToTrainerTrainingItem(trainingModel);
+            String traineeName = traineeDao.get(trainingModel.getTraineeId()).getUserName();
+            trainerTrainingListItemDTO.setTraineeName(traineeName);
+            resultList.add(trainerTrainingListItemDTO);
+        }
+        return resultList;
     }
 
     @Override

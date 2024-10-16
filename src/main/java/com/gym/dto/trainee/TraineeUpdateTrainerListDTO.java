@@ -1,4 +1,4 @@
-package com.gym.dto;
+package com.gym.dto.trainee;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,12 @@
 package com.gym.controller;
 
 import com.gym.dto.*;
+import com.gym.dto.trainee.TraineeListItemDTO;
+import com.gym.dto.trainer.TrainerCreateDTO;
+import com.gym.dto.trainer.TrainerProfileDTO;
+import com.gym.dto.trainer.TrainerUpdateDTO;
+import com.gym.dto.trainer.TrainerUpdatedProfileDTO;
+import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
@@ -27,7 +33,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/trainer")
 @RequiredArgsConstructor
-@Tag(name = "Trainer", description = "Operations for creating, updating, retrieving and deleting trainers in the application")
+@Tag(name = "Trainer", description = "Operations for creating, updating and retrieving trainers in the application")
 public class TrainerController {
 
     @Autowired
@@ -142,5 +148,111 @@ public class TrainerController {
         trainerUpdatedProfileDTO.setTraineeList(traineeListItemDTOList);
 
         return ResponseEntity.ok(trainerUpdatedProfileDTO);
+    }
+
+    @GetMapping("/{trainer}/trainings")
+    @Operation(summary = "Gets trainer training list")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Get trainers training list success",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = TrainerTrainingListItemDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Trainer not found or user unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
+    private ResponseEntity<List<TrainerTrainingListItemDTO>> getTrainingList(
+            @Parameter(description = "Trainer username")
+            @PathVariable("trainer") String userName,
+            @Parameter(description = "Trainer password")
+            @RequestHeader("password") String password,
+            @Parameter(description = "End date for training list period")
+            @RequestParam(defaultValue = "", name = "periodTo") String periodTo,
+            @Parameter(description = "Start date for training list period")
+            @RequestParam(defaultValue = "", name = "periodFrom") String periodFrom,
+            @Parameter(description = "Trainee username for training list period")
+            @RequestParam(defaultValue = "", name = "trainee") String trainee
+    )
+            throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(userName)
+                .password(password)
+                .build();
+        List<TrainerTrainingListItemDTO> trainingList =
+                service.getTrainingList(credentials, periodFrom, periodTo, trainee);
+        return ResponseEntity.ok(trainingList);
+    }
+
+    @PatchMapping("/{trainer}/activate")
+    @Operation(summary = "Activate trainer profile")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Trainer profile activated",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json")
+                    }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Trainer not found or user unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
+    private ResponseEntity activateTrainer(@Parameter(description = "Trainer username")
+                                           @PathVariable("trainer") String userName,
+                                           @Parameter(description = "Trainer password")
+                                           @RequestHeader("password") String password)
+            throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(userName)
+                .password(password)
+                .build();
+        service.activate(credentials);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{trainer}/deactivate")
+    @Operation(summary = "Deactivate trainer profile")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Trainer profile deactivated",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json")
+                    }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Trainer not found or user unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    })
+    })
+    private ResponseEntity deactivateTrainer(@Parameter(description = "Trainer username")
+                                             @PathVariable("trainer") String userName,
+                                             @Parameter(description = "Trainer password")
+                                             @RequestHeader("password") String password)
+            throws IncorrectCredentialException {
+        UserCredentials credentials = UserCredentials.builder()
+                .userName(userName)
+                .password(password)
+                .build();
+        service.deactivate(credentials);
+        return ResponseEntity.ok().build();
     }
 }

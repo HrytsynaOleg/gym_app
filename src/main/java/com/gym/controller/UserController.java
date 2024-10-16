@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/user")
 @RequiredArgsConstructor
-@Tag(name = "User", description = "Operations for logging users and changing password")
+@Tag(name = "User", description = "Operations for login users and changing password")
 public class UserController {
 
     @Autowired
