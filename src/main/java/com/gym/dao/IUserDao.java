@@ -1,10 +1,11 @@
 package com.gym.dao;
 
-import com.gym.entity.User;
 import com.gym.model.UserCredentials;
+import com.gym.model.UserModel;
 
 public interface IUserDao {
-    User getByName(String name);
+    UserModel getUserByName(String name);
     UserCredentials getUserCredentials(String name);
     long getUserCount(String firstName, String lastName);
+    void update(UserModel user);
 }

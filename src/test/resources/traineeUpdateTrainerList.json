@@ -1,0 +1,22 @@
+[
+  {
+    "id": 116,
+    "userId": 12,
+    "firstName": "Kerry",
+    "lastName": "Kerry",
+    "userName": "Kerry.Kerry",
+    "password": "1234567890",
+    "isActive": true,
+    "trainingType": "YOGA"
+  },
+  {
+    "id": 117,
+    "userId": 13,
+    "firstName": "Tom",
+    "lastName": "Arraya",
+    "userName": "Tom.Arraya",
+    "password": "1234567890",
+    "isActive": true,
+    "trainingType": "FITNESS"
+  }
+]

@@ -1,5 +1,6 @@
 package com.gym.service.impl;
 
+import com.gym.dto.training.TrainingCreateDTO;
 import com.gym.model.TrainingModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.service.ITrainingService;
@@ -19,7 +20,6 @@ class TrainingServiceTest {
     private final String trainingDateInString = "2024-09-18";
     private final LocalDate trainingDate = LocalDate.of(2024, 9, 18);
     private final String trainingName = "My first training";
-    private final String trainingTypeString = "FITNESS";
     private final TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.FITNESS;
     private final int duration = 60;
 
@@ -30,9 +30,14 @@ class TrainingServiceTest {
 
     @Test
     void createTrainingTest() {
-
-        TrainingModel responseTrainingModel = trainingService.createTraining(traineeId, trainerId, trainingName,
-                trainingTypeString, trainingDateInString, duration);
+        TrainingCreateDTO trainerCreateDTO = TrainingCreateDTO.builder()
+                .trainerUserName("Tom.Arraya")
+                .traineeUserName("James.Hetfield")
+                .trainingName(trainingName)
+                .trainingDate(trainingDateInString)
+                .trainingDuration(duration)
+                .build();
+        TrainingModel responseTrainingModel = trainingService.createTraining(trainerCreateDTO);
         TrainingModel newTrainingModel = trainingService.getById(responseTrainingModel.getId());
 
         assertEquals(responseTrainingModel.getId(), newTrainingModel.getId());

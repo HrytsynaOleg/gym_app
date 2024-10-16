@@ -9,6 +9,7 @@ import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.utils.Mapper;
 import lombok.extern.log4j.Log4j2;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
@@ -36,11 +37,12 @@ public class TraineeDao implements ITraineeDao {
             trainee.setUser(user);
             entityManager.persist(trainee);
         } catch (Exception e) {
-            log.error("Dao error occurred - create trainee ");
+            log.error("Dao error occurred - create trainee. Transaction Id {}", MDC.get("transactionId"));
             return null;
         }
         TraineeModel newTraineeModel = get(trainee.getId());
-        log.info(String.format("Trainee id = %s created in database", trainee.getId()));
+        log.info("Trainee id = {} created in database. Transaction Id {}", trainee.getId(),
+                MDC.get("transactionId"));
         return newTraineeModel;
     }
 
@@ -53,7 +55,7 @@ public class TraineeDao implements ITraineeDao {
         try {
             resultList = query.getResultList();
         } catch (Exception e) {
-            log.error("Dao error occurred - get trainee by name");
+            log.error("Dao error occurred - get trainee by name. Transaction Id {}", MDC.get("transactionId"));
             return null;
         }
         if (resultList.size() != 1) {
@@ -71,7 +73,7 @@ public class TraineeDao implements ITraineeDao {
             entityManager.merge(user);
             entityManager.merge(trainee);
         } catch (Exception e) {
-            log.error("Dao error occurred - update trainee ");
+            log.error("Dao error occurred - update trainee. Transaction Id {}", MDC.get("transactionId"));
         }
     }
 
@@ -80,9 +82,11 @@ public class TraineeDao implements ITraineeDao {
     public void delete(long id) {
         try {
             Trainee trainee = entityManager.find(Trainee.class, id);
+            User user = entityManager.find(User.class, trainee.getUser().getId());
             entityManager.remove(trainee);
+            entityManager.remove(user);
         } catch (Exception e) {
-            log.error("Dao error occurred - delete trainee");
+            log.error("Dao error occurred - delete trainee. Transaction Id {}", MDC.get("transactionId"));
         }
     }
 
@@ -92,7 +96,7 @@ public class TraineeDao implements ITraineeDao {
         try {
             trainee = entityManager.find(Trainee.class, id);
         } catch (Exception e) {
-            log.error("Dao error occurred - get trainee");
+            log.error("Dao error occurred - get trainee. Transaction Id {}", MDC.get("transactionId"));
             return null;
         }
         if (trainee == null) {
@@ -112,20 +116,18 @@ public class TraineeDao implements ITraineeDao {
             newTrainerTrainee.setTrainee(trainee);
             entityManager.persist(newTrainerTrainee);
         } catch (Exception e) {
-            log.error("Dao error occurred - intend trainer");
+            log.error("Dao error occurred - intend trainer. Transaction Id {}", MDC.get("transactionId"));
         }
     }
 
     @Override
     @Transactional
     public void deleteTrainer(TraineeModel traineeModel, TrainerModel trainerModel) {
-        Trainer trainer = Mapper.mapTrainerModelToTrainerEntity(trainerModel);
-        Trainee trainee = Mapper.mapTraineeModelToTraineeEntity(traineeModel);
         String queryString = "select t from TrainerTrainee t where t.trainee.id = ?1 and " +
                 "t.trainer.id = ?2";
         TypedQuery<TrainerTrainee> query = entityManager.createQuery(queryString, TrainerTrainee.class);
-        query.setParameter(1, trainee.getId());
-        query.setParameter(2, trainer.getId());
+        query.setParameter(1, traineeModel.getId());
+        query.setParameter(2, trainerModel.getId());
         List<TrainerTrainee> trainerTraineeList;
         try {
             trainerTraineeList = query.getResultList();
@@ -135,25 +137,33 @@ public class TraineeDao implements ITraineeDao {
                 throw new Exception();
             }
         } catch (Exception e) {
-            log.error("Dao error occurred - delete trainer");
+            log.error("Dao error occurred - delete trainer. Transaction Id {}", MDC.get("transactionId"));
         }
     }
 
     @Override
-    public List<TrainerModel> getIntendedTrainerList(TraineeModel traineeModel) {
-        Trainee trainee = Mapper.mapTraineeModelToTraineeEntity(traineeModel);
+    public List<TrainerModel> getAssignedTrainerList(TraineeModel traineeModel) {
+        String queryString = "select t.trainer from TrainerTrainee t where t.trainee.id = ?1";
+        return getTrainerList(queryString, traineeModel.getId());
+    }
+
+    @Override
+    public List<TrainerModel> getNotAssignedTrainerList(TraineeModel traineeModel) {
+        String queryString = "select t from Trainer t where t.id not in " +
+                "(select p.trainer.id from TrainerTrainee p where p.trainee.id = ?1)";
+        return getTrainerList(queryString, traineeModel.getId());
+    }
+
+    private List<TrainerModel> getTrainerList(String queryString, long traineeId){
         List<TrainerModel> trainerModelList;
         try {
-            String queryString = "select t from TrainerTrainee t where t.trainee.id = ?1";
-            TypedQuery<TrainerTrainee> query = entityManager.createQuery(queryString, TrainerTrainee.class);
-            query.setParameter(1, trainee.getId());
-            List<TrainerTrainee> trainerTraineeList = query.getResultList();
-            trainerModelList = trainerTraineeList.stream()
-                    .map(TrainerTrainee::getTrainer)
+            TypedQuery<Trainer> query = entityManager.createQuery(queryString, Trainer.class);
+            query.setParameter(1, traineeId);
+            trainerModelList = query.getResultList().stream()
                     .map(Mapper::mapTrainerEntityToTrainerModel)
                     .toList();
         } catch (Exception e) {
-            log.error("Dao error occurred - get trainer list");
+            log.error("Dao error occurred - get trainer list. Transaction Id {}", MDC.get("transactionId"));
             return new ArrayList<>();
         }
         return trainerModelList;

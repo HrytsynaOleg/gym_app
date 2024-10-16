@@ -13,5 +13,6 @@ public interface ITraineeDao {
     TraineeModel get(long id);
     void intendTrainer(TraineeModel traineeModel, TrainerModel trainerModel);
     void deleteTrainer(TraineeModel traineeModel, TrainerModel trainerModel);
-    List<TrainerModel> getIntendedTrainerList(TraineeModel traineeModel);
+    List<TrainerModel> getAssignedTrainerList(TraineeModel traineeModel);
+    List<TrainerModel> getNotAssignedTrainerList(TraineeModel traineeModel);
 }

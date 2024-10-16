@@ -1,9 +1,9 @@
 package com.gym.service;
 
+import com.gym.dto.training.TrainingCreateDTO;
 import com.gym.model.TrainingModel;
 
 public interface ITrainingService {
-    TrainingModel createTraining(long traineeId, long trainerId, String trainingName, String trainingType,
-                                 String trainingDate, int duration);
+    TrainingModel createTraining(TrainingCreateDTO trainingCreateDTO);
     TrainingModel getById(long id);
 }

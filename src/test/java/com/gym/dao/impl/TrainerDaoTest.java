@@ -2,6 +2,7 @@ package com.gym.dao.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dao.ITrainerDao;
+import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 import com.gym.model.TrainingTypeEnum;
 import com.gym.utils.JsonUtils;
@@ -10,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,17 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class TrainerDaoTest {
 
     private final ITrainerDao dao;
-    private TrainerModel serviceInputTrainerModel;
+    private final TrainerModel serviceInputTrainerModel;
 
     @Autowired
     TrainerDaoTest(ITrainerDao dao) {
         this.dao = dao;
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer.json")) {
-            this.serviceInputTrainerModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
-            });
-        } catch (IOException ex) {
-            log.error("Error reading resource file");
-        }
+        this.serviceInputTrainerModel = JsonUtils.parseResource("trainer.json", new TypeReference<>() {
+        });
     }
 
     @Test
@@ -99,6 +94,11 @@ class TrainerDaoTest {
     void getNotAssignedTrainerList(){
         List<TrainerModel> notAssignedTrainerList = dao.getNotAssignedTrainerList();
         assertEquals(2, notAssignedTrainerList.size());
-        System.out.println();
+    }
+
+    @Test
+    void getAssignedTraineeList(){
+        List<TraineeModel> assignedTraineeList = dao.getAssignedTraineeList(117);
+        assertEquals(3, assignedTraineeList.size());
     }
 }

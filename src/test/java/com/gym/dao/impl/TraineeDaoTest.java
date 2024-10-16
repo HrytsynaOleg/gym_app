@@ -13,8 +13,6 @@ import com.gym.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,19 +23,15 @@ class TraineeDaoTest {
     private final ITraineeDao dao;
     private final ITrainingDao trainingDao;
     private final ITrainerDao trainerDao;
-    private TraineeModel serviceInputTraineeModel;
+    private final TraineeModel serviceInputTraineeModel;
 
     @Autowired
     TraineeDaoTest(ITraineeDao dao, ITrainingDao trainingDao, ITrainerDao trainerDao) {
         this.dao = dao;
         this.trainingDao = trainingDao;
         this.trainerDao = trainerDao;
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainee.json")) {
-            this.serviceInputTraineeModel = JsonUtils.parseInputStream(inputStream, new TypeReference<>() {
-            });
-        } catch (IOException ex) {
-            log.error("Error reading source file");
-        }
+        this.serviceInputTraineeModel = JsonUtils.parseResource("trainee.json", new TypeReference<>() {
+        });
     }
 
     @Test
@@ -117,20 +111,28 @@ class TraineeDaoTest {
     }
 
     @Test
-    void getIntendedTrainersTest(){
+    void getAssignedTrainersTest(){
         TraineeModel traineeModel = dao.get(253);
-        List<TrainerModel> intendedTrainerList = dao.getIntendedTrainerList(traineeModel);
+        List<TrainerModel> assignedTrainerList = dao.getAssignedTrainerList(traineeModel);
 
-        assertEquals(1, intendedTrainerList.size());
+        assertEquals(1, assignedTrainerList.size());
+    }
+
+    @Test
+    void getNotAssignedTrainersTest(){
+        TraineeModel traineeModel = dao.get(253);
+        List<TrainerModel> notAssignedTrainerList = dao.getNotAssignedTrainerList(traineeModel);
+
+        assertEquals(3, notAssignedTrainerList.size());
     }
 
     @Test
     void intendTrainerTest(){
-        TraineeModel traineeModel = dao.get(253);
+        TraineeModel traineeModel = dao.get(258);
         TrainerModel trainerModel = trainerDao.get(118);
-        List<TrainerModel> intendedTrainerList = dao.getIntendedTrainerList(traineeModel);
+        List<TrainerModel> intendedTrainerList = dao.getAssignedTrainerList(traineeModel);
         dao.intendTrainer(traineeModel, trainerModel);
-        List<TrainerModel> intendedTrainerListAfterIntending = dao.getIntendedTrainerList(traineeModel);
+        List<TrainerModel> intendedTrainerListAfterIntending = dao.getAssignedTrainerList(traineeModel);
 
         assertEquals(1, intendedTrainerList.size());
         assertEquals(2, intendedTrainerListAfterIntending.size());
@@ -138,11 +140,11 @@ class TraineeDaoTest {
 
     @Test
     void deleteTrainerTest(){
-        TraineeModel traineeModel = dao.get(258);
-        TrainerModel trainerModel = trainerDao.get(117);
-        List<TrainerModel> intendedTrainerList = dao.getIntendedTrainerList(traineeModel);
+        TraineeModel traineeModel = dao.get(265);
+        TrainerModel trainerModel = trainerDao.get(118);
+        List<TrainerModel> intendedTrainerList = dao.getAssignedTrainerList(traineeModel);
         dao.deleteTrainer(traineeModel, trainerModel);
-        List<TrainerModel> intendedTrainerListAfterDeleting = dao.getIntendedTrainerList(traineeModel);
+        List<TrainerModel> intendedTrainerListAfterDeleting = dao.getAssignedTrainerList(traineeModel);
 
         assertEquals(1, intendedTrainerList.size());
         assertEquals(0, intendedTrainerListAfterDeleting.size());

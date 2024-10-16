@@ -1,9 +1,9 @@
 package com.gym.service.impl;
 
-import com.gym.exceptions.IncorrectCredentialException;
+import com.gym.dto.training.TraineeTrainingListItemDTO;
+import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
-import com.gym.model.TrainingModel;
 import com.gym.model.UserCredentials;
 import com.gym.service.ITraineeService;
 import com.gym.service.ITrainerService;
@@ -181,24 +181,6 @@ class TraineeServiceTest {
     }
 
     @Test
-    void updateTraineePasswordTest() {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("David.Gilmoure")
-                .password("1234567890")
-                .build();
-        TraineeModel updatedTrainee;
-        try {
-            traineeService.updateTraineePassword(credentials, "123");
-            credentials.setPassword("123");
-            updatedTrainee = traineeService.getTraineeProfile(credentials);
-            traineeService.updateTraineePassword(credentials, "1234567890");
-        } catch (IncorrectCredentialException e) {
-            throw new RuntimeException(e);
-        }
-        assertEquals("123", updatedTrainee.getPassword());
-    }
-
-    @Test
     void deleteTraineeTest() {
         UserCredentials credentials = UserCredentials.builder()
                 .userName("Neil.Young")
@@ -220,14 +202,14 @@ class TraineeServiceTest {
                 .password("1234567890")
                 .build();
 
-        LocalDate localDateFrom = LocalDate.of(2024, 9, 11);
-        LocalDate localDateTo = LocalDate.of(2024, 9, 15);
+        String localDateFrom = "2024-09-11";
+        String localDateTo = "2024-09-15";
         String trainerUserName = "Kerry.King";
 
-        List<TrainingModel> resultList = null;
+        List<TraineeTrainingListItemDTO> resultList = null;
         try {
             resultList = traineeService.getTrainingList(credentials, localDateFrom, localDateTo,
-                    trainerUserName, 10);
+                    trainerUserName, "YOGA");
         } catch (IncorrectCredentialException e) {
             e.printStackTrace();
         }
@@ -241,12 +223,12 @@ class TraineeServiceTest {
                 .userName("Bruce.Dickinson")
                 .password("1234567890")
                 .build();
-        List<TrainerModel> newTrainerList = new ArrayList<>();
-        newTrainerList.add(trainerService.get(credentials, 117));
-        newTrainerList.add(trainerService.get(credentials, 118));
-        List<TrainerModel> trainerModelList = traineeService.getIntendedTrainerList(credentials);
+        List<String> newTrainerList = new ArrayList<>();
+        newTrainerList.add(trainerService.get(credentials, 117).getUserName());
+        newTrainerList.add(trainerService.get(credentials, 118).getUserName());
+        List<TrainerModel> trainerModelList = traineeService.getAssignedTrainerList(credentials);
         traineeService.updateTrainerList(credentials, newTrainerList);
-        List<TrainerModel> trainerModelUpdatedList = traineeService.getIntendedTrainerList(credentials);
+        List<TrainerModel> trainerModelUpdatedList = traineeService.getAssignedTrainerList(credentials);
 
         assertEquals(1, trainerModelList.size());
         assertEquals(2, trainerModelUpdatedList.size());
