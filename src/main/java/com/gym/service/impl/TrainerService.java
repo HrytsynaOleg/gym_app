@@ -4,7 +4,6 @@ import com.gym.dao.ITraineeDao;
 import com.gym.dao.ITrainerDao;
 import com.gym.dao.ITrainingDao;
 import com.gym.dao.IUserDao;
-import com.gym.dto.training.TraineeTrainingListItemDTO;
 import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.*;

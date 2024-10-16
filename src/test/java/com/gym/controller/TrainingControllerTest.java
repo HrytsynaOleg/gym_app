@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -37,7 +38,7 @@ class TrainingControllerTest {
                 .traineeUserName("James.Hetfield")
                 .trainingName("test training")
                 .trainingDate("2024-10-18")
-                .trainingDuration("30")
+                .trainingDuration(30)
                 .build();
         given(service.createTraining(trainerCreateDTO)).willReturn(trainingModel);
         try {
@@ -48,4 +49,39 @@ class TrainingControllerTest {
             throw new RuntimeException(e);
         }
     }
+    @Test
+    void createTrainingWithWrongParameterTest() {
+        TrainingCreateDTO trainerCreateDTO = TrainingCreateDTO.builder()
+                .trainerUserName("")
+                .traineeUserName("")
+                .trainingName("test training")
+                .trainingDate("2024-10-18")
+                .trainingDuration(5)
+                .build();
+        try {
+            mvc.perform(post("/training").contentType(MediaType.APPLICATION_JSON)
+                            .content(JsonUtils.convertObjectToJson(trainerCreateDTO)))
+                    .andExpect(status().isBadRequest())
+                    .andExpect(jsonPath("$.errors").isNotEmpty())
+                    .andExpect(jsonPath("$.errors").isArray())
+                    .andExpect(jsonPath("$.errors[?(@ =='Trainee username name must be not empty')]")
+                            .value("Trainee username name must be not empty"))
+                    .andExpect(jsonPath("$.errors[?(@ =='Training duration cannot be less than 10 min')]")
+                            .value("Training duration cannot be less than 10 min"))
+                    .andExpect(jsonPath("$.errors[?(@ =='Trainer username must be not empty')]")
+                            .value("Trainer username must be not empty"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void getTrainingTypeListTest() {
+        try {
+            mvc.perform(get("/training/types"))
+                    .andExpect(status().isOk());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

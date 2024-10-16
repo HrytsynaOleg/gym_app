@@ -13,6 +13,6 @@ public class TraineeTrainingListItemDTO {
     private String trainingName;
     private String trainingDate;
     private String trainingType;
-    private String trainingDuration;
+    private int trainingDuration;
     private String trainerName;
 }

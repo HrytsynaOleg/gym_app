@@ -35,7 +35,7 @@ class TrainingServiceTest {
                 .traineeUserName("James.Hetfield")
                 .trainingName(trainingName)
                 .trainingDate(trainingDateInString)
-                .trainingDuration(String.valueOf(duration))
+                .trainingDuration(duration)
                 .build();
         TrainingModel responseTrainingModel = trainingService.createTraining(trainerCreateDTO);
         TrainingModel newTrainingModel = trainingService.getById(responseTrainingModel.getId());

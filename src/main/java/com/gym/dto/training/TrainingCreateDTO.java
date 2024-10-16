@@ -1,5 +1,6 @@
 package com.gym.dto.training;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,6 @@ public class TrainingCreateDTO {
     private String trainingName;
     @NotBlank(message = "Training date must be not empty")
     private String trainingDate;
-    @NotBlank(message = "Training duration must be not empty")
-    private String trainingDuration;
+    @Min(value = 10, message = "Training duration cannot be less than 10 min")
+    private int trainingDuration;
 }

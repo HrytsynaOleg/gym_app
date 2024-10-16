@@ -113,7 +113,7 @@ public class DTOMapper {
                 .trainingName(trainingModel.getTrainingName())
                 .trainingDate(DateUtils.parseLocalDateToString(trainingModel.getTrainingDate()))
                 .trainingType(trainingModel.getTrainingType().getName())
-                .trainingDuration(String.valueOf(trainingModel.getDuration()))
+                .trainingDuration(trainingModel.getDuration())
                 .build();
     }
 
@@ -122,7 +122,7 @@ public class DTOMapper {
                 .trainingName(trainingModel.getTrainingName())
                 .trainingDate(DateUtils.parseLocalDateToString(trainingModel.getTrainingDate()))
                 .trainingType(trainingModel.getTrainingType().getName())
-                .trainingDuration(String.valueOf(trainingModel.getDuration()))
+                .trainingDuration(trainingModel.getDuration())
                 .build();
     }
 }

@@ -47,7 +47,7 @@ public class TrainingService implements ITrainingService {
                 .trainingName(trainingCreateDTO.getTrainingName())
                 .trainingType(trainingTypeEnum)
                 .trainingDate(trainingDate)
-                .duration(Integer.parseInt(trainingCreateDTO.getTrainingDuration()))
+                .duration(trainingCreateDTO.getTrainingDuration())
                 .build();
         TrainingModel newTrainingModel = trainingDao.create(trainingModel);
         log.info("New training created. Transaction Id {}", MDC.get("transactionId"));
