@@ -69,7 +69,7 @@ class TraineeControllerTest {
         try {
             given(service.getTraineeProfile(credentials)).willReturn(traineeModel);
             given(service.getAssignedTrainerList(credentials)).willReturn(List.of());
-            mvc.perform(get("/trainee/Bruce.Dickinson")
+            mvc.perform(get("/trainees/Bruce.Dickinson")
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.firstName").value("Bruce"))
@@ -92,7 +92,7 @@ class TraineeControllerTest {
         try {
             given(service.getTraineeProfile(credentials)).willThrow(new IncorrectCredentialException("User name or password incorrect"));
             given(service.getAssignedTrainerList(credentials)).willThrow(new IncorrectCredentialException("User name or password incorrect"));
-            mvc.perform(get("/trainee/Bruce.Dickinson1")
+            mvc.perform(get("/trainees/Bruce.Dickinson1")
                             .header("password", "1234567890"))
                     .andExpect(status().isUnauthorized())
                     .andExpect(jsonPath("$.errors").isNotEmpty())
@@ -116,7 +116,7 @@ class TraineeControllerTest {
         given(service.createTrainee("Tom", "Cruze", "New York", "1968-03-12"))
                 .willReturn(traineeModel);
         try {
-            mvc.perform(post("/trainee").contentType(MediaType.APPLICATION_JSON)
+            mvc.perform(post("/trainees").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(traineeCreateDTO)))
                     .andExpect(status().isCreated())
                     .andExpect(jsonPath("$.userName").value("Tom.Cruze"))
@@ -150,7 +150,7 @@ class TraineeControllerTest {
             given(service.update(credentials, traineeUpdatedModel))
                     .willReturn(traineeUpdatedModel);
             given(service.getAssignedTrainerList(credentials)).willReturn(List.of());
-            mvc.perform(put("/trainee").contentType(MediaType.APPLICATION_JSON)
+            mvc.perform(put("/trainees").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(traineeUpdateDTO))
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
@@ -174,7 +174,7 @@ class TraineeControllerTest {
                 .build();
         try {
             doNothing().when(service).delete(credentials);
-            mvc.perform(delete("/trainee/Bruce.Dickinson")
+            mvc.perform(delete("/trainees/Bruce.Dickinson")
                             .header("password", "1234567890"))
                     .andExpect(status().isOk());
         } catch (Exception e) {
@@ -195,7 +195,7 @@ class TraineeControllerTest {
         try {
             given(service.getNotAssignedTrainerList(credentials))
                     .willReturn(List.of(trainerModel));
-            mvc.perform(get("/trainee/Bruce.Dickinson/not-assigned-trainers")
+            mvc.perform(get("/trainees/Bruce.Dickinson/not-assigned-trainers")
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.trainers.length()").value(1));
@@ -224,7 +224,7 @@ class TraineeControllerTest {
         try {
             given(service.updateTrainerList(credentials, newTrainerList))
                     .willReturn(updatedTrainerModelList);
-            mvc.perform(put("/trainee/Bruce.Dickinson/trainers")
+            mvc.perform(put("/trainees/Bruce.Dickinson/trainers")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(traineeUpdateTrainerListDTO))
                             .header("password", "1234567890"))

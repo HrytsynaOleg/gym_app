@@ -24,9 +24,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/training")
+@RequestMapping(value = "/trainings")
 @RequiredArgsConstructor
-@Tag(name = "Training", description = "Operations for creating trainings and retrieving training types in the application")
+@Tag(name = "Trainings", description = "Operations for creating trainings and retrieving training types in the application")
 public class TrainingController {
 
     @Autowired
