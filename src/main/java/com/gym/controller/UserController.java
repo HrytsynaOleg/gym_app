@@ -20,9 +20,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/users")
 @RequiredArgsConstructor
-@Tag(name = "User", description = "Operations for login users and changing password")
+@Tag(name = "Users", description = "Operations for login users and changing password")
 public class UserController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class UserController {
                     description = "Login success",
                     content = {
                             @Content(
-                                    mediaType = "")}
+                                    mediaType = "application/json")}
             ),
             @ApiResponse(
                     responseCode = "401",

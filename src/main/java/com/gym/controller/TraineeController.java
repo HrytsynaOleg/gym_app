@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/trainee")
+@RequestMapping(value = "/trainees")
 @RequiredArgsConstructor
-@Tag(name = "Trainee", description = "Operations for creating, updating, retrieving and deleting trainees in the application")
+@Tag(name = "Trainees", description = "Operations for creating, updating, retrieving and deleting trainees in the application")
 public class TraineeController {
 
     @Autowired

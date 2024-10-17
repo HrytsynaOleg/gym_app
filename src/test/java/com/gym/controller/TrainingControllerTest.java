@@ -42,7 +42,7 @@ class TrainingControllerTest {
                 .build();
         given(service.createTraining(trainerCreateDTO)).willReturn(trainingModel);
         try {
-            mvc.perform(post("/training").contentType(MediaType.APPLICATION_JSON)
+            mvc.perform(post("/trainings").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(trainerCreateDTO)))
                     .andExpect(status().isOk());
         } catch (Exception e) {
@@ -59,7 +59,7 @@ class TrainingControllerTest {
                 .trainingDuration(5)
                 .build();
         try {
-            mvc.perform(post("/training").contentType(MediaType.APPLICATION_JSON)
+            mvc.perform(post("/trainings").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(trainerCreateDTO)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.errors").isNotEmpty())
@@ -77,7 +77,7 @@ class TrainingControllerTest {
     @Test
     void getTrainingTypeListTest() {
         try {
-            mvc.perform(get("/training/types"))
+            mvc.perform(get("/trainings/types"))
                     .andExpect(status().isOk());
         } catch (Exception e) {
             throw new RuntimeException(e);

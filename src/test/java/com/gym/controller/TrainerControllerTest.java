@@ -65,7 +65,7 @@ class TrainerControllerTest {
         try {
             given(service.getTrainerProfile(credentials)).willReturn(trainerModel);
             given(service.getAssignedTraineeList(credentials)).willReturn(List.of());
-            mvc.perform(get("/trainer/Kerry.King")
+            mvc.perform(get("/trainers/Kerry.King")
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.firstName").value("Kerry"))
@@ -87,7 +87,7 @@ class TrainerControllerTest {
         try {
             given(service.getTrainerProfile(credentials)).willThrow(new IncorrectCredentialException("User name or password incorrect"));
             given(service.getAssignedTraineeList(credentials)).willThrow(new IncorrectCredentialException("User name or password incorrect"));
-            mvc.perform(get("/trainer/Kerry.King1")
+            mvc.perform(get("/trainers/Kerry.King1")
                             .header("password", "1234567890"))
                     .andExpect(status().isUnauthorized())
                     .andExpect(jsonPath("$.errors").isNotEmpty())
@@ -109,7 +109,7 @@ class TrainerControllerTest {
                 .build();
         given(service.createTrainer("Tom", "Cruze", "YOGA")).willReturn(trainerModel);
         try {
-            mvc.perform(post("/trainer").contentType(MediaType.APPLICATION_JSON)
+            mvc.perform(post("/trainers").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(trainerCreateDTO)))
                     .andExpect(status().isCreated())
                     .andExpect(jsonPath("$.userName").value("Tom.Cruze"))
@@ -142,7 +142,7 @@ class TrainerControllerTest {
             given(service.updateTrainerProfile(credentials, trainerUpdatedModel))
                     .willReturn(trainerUpdatedModel);
             given(service.getAssignedTraineeList(credentials)).willReturn(List.of());
-            mvc.perform(put("/trainer").contentType(MediaType.APPLICATION_JSON)
+            mvc.perform(put("/trainers").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(trainerUpdateDTO))
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())

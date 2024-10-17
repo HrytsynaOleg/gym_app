@@ -34,7 +34,7 @@ class UserControllerTest {
                 .build();
         try {
             doNothing().when(service).login(credentials);
-            mvc.perform(get("/user/Kerry.King")
+            mvc.perform(get("/users/Kerry.King")
                             .header("password", "1234567890"))
                     .andExpect(status().isOk());
         } catch (Exception e) {
@@ -51,7 +51,7 @@ class UserControllerTest {
         try {
 
             doThrow(new IncorrectCredentialException("User name or password incorrect")).when(service).login(credentials);
-            mvc.perform(get("/user/Kerry.King1")
+            mvc.perform(get("/users/Kerry.King1")
                             .header("password", "1234567890"))
                     .andExpect(status().isUnauthorized());
         } catch (Exception e) {
