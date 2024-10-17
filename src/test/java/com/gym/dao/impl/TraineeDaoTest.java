@@ -10,14 +10,18 @@ import com.gym.model.TrainingModel;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import com.gym.utils.JsonUtils;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @Log4j2
+@RunWith(SpringRunner.class)
 @SpringBootTest
 class TraineeDaoTest {
     private final ITraineeDao dao;
@@ -35,6 +39,7 @@ class TraineeDaoTest {
     }
 
     @Test
+    @DirtiesContext
     void createTraineeTest() {
             TraineeModel newTraineeModel = dao.create(serviceInputTraineeModel);
             TraineeModel testNewTraineeModel = dao.get(newTraineeModel.getId());
