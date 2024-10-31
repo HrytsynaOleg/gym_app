@@ -13,6 +13,8 @@ import com.gym.service.IUserCredentialsService;
 import com.gym.utils.DTOMapper;
 import com.gym.utils.DateUtils;
 import com.gym.utils.StorageUtils;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.log4j.Log4j2;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,13 @@ public class TrainerService implements ITrainerService {
     private IUserCredentialsService credentialsService;
     @Value("${password.length}")
     private Integer passwordLength;
+    private final Counter trainerRegistrationCounter;
+
+    public TrainerService(MeterRegistry registry) {
+        trainerRegistrationCounter = Counter.builder("trainer.register")
+                .description("Number of trainer registered")
+                .register(registry);
+    }
 
     @Override
     @Validated
@@ -68,6 +77,7 @@ public class TrainerService implements ITrainerService {
 
         TrainerModel newTrainerModel = trainerDao.create(trainerModel);
         log.info("New trainer created in trainer service. Transaction Id {}", MDC.get("transactionId"));
+        trainerRegistrationCounter.increment();
         return newTrainerModel;
     }
 
