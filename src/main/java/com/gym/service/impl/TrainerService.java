@@ -93,7 +93,7 @@ public class TrainerService implements ITrainerService {
 
     @Override
     public TrainerModel getTrainerProfile(UserCredentials credentials) throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
+//        credentialsService.verifyCredentials(credentials);
         return trainerDao.getByUserName(credentials.getUserName());
     }
 
@@ -160,7 +160,7 @@ public class TrainerService implements ITrainerService {
     @Override
     public List<TraineeModel> getAssignedTraineeList(UserCredentials credentials)
             throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
+//        credentialsService.verifyCredentials(credentials);
         TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
         return trainerDao.getAssignedTraineeList(trainer.getId());
     }

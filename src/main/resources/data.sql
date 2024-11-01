@@ -2,8 +2,9 @@
 -- Table user
 -- -----------------------------------------------------
 -- insert initial data
-INSERT INTO users (id, first_name, last_name, user_name, password, is_active) VALUES (12, 'Kerry', 'King', 'Kerry.King', '1234567890', 1),
-(13, 'Tom', 'Arraya', 'Tom.Arraya', '1234567890', 1),
+INSERT INTO users (id, first_name, last_name, user_name, password, is_active) VALUES
+(12, 'Kerry', 'King', 'Kerry.King', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu', 1),
+(13, 'Tom', 'Arraya', 'Tom.Arraya', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu', 1),
 (14, 'Jeff', 'Hanneman', 'Jeff.Hanneman', '1234567890', 1),
 (15, 'Dave', 'Lombardo', 'Dave.Lombardo', '1234567890', 1),
 (16, 'Bruce', 'Dickinson', 'Bruce.Dickinson', '1234567890', 1),
