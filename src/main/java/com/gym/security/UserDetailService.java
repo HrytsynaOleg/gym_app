@@ -24,11 +24,11 @@ public class UserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (loginAttemptService.isBlocked(username)) {
-            throw new UsernameNotFoundException("blocked");
+            throw new UsernameNotFoundException("Blocked");
         }
         UserModel user = dao.getUserByName(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User name or password incorrect");
+            throw new UsernameNotFoundException("Bad credentials");
         }
         return new User(user.getUserName(), user.getPassword(), List.of(new SimpleGrantedAuthority("USER")));
     }

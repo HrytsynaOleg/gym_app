@@ -48,7 +48,7 @@ public class LoginAttemptService {
     public void init() {
         attemptsCache = CacheBuilder.newBuilder()
                 .expireAfterWrite(BLOCKING_DURATION, TimeUnit.MINUTES)
-                .build(new CacheLoader<String, Integer>() {
+                .build(new CacheLoader<>() {
                     @Override
                     public Integer load(String key)   {
                         return 0;
