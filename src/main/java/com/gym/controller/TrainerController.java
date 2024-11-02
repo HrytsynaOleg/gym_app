@@ -39,7 +39,7 @@ public class TrainerController {
     @Autowired
     private final ITrainerService service;
 
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "Create new trainer")
     @ApiResponses(value = {
             @ApiResponse(

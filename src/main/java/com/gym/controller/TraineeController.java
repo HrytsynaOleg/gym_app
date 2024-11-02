@@ -37,7 +37,7 @@ public class TraineeController {
     @Autowired
     private final ITraineeService service;
 
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "Create new trainee")
     @ApiResponses(value = {
             @ApiResponse(

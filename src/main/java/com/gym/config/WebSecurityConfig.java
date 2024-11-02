@@ -14,10 +14,13 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests((requests) -> requests.anyRequest().authenticated());
+        http.csrf((csrf) -> csrf
+                .ignoringRequestMatchers("/*/create"));
+        http.authorizeRequests()
+                .requestMatchers("/login", "/trainers/create", "/trainees/create").permitAll()
+                .anyRequest().authenticated();
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());
         return http.build();
     }
-
 }
