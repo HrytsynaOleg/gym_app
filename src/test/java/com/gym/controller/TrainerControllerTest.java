@@ -5,7 +5,6 @@ import com.gym.dto.trainer.TrainerCreateDTO;
 import com.gym.dto.trainer.TrainerUpdateDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
-import com.gym.model.UserCredentials;
 import com.gym.service.ITrainerService;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.StringUtils;
@@ -57,14 +56,10 @@ class TrainerControllerTest {
     void getTrainerProfileTest() {
         TrainerModel trainerModel = JsonUtils.parseResource("trainerRestTest.json", new TypeReference<>() {
         });
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(trainerModel.getUserName())
-                .password(trainerModel.getPassword())
-                .build();
 
         try {
-            given(service.getTrainerProfile(credentials)).willReturn(trainerModel);
-            given(service.getAssignedTraineeList(credentials)).willReturn(List.of());
+            given(service.getTrainerProfile(trainerModel.getUserName())).willReturn(trainerModel);
+            given(service.getAssignedTraineeList(trainerModel.getUserName())).willReturn(List.of());
             mvc.perform(get("/trainers/Kerry.King")
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
@@ -80,13 +75,9 @@ class TrainerControllerTest {
 
     @Test
     void getTrainerProfileIfNotExistTest() {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("Kerry.King1")
-                .password("1234567890")
-                .build();
         try {
-            given(service.getTrainerProfile(credentials)).willThrow(new IncorrectCredentialException("User name or password incorrect"));
-            given(service.getAssignedTraineeList(credentials)).willThrow(new IncorrectCredentialException("User name or password incorrect"));
+            given(service.getTrainerProfile("Kerry.King1")).willThrow(new IncorrectCredentialException("User name or password incorrect"));
+            given(service.getAssignedTraineeList("Kerry.King1")).willThrow(new IncorrectCredentialException("User name or password incorrect"));
             mvc.perform(get("/trainers/Kerry.King1")
                             .header("password", "1234567890"))
                     .andExpect(status().isUnauthorized())
@@ -125,10 +116,6 @@ class TrainerControllerTest {
         });
         TrainerModel trainerUpdatedModel = JsonUtils.parseResource("trainerUpdatedRestTest.json", new TypeReference<>() {
         });
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(trainerModel.getUserName())
-                .password(trainerModel.getPassword())
-                .build();
         TrainerUpdateDTO trainerUpdateDTO = TrainerUpdateDTO.builder()
                 .userName("Kerry.King")
                 .firstName("Patrick")
@@ -137,11 +124,11 @@ class TrainerControllerTest {
                 .isActive(true)
                 .build();
         try {
-            given(service.getTrainerProfile(credentials))
+            given(service.getTrainerProfile(trainerModel.getUserName()))
                     .willReturn(trainerModel);
-            given(service.updateTrainerProfile(credentials, trainerUpdatedModel))
+            given(service.updateTrainerProfile(trainerModel.getUserName(), trainerUpdatedModel))
                     .willReturn(trainerUpdatedModel);
-            given(service.getAssignedTraineeList(credentials)).willReturn(List.of());
+            given(service.getAssignedTraineeList(trainerModel.getUserName())).willReturn(List.of());
             mvc.perform(put("/trainers").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(trainerUpdateDTO))
                             .header("password", "1234567890"))

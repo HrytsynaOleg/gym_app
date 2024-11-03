@@ -90,16 +90,10 @@ public class TrainerController {
                     })
     })
     private ResponseEntity<TrainerProfileDTO> getTrainerProfile(@Parameter(description = "Trainer username")
-                                                                @PathVariable("trainer") String userName,
-                                                                @Parameter(description = "Trainer password")
-                                                                @RequestHeader("password") String password)
+                                                                @PathVariable("trainer") String userName)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
-        TrainerModel trainerProfile = service.getTrainerProfile(credentials);
-        List<TraineeModel> assignedTraineeList = service.getAssignedTraineeList(credentials);
+        TrainerModel trainerProfile = service.getTrainerProfile(userName);
+        List<TraineeModel> assignedTraineeList = service.getAssignedTraineeList(userName);
         TrainerProfileDTO trainerProfileDTO = DTOMapper.mapTrainerModelToTrainerProfileDTO(trainerProfile);
         List<TraineeListItemDTO> traineeListItemDTOList = assignedTraineeList.stream()
                 .map(DTOMapper::mapTraineeModelToTraineeDTO)
@@ -128,18 +122,13 @@ public class TrainerController {
                                     array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
                     })
     })
-    private ResponseEntity<TrainerUpdatedProfileDTO> updateTrainerProfile(@RequestBody @Valid TrainerUpdateDTO trainerUpdateDTO,
-                                                                          @Parameter(description = "Trainee password")
-                                                                          @RequestHeader("password") String password)
+    private ResponseEntity<TrainerUpdatedProfileDTO> updateTrainerProfile(@RequestBody @Valid TrainerUpdateDTO trainerUpdateDTO)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(trainerUpdateDTO.getUserName())
-                .password(password)
-                .build();
-        TrainerModel trainerProfile = service.getTrainerProfile(credentials);
+        String username = trainerUpdateDTO.getUserName();
+        TrainerModel trainerProfile = service.getTrainerProfile(username);
         DTOMapper.updateTrainerModelFromDTO(trainerProfile, trainerUpdateDTO);
-        TrainerModel updatedTrainerProfile = service.updateTrainerProfile(credentials, trainerProfile);
-        List<TraineeModel> assignedTraineeList = service.getAssignedTraineeList(credentials);
+        TrainerModel updatedTrainerProfile = service.updateTrainerProfile(username, trainerProfile);
+        List<TraineeModel> assignedTraineeList = service.getAssignedTraineeList(username);
         TrainerUpdatedProfileDTO trainerUpdatedProfileDTO =
                 DTOMapper.mapTrainerModelToUpdatedTrainerProfileDTO(updatedTrainerProfile);
         List<TraineeListItemDTO> traineeListItemDTOList = assignedTraineeList.stream()
@@ -173,8 +162,6 @@ public class TrainerController {
     private ResponseEntity<List<TrainerTrainingListItemDTO>> getTrainingList(
             @Parameter(description = "Trainer username")
             @PathVariable("trainer") String userName,
-            @Parameter(description = "Trainer password")
-            @RequestHeader("password") String password,
             @Parameter(description = "End date for training list period")
             @RequestParam(defaultValue = "", name = "periodTo") String periodTo,
             @Parameter(description = "Start date for training list period")
@@ -183,12 +170,8 @@ public class TrainerController {
             @RequestParam(defaultValue = "", name = "trainee") String trainee
     )
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
         List<TrainerTrainingListItemDTO> trainingList =
-                service.getTrainingList(credentials, periodFrom, periodTo, trainee);
+                service.getTrainingList(userName, periodFrom, periodTo, trainee);
         return ResponseEntity.ok(trainingList);
     }
 
@@ -212,15 +195,9 @@ public class TrainerController {
                     })
     })
     private ResponseEntity activateTrainer(@Parameter(description = "Trainer username")
-                                           @PathVariable("trainer") String userName,
-                                           @Parameter(description = "Trainer password")
-                                           @RequestHeader("password") String password)
+                                           @PathVariable("trainer") String userName)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
-        service.activate(credentials);
+        service.activate(userName);
         return ResponseEntity.ok().build();
     }
 
@@ -244,15 +221,9 @@ public class TrainerController {
                     })
     })
     private ResponseEntity deactivateTrainer(@Parameter(description = "Trainer username")
-                                             @PathVariable("trainer") String userName,
-                                             @Parameter(description = "Trainer password")
-                                             @RequestHeader("password") String password)
+                                             @PathVariable("trainer") String userName)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
-        service.deactivate(credentials);
+        service.deactivate(userName);
         return ResponseEntity.ok().build();
     }
 }

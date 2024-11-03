@@ -17,6 +17,7 @@ import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Repository("trainerDao")
@@ -44,7 +45,7 @@ public class TrainerDao implements ITrainerDao {
     }
 
     @Override
-    public TrainerModel getByUserName(String username) {
+    public TrainerModel getByUserName(String username) throws NoSuchElementException {
         String queryString = "select t from Trainer t where t.user.userName like ?1";
         TypedQuery<Trainer> query = entityManager.createQuery(queryString, Trainer.class);
         List<Trainer> resultList;
@@ -53,10 +54,10 @@ public class TrainerDao implements ITrainerDao {
             resultList = query.getResultList();
         } catch (Exception e) {
             log.error("Dao error occurred - get trainer by name. Transaction Id {}", MDC.get("transactionId"));
-            return null;
+            throw new NoSuchElementException("Trainer not found");
         }
         if (resultList.size() != 1) {
-            return null;
+            throw new NoSuchElementException("Trainer not found");
         }
         return Mapper.mapTrainerEntityToTrainerModel(resultList.get(0));
     }
@@ -75,16 +76,16 @@ public class TrainerDao implements ITrainerDao {
     }
 
     @Override
-    public TrainerModel get(long id) {
+    public TrainerModel get(long id) throws NoSuchElementException {
         Trainer trainer;
         try {
             trainer = entityManager.find(Trainer.class, id);
         } catch (Exception e) {
             log.error("Dao error occurred - get trainer. Transaction Id {}", MDC.get("transactionId"));
-            return null;
+            throw new NoSuchElementException("Trainer not found");
         }
         if (trainer == null) {
-            return null;
+            throw new NoSuchElementException("Trainer not found");
         }
         return Mapper.mapTrainerEntityToTrainerModel(trainer);
     }

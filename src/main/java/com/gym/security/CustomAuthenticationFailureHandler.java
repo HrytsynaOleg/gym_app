@@ -6,11 +6,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Autowired
     private LoginAttemptService loginAttemptService;
@@ -21,6 +19,15 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         if (exception.getMessage().equalsIgnoreCase("blocked")) {
             errorMessage = "User blocked";
         }
-        response.sendError(403, errorMessage);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write(errorMessage);
+        response.sendRedirect("/login?error=" + errorMessage);
+//        if (exception.getMessage().equalsIgnoreCase("blocked")) {
+//            response.sendRedirect("/login?error=disabled");
+//        } else if (exception.getMessage().equalsIgnoreCase("Bad credentials")) {
+//            response.sendRedirect("/login?error=invalid");
+//        } else {
+//            response.sendRedirect("/login?error=true");
+//        }
     }
 }

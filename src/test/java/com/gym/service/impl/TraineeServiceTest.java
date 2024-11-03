@@ -224,8 +224,8 @@ class TraineeServiceTest {
                 .password("1234567890")
                 .build();
         List<String> newTrainerList = new ArrayList<>();
-        newTrainerList.add(trainerService.get(credentials, 117).getUserName());
-        newTrainerList.add(trainerService.get(credentials, 118).getUserName());
+        newTrainerList.add(trainerService.get(117).getUserName());
+        newTrainerList.add(trainerService.get(118).getUserName());
         List<TrainerModel> trainerModelList = traineeService.getAssignedTrainerList(credentials);
         traineeService.updateTrainerList(credentials, newTrainerList);
         List<TrainerModel> trainerModelUpdatedList = traineeService.getAssignedTrainerList(credentials);
