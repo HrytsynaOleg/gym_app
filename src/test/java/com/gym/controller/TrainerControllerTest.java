@@ -3,7 +3,6 @@ package com.gym.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dto.trainer.TrainerCreateDTO;
 import com.gym.dto.trainer.TrainerUpdateDTO;
-import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
 import com.gym.service.ITrainerService;
 import com.gym.utils.JsonUtils;
@@ -18,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -53,6 +54,7 @@ class TrainerControllerTest {
     }
 
     @Test
+    @WithMockUser(value = "Kerry.King")
     void getTrainerProfileTest() {
         TrainerModel trainerModel = JsonUtils.parseResource("trainerRestTest.json", new TypeReference<>() {
         });
@@ -60,8 +62,7 @@ class TrainerControllerTest {
         try {
             given(service.getTrainerProfile(trainerModel.getUserName())).willReturn(trainerModel);
             given(service.getAssignedTraineeList(trainerModel.getUserName())).willReturn(List.of());
-            mvc.perform(get("/trainers/Kerry.King")
-                            .header("password", "1234567890"))
+            mvc.perform(get("/trainers/Kerry.King"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.firstName").value("Kerry"))
                     .andExpect(jsonPath("$.lastName").value("King"))
@@ -74,22 +75,20 @@ class TrainerControllerTest {
     }
 
     @Test
-    void getTrainerProfileIfNotExistTest() {
+    @WithMockUser(value = "Kerry.King")
+    void getTrainerProfileIfUserNameNotMatchTest() {
         try {
-            given(service.getTrainerProfile("Kerry.King1")).willThrow(new IncorrectCredentialException("User name or password incorrect"));
-            given(service.getAssignedTraineeList("Kerry.King1")).willThrow(new IncorrectCredentialException("User name or password incorrect"));
-            mvc.perform(get("/trainers/Kerry.King1")
-                            .header("password", "1234567890"))
-                    .andExpect(status().isUnauthorized())
-                    .andExpect(jsonPath("$.errors").isNotEmpty())
-                    .andExpect(jsonPath("$.errors").isArray())
-                    .andExpect(jsonPath("$.errors[0]").value("User name or password incorrect"));
+            mvc.perform(get("/trainers/Kerry.King1"))
+                    .andExpect(status().isForbidden());
+            mvc.perform(get("/trainers/Tom.Arraya"))
+                    .andExpect(status().isForbidden());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Test
+    @WithAnonymousUser
     void createTrainerTest() {
         TrainerModel trainerModel = JsonUtils.parseResource("trainerCreateRestTest.json", new TypeReference<>() {
         });
@@ -111,6 +110,7 @@ class TrainerControllerTest {
     }
 
     @Test
+    @WithMockUser(value = "Kerry.King")
     void updateTrainerTest(){
         TrainerModel trainerModel = JsonUtils.parseResource("trainerRestTest.json", new TypeReference<>() {
         });

@@ -18,6 +18,8 @@ import lombok.extern.log4j.Log4j2;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.gym.utils.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -42,11 +44,13 @@ public class TrainerService implements ITrainerService {
     @Value("${password.length}")
     private Integer passwordLength;
     private final Counter trainerRegistrationCounter;
+    private final PasswordEncoder passwordEncoder;
 
     public TrainerService(MeterRegistry registry) {
         trainerRegistrationCounter = Counter.builder("trainer.register")
                 .description("Number of trainer registered")
                 .register(registry);
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @Override
@@ -55,7 +59,10 @@ public class TrainerService implements ITrainerService {
                                       String trainingTypeString) throws ValidationException {
         long usersCount = userDao.getUserCount(firstName, lastName);
         String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
-        String password = StringUtils.generateRandomString(passwordLength);
+        String generatedPassword = StringUtils.generateRandomString(passwordLength);
+        String password = "{bcrypt}" + passwordEncoder.encode(generatedPassword);
+        log.info(generatedPassword);
+        log.info(password);
         TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.valueOf(trainingTypeString);
         TrainerModel trainerModel = TrainerModel.builder()
                 .id(0)
@@ -71,6 +78,7 @@ public class TrainerService implements ITrainerService {
         validator.validate(trainerModel);
 
         TrainerModel newTrainerModel = trainerDao.create(trainerModel);
+        newTrainerModel.setPassword(generatedPassword);
         log.info("New trainer created in trainer service. Transaction Id {}", MDC.get("transactionId"));
         trainerRegistrationCounter.increment();
         return newTrainerModel;
