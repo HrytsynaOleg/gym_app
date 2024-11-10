@@ -11,4 +11,5 @@ public class UserCredentials {
     private String userName;
     @NotBlank
     private String password;
+    private String token;
 }

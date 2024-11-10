@@ -2,17 +2,17 @@
 -- Table user
 -- -----------------------------------------------------
 -- insert initial data
-INSERT INTO users (id, first_name, last_name, user_name, password, is_active) VALUES
-(12, 'Kerry', 'King', 'Kerry.King', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu', 1),
-(13, 'Tom', 'Arraya', 'Tom.Arraya', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu', 1),
-(14, 'Jeff', 'Hanneman', 'Jeff.Hanneman', '1234567890', 1),
-(15, 'Dave', 'Lombardo', 'Dave.Lombardo', '1234567890', 1),
-(16, 'Bruce', 'Dickinson', 'Bruce.Dickinson', '1234567890', 1),
-(17, 'Neil', 'Young', 'Neil.Young', '1234567890', 1),
-(18, 'Ozzy', 'Osbourne', 'Ozzy.Osbourne', '1234567890', 1),
-(19, 'David', 'Gilmoure', 'David.Gilmoure', '1234567890', 1),
-(20, 'James', 'Hetfield', 'James.Hetfield', '1234567890', 1),
-(21, 'Kirk', 'Hammett', 'Kirk.Hammett', '1234567890', 1);
+INSERT INTO users (id, first_name, last_name, user_name, password, token, is_active) VALUES
+(12, 'Kerry', 'King', 'Kerry.King', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IktlcnJ5LktpbmciLCJpZCI6IjEyIn0.dNHpBweiRPQSGgpNOYjq-J-FcwFYKpx28V8hptVhYEI', 1),
+(13, 'Tom', 'Arraya', 'Tom.Arraya', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1),
+(14, 'Jeff', 'Hanneman', 'Jeff.Hanneman', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1),
+(15, 'Dave', 'Lombardo', 'Dave.Lombardo', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1),
+(16, 'Bruce', 'Dickinson', 'Bruce.Dickinson', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1),
+(17, 'Neil', 'Young', 'Neil.Young', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1),
+(18, 'Ozzy', 'Osbourne', 'Ozzy.Osbourne', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1),
+(19, 'David', 'Gilmoure', 'David.Gilmoure', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1),
+(20, 'James', 'Hetfield', 'James.Hetfield', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1),
+(21, 'Kirk', 'Hammett', 'Kirk.Hammett', '{bcrypt}$2a$10$lPj.JYt9.Fa9mWKQj6v/4O3x4HgzEUu9AnyWIS6WtVHQ44UKKqODu','', 1);
 -- -----------------------------------------------------
 -- Table trainee
 -- -----------------------------------------------------

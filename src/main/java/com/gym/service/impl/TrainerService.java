@@ -7,6 +7,7 @@ import com.gym.dao.IUserDao;
 import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.*;
+import com.gym.security.JwtTokenService;
 import com.gym.service.IModelValidator;
 import com.gym.service.ITrainerService;
 import com.gym.utils.DTOMapper;
@@ -41,6 +42,8 @@ public class TrainerService implements ITrainerService {
     private IUserDao userDao;
     @Autowired
     private IModelValidator validator;
+    @Autowired
+    private JwtTokenService tokenService;
     @Value("${password.length}")
     private Integer passwordLength;
     private final Counter trainerRegistrationCounter;
@@ -78,6 +81,9 @@ public class TrainerService implements ITrainerService {
         validator.validate(trainerModel);
 
         TrainerModel newTrainerModel = trainerDao.create(trainerModel);
+        String token = tokenService.generateToken(newTrainerModel);
+        newTrainerModel.setToken(token);
+        userDao.update(newTrainerModel);
         newTrainerModel.setPassword(generatedPassword);
         log.info("New trainer created in trainer service. Transaction Id {}", MDC.get("transactionId"));
         trainerRegistrationCounter.increment();

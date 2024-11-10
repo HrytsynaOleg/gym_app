@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_name VARCHAR(45) NOT NULL,
   user_name VARCHAR(45) NOT NULL,
   password VARCHAR(255) NOT NULL,
+  token VARCHAR(255),
   is_active TINYINT NULL DEFAULT NULL);
 
 -- -----------------------------------------------------

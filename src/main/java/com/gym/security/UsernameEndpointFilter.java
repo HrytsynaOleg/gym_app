@@ -1,29 +1,23 @@
 package com.gym.security;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.gym.dto.ResponseErrorBodyDTO;
-import com.gym.dto.trainer.TrainerUpdateDTO;
 import com.gym.utils.JsonUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 @Component
-public class UsernameFilter extends OncePerRequestFilter {
+public class UsernameEndpointFilter extends OncePerRequestFilter {
 
     private final List<String> endpoints = List.of("trainers", "trainees", "users");
 

@@ -66,6 +66,7 @@ public class TrainerController {
         UserCredentials userCredentials = UserCredentials.builder()
                 .userName(trainer.getUserName())
                 .password(trainer.getPassword())
+                .token(trainer.getToken())
                 .build();
         return new ResponseEntity<>(userCredentials, HttpStatus.CREATED);
     }

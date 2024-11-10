@@ -7,6 +7,7 @@ import com.gym.dao.IUserDao;
 import com.gym.dto.training.TraineeTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.*;
+import com.gym.security.JwtTokenService;
 import com.gym.service.IModelValidator;
 import com.gym.service.ITraineeService;
 import com.gym.service.IUserCredentialsService;
@@ -42,6 +43,8 @@ public class TraineeService implements ITraineeService {
     @Autowired
     private IModelValidator validator;
     @Autowired
+    private JwtTokenService tokenService;
+    @Autowired
     private IUserCredentialsService credentialsService;
     @Value("${password.length}")
     private Integer passwordLength;
@@ -71,6 +74,9 @@ public class TraineeService implements ITraineeService {
                 .dateOfBirth(localDate).build();
         validator.validate(traineeModel);
         TraineeModel newTraineeModel = traineeDao.create(traineeModel);
+        String token = tokenService.generateToken(newTraineeModel);
+        newTraineeModel.setToken(token);
+        userDao.update(newTraineeModel);
         newTraineeModel.setPassword(generatedPassword);
         log.info("New trainee created in trainee service. Transaction Id {}", MDC.get("transactionId"));
         return newTraineeModel;

@@ -16,6 +16,7 @@ public class Mapper {
         user.setUserName(model.getUserName());
         user.setPassword(model.getPassword());
         user.setIsActive(model.getIsActive());
+        user.setToken(model.getToken());
         return user;
     }
 
@@ -27,6 +28,7 @@ public class Mapper {
                 .userName(user.getUserName())
                 .password(user.getPassword())
                 .isActive(user.getIsActive())
+                .token(user.getToken())
                 .build();
     }
 
