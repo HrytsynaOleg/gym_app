@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ChangePasswordDTO {
     @NotBlank(message = "Username must be not empty")
-    String userName;
-    @NotBlank(message = "Old password must be not empty")
-    String oldPassword;
+    String userName;;
     @NotBlank(message = "New password must be not empty")
     String newPassword;
 }

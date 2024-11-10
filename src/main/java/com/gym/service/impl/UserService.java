@@ -13,8 +13,12 @@ import jakarta.validation.ValidationException;
 import lombok.extern.log4j.Log4j2;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import io.micrometer.core.instrument.Counter;
+
+import java.util.NoSuchElementException;
 
 @Log4j2
 @Service("userService")
@@ -27,17 +31,18 @@ public class UserService implements IUserService {
     private IModelValidator validator;
 
     private final Counter userLoginCounter;
+    private final PasswordEncoder passwordEncoder;
 
     public UserService(MeterRegistry registry) {
         userLoginCounter = Counter.builder("users.login")
                 .description("Number of users login created")
                 .register(registry);
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @Override
-    public UserModel getUserProfile(UserCredentials credentials) throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
-        return userDao.getUserByName(credentials.getUserName());
+    public UserModel getUserProfile(String username) throws IncorrectCredentialException {
+        return userDao.getUserByName(username);
     }
 
     @Override
@@ -47,11 +52,11 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void changePassword(UserCredentials credentials, String newPassword) throws ValidationException,
-            IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
-        UserModel user = userDao.getUserByName(credentials.getUserName());
-        user.setPassword(newPassword);
+    public void changePassword(String username, String newPassword) throws ValidationException,
+            NoSuchElementException {
+        UserModel user = userDao.getUserByName(username);
+        String password = "{bcrypt}" + passwordEncoder.encode(newPassword);
+        user.setPassword(password);
         validator.validate(user);
         userDao.update(user);
         log.info("Password changed. Transaction Id {}", MDC.get("transactionId"));

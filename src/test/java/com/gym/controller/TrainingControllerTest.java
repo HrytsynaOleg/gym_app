@@ -1,6 +1,7 @@
 package com.gym.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.gym.config.WebSecurityConfig;
 import com.gym.dto.training.TrainingCreateDTO;
 import com.gym.model.TrainingModel;
 import com.gym.service.ITrainingService;
@@ -10,7 +11,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -21,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(TrainingController.class)
+@Import(WebSecurityConfig.class)
 class TrainingControllerTest {
 
     @Autowired
@@ -30,6 +34,7 @@ class TrainingControllerTest {
     private ITrainingService service;
 
     @Test
+    @WithMockUser
     void createTrainingTest() {
         TrainingModel trainingModel = JsonUtils.parseResource("trainingCreateRestTest.json", new TypeReference<>() {
         });
@@ -50,6 +55,7 @@ class TrainingControllerTest {
         }
     }
     @Test
+    @WithMockUser
     void createTrainingWithWrongParameterTest() {
         TrainingCreateDTO trainerCreateDTO = TrainingCreateDTO.builder()
                 .trainerUserName("")
@@ -75,6 +81,7 @@ class TrainingControllerTest {
         }
     }
     @Test
+    @WithMockUser
     void getTrainingTypeListTest() {
         try {
             mvc.perform(get("/trainings/types"))

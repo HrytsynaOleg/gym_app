@@ -1,5 +1,6 @@
 package com.gym.dto.trainer;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIgnoreProperties
 public class TrainerUpdateDTO {
     @NotBlank(message = "User name must be not empty")
     private String userName;
@@ -22,4 +24,12 @@ public class TrainerUpdateDTO {
     private String specialization;
     @NotNull(message = "Activated status must be not null")
     private boolean isActive;
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean active) {
+        isActive = active;
+    }
 }

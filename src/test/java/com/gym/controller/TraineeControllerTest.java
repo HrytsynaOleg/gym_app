@@ -1,27 +1,27 @@
 package com.gym.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.gym.config.WebSecurityConfig;
 import com.gym.dto.trainee.TraineeCreateDTO;
 import com.gym.dto.trainee.TraineeUpdateDTO;
 import com.gym.dto.trainee.TraineeUpdateTrainerListDTO;
-import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
-import com.gym.model.UserCredentials;
 import com.gym.service.ITraineeService;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -32,8 +32,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+
 @WebMvcTest(TraineeController.class)
+@Import(WebSecurityConfig.class)
 class TraineeControllerTest {
     private MockedStatic<StringUtils> mockStringUtil;
     private final Integer passwordLength = 10;
@@ -58,17 +59,14 @@ class TraineeControllerTest {
 
 
     @Test
+    @WithMockUser(value = "Bruce.Dickinson")
     void getTraineeProfileTest() {
         TraineeModel traineeModel = JsonUtils.parseResource("traineeRestTest.json", new TypeReference<>() {
         });
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(traineeModel.getUserName())
-                .password(traineeModel.getPassword())
-                .build();
 
         try {
-            given(service.getTraineeProfile(credentials)).willReturn(traineeModel);
-            given(service.getAssignedTrainerList(credentials)).willReturn(List.of());
+            given(service.getTraineeProfile("Bruce.Dickinson")).willReturn(traineeModel);
+            given(service.getAssignedTrainerList("Bruce.Dickinson")).willReturn(List.of());
             mvc.perform(get("/trainees/Bruce.Dickinson")
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
@@ -84,20 +82,25 @@ class TraineeControllerTest {
     }
 
     @Test
-    void getTraineeProfileIfNotExistTest() {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("Bruce.Dickinson1")
-                .password("1234567890")
-                .build();
+    @WithMockUser(value = "Kerry.King")
+    void getTraineeProfileIfUserNameNotMatchTest() {
         try {
-            given(service.getTraineeProfile(credentials)).willThrow(new IncorrectCredentialException("User name or password incorrect"));
-            given(service.getAssignedTrainerList(credentials)).willThrow(new IncorrectCredentialException("User name or password incorrect"));
-            mvc.perform(get("/trainees/Bruce.Dickinson1")
-                            .header("password", "1234567890"))
-                    .andExpect(status().isUnauthorized())
+            mvc.perform(get("/trainees/Bruce.Dickinson"))
+                    .andExpect(status().isForbidden())
                     .andExpect(jsonPath("$.errors").isNotEmpty())
                     .andExpect(jsonPath("$.errors").isArray())
-                    .andExpect(jsonPath("$.errors[0]").value("User name or password incorrect"));
+                    .andExpect(jsonPath("$.errors[0]").value("Access for user Kerry.King denied"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @WithAnonymousUser
+    void getTraineeProfileIfUserUnauthorizedTest() {
+        try {
+            mvc.perform(get("/trainees/Bruce.Dickinson"))
+                    .andExpect(status().isUnauthorized());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -127,15 +130,12 @@ class TraineeControllerTest {
     }
 
     @Test
+    @WithMockUser(value = "Bruce.Dickinson")
     void updateTraineeTest(){
         TraineeModel traineeModel = JsonUtils.parseResource("traineeRestTest.json", new TypeReference<>() {
         });
         TraineeModel traineeUpdatedModel = JsonUtils.parseResource("traineeUpdatedRestTest.json", new TypeReference<>() {
         });
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(traineeModel.getUserName())
-                .password(traineeModel.getPassword())
-                .build();
         TraineeUpdateDTO traineeUpdateDTO = TraineeUpdateDTO.builder()
                 .userName("Bruce.Dickinson")
                 .firstName("Neil")
@@ -145,12 +145,12 @@ class TraineeControllerTest {
                 .isActive(true)
                 .build();
         try {
-            given(service.getTraineeProfile(credentials))
+            given(service.getTraineeProfile(traineeModel.getUserName()))
                     .willReturn(traineeModel);
-            given(service.update(credentials, traineeUpdatedModel))
+            given(service.update(traineeModel.getUserName(), traineeUpdatedModel))
                     .willReturn(traineeUpdatedModel);
-            given(service.getAssignedTrainerList(credentials)).willReturn(List.of());
-            mvc.perform(put("/trainees").contentType(MediaType.APPLICATION_JSON)
+            given(service.getAssignedTrainerList("Bruce.Dickinson")).willReturn(List.of());
+            mvc.perform(put("/trainees/Bruce.Dickinson/update").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(traineeUpdateDTO))
                             .header("password", "1234567890"))
                     .andExpect(status().isOk())
@@ -165,16 +165,13 @@ class TraineeControllerTest {
     }
 
     @Test
+    @WithMockUser(value = "Bruce.Dickinson")
     void deleteTraineeTest(){
         TraineeModel traineeModel = JsonUtils.parseResource("traineeRestTest.json", new TypeReference<>() {
         });
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(traineeModel.getUserName())
-                .password(traineeModel.getPassword())
-                .build();
         try {
-            doNothing().when(service).delete(credentials);
-            mvc.perform(delete("/trainees/Bruce.Dickinson")
+            doNothing().when(service).delete(traineeModel.getUserName());
+            mvc.perform(delete("/trainees/Bruce.Dickinson/delete")
                             .header("password", "1234567890"))
                     .andExpect(status().isOk());
         } catch (Exception e) {
@@ -183,17 +180,14 @@ class TraineeControllerTest {
     }
 
     @Test
+    @WithMockUser(value = "Bruce.Dickinson")
     void getNotAssignedTrainerListTest(){
         TraineeModel traineeModel = JsonUtils.parseResource("traineeRestTest.json", new TypeReference<>() {
         });
         TrainerModel trainerModel = JsonUtils.parseResource("trainerRestTest.json", new TypeReference<>() {
         });
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(traineeModel.getUserName())
-                .password(traineeModel.getPassword())
-                .build();
         try {
-            given(service.getNotAssignedTrainerList(credentials))
+            given(service.getNotAssignedTrainerList(traineeModel.getUserName()))
                     .willReturn(List.of(trainerModel));
             mvc.perform(get("/trainees/Bruce.Dickinson/not-assigned-trainers")
                             .header("password", "1234567890"))
@@ -205,16 +199,13 @@ class TraineeControllerTest {
     }
 
     @Test
+    @WithMockUser(value = "Bruce.Dickinson")
     void updateTrainerListTest(){
         TraineeModel traineeModel = JsonUtils.parseResource("traineeRestTest.json", new TypeReference<>() {
         });
         List<TrainerModel> updatedTrainerModelList = JsonUtils.parseResource("traineeUpdateTrainerList.json",
                 new TypeReference<>() {
         });
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(traineeModel.getUserName())
-                .password(traineeModel.getPassword())
-                .build();
         List<String> newTrainerList = List.of("Kerry.King", "Tom.Arraya");
 
         TraineeUpdateTrainerListDTO traineeUpdateTrainerListDTO = TraineeUpdateTrainerListDTO.builder()
@@ -222,7 +213,7 @@ class TraineeControllerTest {
                 .trainerList(List.of("Kerry.King", "Tom.Arraya"))
                 .build();
         try {
-            given(service.updateTrainerList(credentials, newTrainerList))
+            given(service.updateTrainerList(traineeModel.getUserName(), newTrainerList))
                     .willReturn(updatedTrainerModelList);
             mvc.perform(put("/trainees/Bruce.Dickinson/trainers")
                             .contentType(MediaType.APPLICATION_JSON)

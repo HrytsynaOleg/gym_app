@@ -27,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(value = "/trainees")
@@ -37,7 +38,7 @@ public class TraineeController {
     @Autowired
     private final ITraineeService service;
 
-    @PostMapping("/create")
+    @PostMapping
     @Operation(summary = "Create new trainee")
     @ApiResponses(value = {
             @ApiResponse(
@@ -80,7 +81,15 @@ public class TraineeController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainee not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -88,16 +97,10 @@ public class TraineeController {
                     })
     })
     private ResponseEntity<TraineeProfileDTO> getTraineeProfile(@Parameter(description = "Trainee username")
-                                                                @PathVariable("trainee") String userName,
-                                                                @Parameter(description = "Trainee password")
-                                                                @RequestHeader("password") String password)
-            throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
-        TraineeModel traineeProfile = service.getTraineeProfile(credentials);
-        List<TrainerModel> assignedTrainerList = service.getAssignedTrainerList(credentials);
+                                                                @PathVariable("trainee") String username)
+            throws NoSuchElementException {
+        TraineeModel traineeProfile = service.getTraineeProfile(username);
+        List<TrainerModel> assignedTrainerList = service.getAssignedTrainerList(username);
         TraineeProfileDTO traineeProfileDTO = DTOMapper.mapTraineeModelToTraineeProfileDTO(traineeProfile);
         List<TrainerListItemDTO> trainerListItemDTOList = assignedTrainerList.stream()
                 .map(DTOMapper::mapTrainerModelToTrainerListItemDTO)
@@ -106,7 +109,7 @@ public class TraineeController {
         return ResponseEntity.ok(traineeProfileDTO);
     }
 
-    @PutMapping
+    @PutMapping("/{trainee}/update")
     @Operation(summary = "Update trainee profile")
     @ApiResponses(value = {
             @ApiResponse(
@@ -119,7 +122,15 @@ public class TraineeController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainee not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -127,17 +138,13 @@ public class TraineeController {
                     })
     })
     private ResponseEntity<TraineeUpdatedProfileDTO> updateTraineeProfile(@RequestBody @Valid TraineeUpdateDTO traineeUpdateDTO,
-                                                                          @Parameter(description = "Trainee password")
-                                                                          @RequestHeader("password") String password)
+                                                                          @Parameter(description = "Trainee username")
+                                                                          @PathVariable("trainee") String username)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(traineeUpdateDTO.getUserName())
-                .password(password)
-                .build();
-        TraineeModel traineeProfile = service.getTraineeProfile(credentials);
+        TraineeModel traineeProfile = service.getTraineeProfile(username);
         DTOMapper.updateTraineeModelFromDTO(traineeProfile, traineeUpdateDTO);
-        TraineeModel updatedTraineeProfile = service.update(credentials, traineeProfile);
-        List<TrainerModel> assignedTrainerList = service.getAssignedTrainerList(credentials);
+        TraineeModel updatedTraineeProfile = service.update(username, traineeProfile);
+        List<TrainerModel> assignedTrainerList = service.getAssignedTrainerList(username);
         TraineeUpdatedProfileDTO traineeUpdatedProfileDTO =
                 DTOMapper.mapTraineeModelToUpdatedTraineeProfileDTO(updatedTraineeProfile);
         List<TrainerListItemDTO> trainerListItemDTOList = assignedTrainerList.stream()
@@ -148,7 +155,7 @@ public class TraineeController {
         return ResponseEntity.ok(traineeUpdatedProfileDTO);
     }
 
-    @DeleteMapping("/{trainee}")
+    @DeleteMapping("/{trainee}/delete")
     @Operation(summary = "Delete trainee profile")
     @ApiResponses(value = {
             @ApiResponse(
@@ -160,7 +167,15 @@ public class TraineeController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainee not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -168,14 +183,8 @@ public class TraineeController {
                     })
     })
     private ResponseEntity deleteTrainee(@Parameter(description = "Trainee username")
-                                         @PathVariable("trainee") String userName,
-                                         @Parameter(description = "Trainee password")
-                                         @RequestHeader("password") String password) throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
-        service.delete(credentials);
+                                         @PathVariable("trainee") String username) throws IncorrectCredentialException {
+        service.delete(username);
         return ResponseEntity.ok().build();
     }
 
@@ -192,7 +201,15 @@ public class TraineeController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainee not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -201,15 +218,9 @@ public class TraineeController {
     })
     private ResponseEntity<TrainerListDTO> getNotAssignedTrainersProfile(
             @Parameter(description = "Trainee username")
-            @PathVariable("trainee") String userName,
-            @Parameter(description = "Trainee password")
-            @RequestHeader("password") String password)
+            @PathVariable("trainee") String username)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
-        List<TrainerListItemDTO> trainerList = service.getNotAssignedTrainerList(credentials).stream()
+        List<TrainerListItemDTO> trainerList = service.getNotAssignedTrainerList(username).stream()
                 .filter(TrainerModel::getIsActive)
                 .map(DTOMapper::mapTrainerModelToTrainerListItemDTO)
                 .toList();
@@ -232,7 +243,15 @@ public class TraineeController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainee not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -241,14 +260,10 @@ public class TraineeController {
     })
     private ResponseEntity<TrainerListDTO> updateTraineesTrainerList(
             @RequestBody @Valid TraineeUpdateTrainerListDTO traineeUpdateTrainerListDTO,
-            @Parameter(description = "Trainee password")
-            @RequestHeader("password") String password)
+            @Parameter(description = "Trainee username")
+            @PathVariable("trainee") String username)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(traineeUpdateTrainerListDTO.getUserName())
-                .password(password)
-                .build();
-        List<TrainerModel> newTrainerModelList = service.updateTrainerList(credentials,
+        List<TrainerModel> newTrainerModelList = service.updateTrainerList(username,
                 traineeUpdateTrainerListDTO.getTrainerList());
         List<TrainerListItemDTO> newTrainerList = newTrainerModelList.stream()
                 .map(DTOMapper::mapTrainerModelToTrainerListItemDTO)
@@ -272,7 +287,15 @@ public class TraineeController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainee not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -281,25 +304,19 @@ public class TraineeController {
     })
     private ResponseEntity<List<TraineeTrainingListItemDTO>> getTrainingList(
             @Parameter(description = "Trainee username")
-            @PathVariable("trainee") String userName,
-            @Parameter(description = "Trainee password")
-            @RequestHeader("password") String password,
+            @PathVariable("trainee") String username,
             @Parameter(description = "End date for training list period")
-            @RequestParam(defaultValue  = "", name = "periodTo") String periodTo,
+            @RequestParam(defaultValue = "", name = "periodTo") String periodTo,
             @Parameter(description = "Start date for training list period")
-            @RequestParam(defaultValue  = "", name = "periodFrom") String periodFrom,
+            @RequestParam(defaultValue = "", name = "periodFrom") String periodFrom,
             @Parameter(description = "Trainer username for training list period")
-            @RequestParam(defaultValue  = "", name = "trainer") String trainer,
+            @RequestParam(defaultValue = "", name = "trainer") String trainer,
             @Parameter(description = "Training type for training list period")
-            @RequestParam(defaultValue  = "", name = "trainingType") String trainingType
+            @RequestParam(defaultValue = "", name = "trainingType") String trainingType
     )
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
         List<TraineeTrainingListItemDTO> trainingList =
-                service.getTrainingList(credentials, periodFrom, periodTo, trainer, trainingType);
+                service.getTrainingList(username, periodFrom, periodTo, trainer, trainingType);
         return ResponseEntity.ok(trainingList);
     }
 
@@ -315,7 +332,15 @@ public class TraineeController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainee not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -323,15 +348,9 @@ public class TraineeController {
                     })
     })
     private ResponseEntity activateTrainee(@Parameter(description = "Trainee username")
-                                           @PathVariable("trainee") String userName,
-                                           @Parameter(description = "Trainee password")
-                                           @RequestHeader("password") String password)
+                                           @PathVariable("trainee") String username)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
-        service.activate(credentials);
+        service.activate(username);
         return ResponseEntity.ok().build();
     }
 
@@ -347,7 +366,15 @@ public class TraineeController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainee not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -355,15 +382,9 @@ public class TraineeController {
                     })
     })
     private ResponseEntity deactivateTrainee(@Parameter(description = "Trainee username")
-                                           @PathVariable("trainee") String userName,
-                                           @Parameter(description = "Trainee password")
-                                           @RequestHeader("password") String password)
+                                             @PathVariable("trainee") String username)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(userName)
-                .password(password)
-                .build();
-        service.deactivate(credentials);
+        service.deactivate(username);
         return ResponseEntity.ok().build();
     }
 }

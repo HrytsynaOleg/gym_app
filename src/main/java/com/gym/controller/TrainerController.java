@@ -29,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(value = "/trainers")
@@ -82,7 +83,15 @@ public class TrainerController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainer not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -90,10 +99,10 @@ public class TrainerController {
                     })
     })
     private ResponseEntity<TrainerProfileDTO> getTrainerProfile(@Parameter(description = "Trainer username")
-                                                                @PathVariable("trainer") String userName)
-            throws IncorrectCredentialException {
-        TrainerModel trainerProfile = service.getTrainerProfile(userName);
-        List<TraineeModel> assignedTraineeList = service.getAssignedTraineeList(userName);
+                                                                @PathVariable("trainer") String username)
+            throws NoSuchElementException {
+        TrainerModel trainerProfile = service.getTrainerProfile(username);
+        List<TraineeModel> assignedTraineeList = service.getAssignedTraineeList(username);
         TrainerProfileDTO trainerProfileDTO = DTOMapper.mapTrainerModelToTrainerProfileDTO(trainerProfile);
         List<TraineeListItemDTO> traineeListItemDTOList = assignedTraineeList.stream()
                 .map(DTOMapper::mapTraineeModelToTraineeDTO)
@@ -102,7 +111,7 @@ public class TrainerController {
         return ResponseEntity.ok(trainerProfileDTO);
     }
 
-    @PutMapping
+    @PutMapping("/{trainer}/update")
     @Operation(summary = "Update trainer profile")
     @ApiResponses(value = {
             @ApiResponse(
@@ -115,16 +124,25 @@ public class TrainerController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainer not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
                     })
     })
-    private ResponseEntity<TrainerUpdatedProfileDTO> updateTrainerProfile(@RequestBody @Valid TrainerUpdateDTO trainerUpdateDTO)
+    private ResponseEntity<TrainerUpdatedProfileDTO> updateTrainerProfile(@RequestBody @Valid TrainerUpdateDTO trainerUpdateDTO,
+                                                                          @Parameter(description = "Trainer username")
+                                                                          @PathVariable("trainer") String username)
             throws IncorrectCredentialException {
-        String username = trainerUpdateDTO.getUserName();
         TrainerModel trainerProfile = service.getTrainerProfile(username);
         DTOMapper.updateTrainerModelFromDTO(trainerProfile, trainerUpdateDTO);
         TrainerModel updatedTrainerProfile = service.updateTrainerProfile(username, trainerProfile);
@@ -152,7 +170,15 @@ public class TrainerController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainer not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -187,7 +213,15 @@ public class TrainerController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainer not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -213,7 +247,15 @@ public class TrainerController {
                     }),
             @ApiResponse(
                     responseCode = "401",
-                    description = "Trainer not found or user unauthorized",
+                    description = "User unauthorized",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
                     content = {
                             @Content(
                                     mediaType = "application/json",

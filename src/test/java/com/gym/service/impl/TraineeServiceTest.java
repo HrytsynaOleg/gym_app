@@ -24,6 +24,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -140,13 +141,9 @@ class TraineeServiceTest {
     @Test
     void getTrainerProfileTest() {
         TraineeModel traineeProfile;
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("Neil.Young")
-                .password("1234567890")
-                .build();
         try {
-            traineeProfile = traineeService.getTraineeProfile(credentials);
-        } catch (IncorrectCredentialException e) {
+            traineeProfile = traineeService.getTraineeProfile("Neil.Young");
+        } catch (NoSuchElementException e) {
             throw new RuntimeException(e);
         }
         assertNotNull(traineeProfile);
@@ -160,57 +157,44 @@ class TraineeServiceTest {
 
     @Test
     void setActiveStatusTest() {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("David.Gilmoure")
-                .password("1234567890")
-                .build();
         try {
-            TraineeModel trainee = traineeService.getTraineeProfile(credentials);
+            TraineeModel trainee = traineeService.getTraineeProfile("David.Gilmoure");
             boolean statusBeforeChanging = trainee.getIsActive();
-            traineeService.deactivate(credentials);
-            TraineeModel deactivatedTrainee = traineeService.getTraineeProfile(credentials);
-            traineeService.activate(credentials);
-            TraineeModel activatedTrainee = traineeService.getTraineeProfile(credentials);
+            traineeService.deactivate("David.Gilmoure");
+            TraineeModel deactivatedTrainee = traineeService.getTraineeProfile("David.Gilmoure");
+            traineeService.activate("David.Gilmoure");
+            TraineeModel activatedTrainee = traineeService.getTraineeProfile("David.Gilmoure");
 
             assertTrue(statusBeforeChanging);
             assertFalse(deactivatedTrainee.getIsActive());
             assertTrue(activatedTrainee.getIsActive());
-        } catch (IncorrectCredentialException e) {
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
     }
 
     @Test
     void deleteTraineeTest() {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("Neil.Young")
-                .password("1234567890")
-                .build();
         try {
-            traineeService.delete(credentials);
-            TraineeModel traineeModelAfterDelete = traineeService.getTraineeProfile(credentials);
+            traineeService.delete("Neil.Young");
+            TraineeModel traineeModelAfterDelete = traineeService.getTraineeProfile("Neil.Young");
 
             assertNull(traineeModelAfterDelete);
-        } catch (IncorrectCredentialException e) {
+        } catch (NoSuchElementException e) {
             throw new RuntimeException(e);
         }
     }
     @Test
     void getTrainingListByParametersTest(){
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("Bruce.Dickinson")
-                .password("1234567890")
-                .build();
-
         String localDateFrom = "2024-09-11";
         String localDateTo = "2024-09-15";
         String trainerUserName = "Kerry.King";
 
         List<TraineeTrainingListItemDTO> resultList = null;
         try {
-            resultList = traineeService.getTrainingList(credentials, localDateFrom, localDateTo,
+            resultList = traineeService.getTrainingList("Bruce.Dickinson", localDateFrom, localDateTo,
                     trainerUserName, "YOGA");
-        } catch (IncorrectCredentialException e) {
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
 
@@ -219,16 +203,12 @@ class TraineeServiceTest {
 
     @Test
     void updateTrainerListTest() throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName("Bruce.Dickinson")
-                .password("1234567890")
-                .build();
         List<String> newTrainerList = new ArrayList<>();
         newTrainerList.add(trainerService.get(117).getUserName());
         newTrainerList.add(trainerService.get(118).getUserName());
-        List<TrainerModel> trainerModelList = traineeService.getAssignedTrainerList(credentials);
-        traineeService.updateTrainerList(credentials, newTrainerList);
-        List<TrainerModel> trainerModelUpdatedList = traineeService.getAssignedTrainerList(credentials);
+        List<TrainerModel> trainerModelList = traineeService.getAssignedTrainerList("Bruce.Dickinson");
+        traineeService.updateTrainerList("Bruce.Dickinson", newTrainerList);
+        List<TrainerModel> trainerModelUpdatedList = traineeService.getAssignedTrainerList("Bruce.Dickinson");
 
         assertEquals(1, trainerModelList.size());
         assertEquals(2, trainerModelUpdatedList.size());

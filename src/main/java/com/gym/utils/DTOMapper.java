@@ -105,7 +105,7 @@ public class DTOMapper {
         model.setFirstName(dtoModel.getFirstName());
         model.setLastName(dtoModel.getLastName());
         model.setTrainingType(TrainingTypeEnum.valueOf(dtoModel.getSpecialization()));
-        model.setIsActive(dtoModel.isActive());
+        model.setIsActive(dtoModel.getIsActive());
     }
 
     public static TraineeTrainingListItemDTO mapTrainingModelToTraineeTrainingItem(TrainingModel trainingModel){
