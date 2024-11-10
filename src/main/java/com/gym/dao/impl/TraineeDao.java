@@ -19,6 +19,7 @@ import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Repository("traineeDao")
 @Log4j2
@@ -47,7 +48,7 @@ public class TraineeDao implements ITraineeDao {
     }
 
     @Override
-    public TraineeModel getByUserName(String userName) {
+    public TraineeModel getByUserName(String userName) throws NoSuchElementException{
         String queryString = "select t from Trainee t where t.user.userName like ?1";
         TypedQuery<Trainee> query = entityManager.createQuery(queryString, Trainee.class);
         query.setParameter(1, userName);
@@ -56,10 +57,10 @@ public class TraineeDao implements ITraineeDao {
             resultList = query.getResultList();
         } catch (Exception e) {
             log.error("Dao error occurred - get trainee by name. Transaction Id {}", MDC.get("transactionId"));
-            return null;
+            throw new NoSuchElementException("Trainee not found");
         }
         if (resultList.size() != 1) {
-            return null;
+            throw new NoSuchElementException("Trainee not found");
         }
         return Mapper.mapTraineeEntityToTraineeModel(resultList.get(0));
     }

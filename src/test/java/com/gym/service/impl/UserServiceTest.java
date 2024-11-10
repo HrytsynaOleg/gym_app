@@ -27,10 +27,10 @@ public class UserServiceTest {
                 .build();
         UserModel updatedUser;
         try {
-            userService.changePassword(credentials, "123");
+            userService.changePassword("Kerry.King", "123");
             credentials.setPassword("123");
-            updatedUser = userService.getUserProfile(credentials);
-            userService.changePassword(credentials, "1234567890");
+            updatedUser = userService.getUserProfile("Kerry.King");
+            userService.changePassword("Kerry.King", "1234567890");
         } catch (IncorrectCredentialException e) {
             throw new RuntimeException(e);
         }

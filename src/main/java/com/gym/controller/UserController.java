@@ -75,15 +75,19 @@ public class UserController {
                             @Content(
                                     mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
+                    }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Access denied for this user",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ResponseErrorBodyDTO.class)))
                     })
     })
     private ResponseEntity changePassword(@RequestBody @Valid ChangePasswordDTO changePasswordDTO)
             throws IncorrectCredentialException {
-        UserCredentials credentials = UserCredentials.builder()
-                .userName(changePasswordDTO.getUserName())
-                .password(changePasswordDTO.getOldPassword())
-                .build();
-        service.changePassword(credentials, changePasswordDTO.getNewPassword());
+        service.changePassword(changePasswordDTO.getUserName(), changePasswordDTO.getNewPassword());
         return ResponseEntity.ok().build();
     }
 

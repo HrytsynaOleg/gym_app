@@ -20,6 +20,7 @@ public class UserModel {
     String password;
     @NotNull
     boolean isActive;
+    String token;
 
     public boolean getIsActive() {
         return this.isActive;

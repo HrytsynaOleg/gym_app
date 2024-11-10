@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,14 @@ public class ControllerExceptionHandler {
         log.error("User unauthorized error: {}. Transaction Id {}", getErrorsLoggerDescription(errors),
                 MDC.get("transactionId"));
         return new ResponseEntity<>(getErrorsBody(errors), new HttpHeaders(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ResponseErrorBodyDTO> handleHttpRequestNotFoundErrors(NoSuchElementException ex) {
+        List<String> errors = List.of(ex.getMessage());
+        log.error("Element not found: {}. Transaction Id {}", getErrorsLoggerDescription(errors),
+                MDC.get("transactionId"));
+        return new ResponseEntity<>(getErrorsBody(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     private String getErrorsLoggerDescription(List<String> errors) {

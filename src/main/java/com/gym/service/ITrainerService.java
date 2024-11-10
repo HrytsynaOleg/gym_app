@@ -4,29 +4,28 @@ import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
-import com.gym.model.UserCredentials;
+import jakarta.validation.ValidationException;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public interface ITrainerService {
     TrainerModel createTrainer(String firstName, String lastName, String trainingType);
 
-    boolean isCredentialsNotMatch(UserCredentials credentials);
+    TrainerModel getTrainerProfile(String username) throws NoSuchElementException;
 
-    TrainerModel getTrainerProfile(UserCredentials credentials) throws IncorrectCredentialException;
-
-    List<TrainerTrainingListItemDTO> getTrainingList(UserCredentials credentials, String dateFrom,
+    List<TrainerTrainingListItemDTO> getTrainingList(String username, String dateFrom,
                                                      String dateTo, String traineeUserName) throws IncorrectCredentialException;
-    List<TrainerModel> getNotAssignedTrainerList(UserCredentials credentials) throws IncorrectCredentialException;
 
-    void activate(UserCredentials credentials) throws IncorrectCredentialException;
+    List<TrainerModel> getNotAssignedTrainerList(String username);
 
-    void deactivate(UserCredentials credentials) throws IncorrectCredentialException;
+    void activate(String username) throws ValidationException, NoSuchElementException;
 
-    TrainerModel updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws IncorrectCredentialException;
+    void deactivate(String username) throws ValidationException, NoSuchElementException;
 
-    TrainerModel get(UserCredentials credentials, long id) throws IncorrectCredentialException;
+    TrainerModel updateTrainerProfile(String username, TrainerModel trainerModel) throws ValidationException, NoSuchElementException;
 
-    List<TraineeModel> getAssignedTraineeList(UserCredentials credentials) throws IncorrectCredentialException;
+    TrainerModel get(long id) throws NoSuchElementException;
+
+    List<TraineeModel> getAssignedTraineeList(String username) throws NoSuchElementException;
 }

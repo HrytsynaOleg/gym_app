@@ -7,9 +7,9 @@ import com.gym.dao.IUserDao;
 import com.gym.dto.training.TrainerTrainingListItemDTO;
 import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.*;
+import com.gym.security.JwtTokenService;
 import com.gym.service.IModelValidator;
 import com.gym.service.ITrainerService;
-import com.gym.service.IUserCredentialsService;
 import com.gym.utils.DTOMapper;
 import com.gym.utils.DateUtils;
 import com.gym.utils.StorageUtils;
@@ -19,15 +19,15 @@ import lombok.extern.log4j.Log4j2;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.gym.utils.StringUtils;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.ValidationException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 @Log4j2
 @Service("trainerService")
@@ -43,15 +43,17 @@ public class TrainerService implements ITrainerService {
     @Autowired
     private IModelValidator validator;
     @Autowired
-    private IUserCredentialsService credentialsService;
+    private JwtTokenService tokenService;
     @Value("${password.length}")
     private Integer passwordLength;
     private final Counter trainerRegistrationCounter;
+    private final PasswordEncoder passwordEncoder;
 
     public TrainerService(MeterRegistry registry) {
         trainerRegistrationCounter = Counter.builder("trainer.register")
                 .description("Number of trainer registered")
                 .register(registry);
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @Override
@@ -60,7 +62,10 @@ public class TrainerService implements ITrainerService {
                                       String trainingTypeString) throws ValidationException {
         long usersCount = userDao.getUserCount(firstName, lastName);
         String userName = StorageUtils.generateUserName(firstName, lastName, usersCount);
-        String password = StringUtils.generateRandomString(passwordLength);
+        String generatedPassword = StringUtils.generateRandomString(passwordLength);
+        String password = "{bcrypt}" + passwordEncoder.encode(generatedPassword);
+        log.info(generatedPassword);
+        log.info(password);
         TrainingTypeEnum trainingTypeEnum = TrainingTypeEnum.valueOf(trainingTypeString);
         TrainerModel trainerModel = TrainerModel.builder()
                 .id(0)
@@ -76,33 +81,25 @@ public class TrainerService implements ITrainerService {
         validator.validate(trainerModel);
 
         TrainerModel newTrainerModel = trainerDao.create(trainerModel);
+        String token = tokenService.generateToken(newTrainerModel);
+        newTrainerModel.setToken(token);
+        userDao.update(newTrainerModel);
+        newTrainerModel.setPassword(generatedPassword);
         log.info("New trainer created in trainer service. Transaction Id {}", MDC.get("transactionId"));
         trainerRegistrationCounter.increment();
         return newTrainerModel;
     }
 
     @Override
-    public boolean isCredentialsNotMatch(UserCredentials credentials) {
-        try {
-            credentialsService.verifyCredentials(credentials);
-        } catch (IncorrectCredentialException e) {
-            return true;
-        }
-        return false;
+    public TrainerModel getTrainerProfile(String username) throws NoSuchElementException {
+        return trainerDao.getByUserName(username);
     }
 
     @Override
-    public TrainerModel getTrainerProfile(UserCredentials credentials) throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
-        return trainerDao.getByUserName(credentials.getUserName());
-    }
-
-    @Override
-    public List<TrainerTrainingListItemDTO> getTrainingList(UserCredentials credentials, String dateFrom, String dateTo,
+    public List<TrainerTrainingListItemDTO> getTrainingList(String username, String dateFrom, String dateTo,
                                                             String traineeUserName) throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("trainer", credentials.getUserName());
+        parameters.put("trainer", username);
         if (!traineeUserName.isBlank()) {
             parameters.put("trainee", traineeUserName);
         }
@@ -122,53 +119,49 @@ public class TrainerService implements ITrainerService {
     }
 
     @Override
-    public List<TrainerModel> getNotAssignedTrainerList(UserCredentials credentials) throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
+    public List<TrainerModel> getNotAssignedTrainerList(String username) {
         return trainerDao.getNotAssignedTrainerList();
     }
 
     @Override
-    public void activate(UserCredentials credentials) throws ValidationException,
-            IncorrectCredentialException {
-        setActiveStatus(credentials, true);
+    public void activate(String username) throws ValidationException,
+            NoSuchElementException {
+        setActiveStatus(username, true);
         log.info("User activated. Transaction Id {}", MDC.get("transactionId"));
     }
 
     @Override
-    public void deactivate(UserCredentials credentials) throws IncorrectCredentialException {
-        setActiveStatus(credentials, false);
+    public void deactivate(String username) throws ValidationException, NoSuchElementException {
+        setActiveStatus(username, false);
         log.info("User deactivated. Transaction Id {}", MDC.get("transactionId"));
     }
 
     @Override
-    public TrainerModel updateTrainerProfile(UserCredentials credentials, TrainerModel trainerModel) throws ValidationException,
-            IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
+    public TrainerModel updateTrainerProfile(String username, TrainerModel trainerModel) throws ValidationException,
+            NoSuchElementException {
+        trainerDao.getByUserName(username);
         validator.validate(trainerModel);
         trainerDao.update(trainerModel);
-        TrainerModel updatedTrainerModel = trainerDao.getByUserName(credentials.getUserName());
+        TrainerModel updatedTrainerModel = trainerDao.getByUserName(username);
         log.info("Trainer profile updated. Transaction Id {}", MDC.get("transactionId"));
         return updatedTrainerModel;
     }
 
     @Override
-    public TrainerModel get(UserCredentials credentials, long id) throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
+    public TrainerModel get(long id) throws NoSuchElementException {
         return trainerDao.get(id);
     }
 
     @Override
-    public List<TraineeModel> getAssignedTraineeList(UserCredentials credentials)
-            throws IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
-        TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
+    public List<TraineeModel> getAssignedTraineeList(String username)
+            throws NoSuchElementException {
+        TrainerModel trainer = trainerDao.getByUserName(username);
         return trainerDao.getAssignedTraineeList(trainer.getId());
     }
 
-    private void setActiveStatus(UserCredentials credentials, boolean status) throws ValidationException,
-            IncorrectCredentialException {
-        credentialsService.verifyCredentials(credentials);
-        TrainerModel trainer = trainerDao.getByUserName(credentials.getUserName());
+    private void setActiveStatus(String username, boolean status) throws ValidationException,
+            NoSuchElementException {
+        TrainerModel trainer = trainerDao.getByUserName(username);
         trainer.setIsActive(status);
         validator.validate(trainer);
         trainerDao.update(trainer);

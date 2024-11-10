@@ -4,10 +4,11 @@ import com.gym.model.TraineeModel;
 import com.gym.model.TrainerModel;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public interface ITraineeDao {
     TraineeModel create(TraineeModel traineeModel);
-    TraineeModel getByUserName(String userName);
+    TraineeModel getByUserName(String userName) throws NoSuchElementException;
     void update(TraineeModel traineeModel);
     void delete(long id);
     TraineeModel get(long id);
