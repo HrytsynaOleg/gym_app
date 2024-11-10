@@ -33,30 +33,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String header = request.getHeader(headerName);
         String bearerPrefix = "Bearer ";
         String tokenUserName;
-        if (!matchPath(path)) {
+        if (matchPath(path)) {
             if (!header.startsWith(bearerPrefix)) {
                 setErrorResponse(response);
                 return;
             }
+            try {
+                tokenUserName = tokenService.getUserName(header.substring(bearerPrefix.length()));
+            }catch (JwtException e) {
+                setErrorResponse(response);
+                return;
+            }
+            UserModel userModel;
+            try {
+                userModel = userService.getUserProfile(tokenUserName);
+            } catch (IncorrectCredentialException e) {
+                setErrorResponse(response);
+                return;
+            }
+            if (!userModel.getToken().equals(header.substring(bearerPrefix.length()))) {
+                setErrorResponse(response);
+                return;
+            }
         }
-        try {
-            tokenUserName = tokenService.getUserName(header.substring(bearerPrefix.length()));
-        }catch (JwtException e) {
-            setErrorResponse(response);
-            return;
-        }
-        UserModel userModel;
-        try {
-            userModel = userService.getUserProfile(tokenUserName);
-        } catch (IncorrectCredentialException e) {
-            setErrorResponse(response);
-            return;
-        }
-        if (!userModel.getToken().equals(header.substring(bearerPrefix.length()))) {
-            setErrorResponse(response);
-            return;
-        }
-
         filterChain.doFilter(request, response);
     }
 
