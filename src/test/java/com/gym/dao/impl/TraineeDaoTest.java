@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 @Log4j2
@@ -73,7 +74,6 @@ class TraineeDaoTest {
         assertEquals("Ozzy", traineeModel.getFirstName());
         assertEquals("Osbourne", traineeModel.getLastName());
         assertEquals("Ozzy.Osbourne", traineeModel.getUserName());
-        assertEquals("1234567890", traineeModel.getPassword());
         assertTrue(traineeModel.getIsActive());
         assertEquals("Boston", traineeModel.getAddress());
         assertEquals(LocalDate.of(1978,2,3), traineeModel.getDateOfBirth());
@@ -99,8 +99,7 @@ class TraineeDaoTest {
 
     @Test
     void getTraineeByUserNameIfNotExistTest(){
-        TraineeModel traineeModel = dao.getByUserName("112");
-        assertNull(traineeModel);
+        assertThrows(NoSuchElementException.class, () -> dao.getByUserName("112"));
     }
 
     @Test

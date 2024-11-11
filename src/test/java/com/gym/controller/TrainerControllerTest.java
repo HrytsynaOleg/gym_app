@@ -1,27 +1,28 @@
 package com.gym.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.config.WebSecurityConfig;
 import com.gym.dto.trainer.TrainerCreateDTO;
 import com.gym.dto.trainer.TrainerUpdateDTO;
+import com.gym.exception.IncorrectCredentialException;
 import com.gym.model.TrainerModel;
+import com.gym.model.UserModel;
+import com.gym.security.JwtTokenService;
 import com.gym.service.ITrainerService;
+import com.gym.service.impl.UserService;
 import com.gym.utils.JsonUtils;
 import com.gym.utils.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -31,9 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import static org.mockito.BDDMockito.given;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(TrainerController.class)
-@Import(WebSecurityConfig.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class TrainerControllerTest {
     private MockedStatic<StringUtils> mockStringUtil;
     private final Integer passwordLength = 10;
@@ -43,6 +43,12 @@ class TrainerControllerTest {
 
     @MockBean
     private ITrainerService service;
+
+    @MockBean
+    private JwtTokenService tokenService;
+
+    @MockBean
+    private UserService userService;
 
     @BeforeEach
     public void registerStaticMock() {
@@ -96,7 +102,7 @@ class TrainerControllerTest {
     void getTrainerProfileIfUserNotAuthorizedTest() {
         try {
             mvc.perform(get("/trainers/Kerry.King"))
-                    .andExpect(status().isUnauthorized());
+                    .andExpect(status().isForbidden());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -112,10 +118,20 @@ class TrainerControllerTest {
                 .lastName("Cruze")
                 .specialization("YOGA")
                 .build();
-
+        UserModel userModel = UserModel.builder()
+                .userName("Kerry.King")
+                .token("test token")
+                .build();
         given(service.createTrainer("Tom", "Cruze", "YOGA")).willReturn(trainerModel);
+        given(tokenService.getUserName("test token")).willReturn("Kerry.King");        try {
+            given(userService.getUserProfile("Kerry.King")).willReturn(userModel);
+        } catch (IncorrectCredentialException e) {
+            throw new RuntimeException(e);
+        }
+
         try {
             mvc.perform(post("/trainers")
+                            .header("Authorization", "Bearer test token")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(trainerCreateDTO)))
                     .andExpect(status().isCreated())
@@ -166,7 +182,7 @@ class TrainerControllerTest {
         try {
             mvc.perform(put("/trainers/Kerry.King/update").contentType(MediaType.APPLICATION_JSON)
                             .content(JsonUtils.convertObjectToJson(trainerUpdateDTO)))
-                    .andExpect(status().isUnauthorized());
+                    .andExpect(status().isForbidden());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

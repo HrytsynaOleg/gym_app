@@ -10,20 +10,21 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
 
-@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    @Autowired
-    private JwtTokenService tokenService;
-    @Autowired
-    private UserService userService;
+    private final JwtTokenService tokenService;
+    private final UserService userService;
     private final List<String> endpoints = List.of("trainers", "trainees", "training");
+
+    public JwtAuthenticationFilter(JwtTokenService tokenService, UserService userService) {
+        this.tokenService = tokenService;
+        this.userService = userService;
+    }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -40,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
             try {
                 tokenUserName = tokenService.getUserName(header.substring(bearerPrefix.length()));
-            }catch (JwtException e) {
+            } catch (JwtException e) {
                 setErrorResponse(response);
                 return;
             }

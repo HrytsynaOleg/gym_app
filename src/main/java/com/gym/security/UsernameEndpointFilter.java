@@ -10,13 +10,11 @@ import lombok.SneakyThrows;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
 
-@Component
 public class UsernameEndpointFilter extends OncePerRequestFilter {
 
     private final List<String> endpoints = List.of("trainers", "trainees", "users");
@@ -45,23 +43,6 @@ public class UsernameEndpointFilter extends OncePerRequestFilter {
                 return;
             }
         }
-//        if (path.matches("/trainers")) {
-//            if (request.getMethod().equalsIgnoreCase("PUT")) {
-//                ContentCachingRequestWrapper wrapper = new ContentCachingRequestWrapper(request);
-////                String content = wrapper.getContentAsString();
-//                TrainerUpdateDTO trainerUpdateDTO = JsonUtils.parseJsonString(wrapper.getContentAsString(),
-//                        new TypeReference<>() {
-//                        });
-//                if (trainerUpdateDTO != null && username.equalsIgnoreCase(trainerUpdateDTO.getUserName())) {
-//                    hasUsernameInBody = true;
-//                }
-//                if (!hasUsernameInBody) {
-//                    setErrorResponse(response, username);
-//                    return;
-//                }
-//            }
-//        }
-
         filterChain.doFilter(request, response);
     }
 
@@ -76,7 +57,7 @@ public class UsernameEndpointFilter extends OncePerRequestFilter {
 
     private boolean matchPath(String path, String username) {
         for (String endpoint : endpoints) {
-            if (path.matches("/" + endpoint + "/" + username + "(?:/.*)?" )) {
+            if (path.matches("/" + endpoint + "/" + username + "(?:/.*)?")) {
                 return true;
             }
         }
