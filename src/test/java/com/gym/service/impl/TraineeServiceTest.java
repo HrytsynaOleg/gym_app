@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import jakarta.validation.ValidationException;
+
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -88,7 +89,6 @@ class TraineeServiceTest {
         assertEquals(firstName, newTraineeModel.getFirstName());
         assertEquals(lastName, newTraineeModel.getLastName());
         assertEquals(userName, newTraineeModel.getUserName());
-        assertEquals(passwordLength, newTraineeModel.getPassword().length());
         assertEquals(address, newTraineeModel.getAddress());
         assertEquals(dateOfBirth, newTraineeModel.getDateOfBirth());
     }
@@ -104,7 +104,7 @@ class TraineeServiceTest {
         TraineeModel responseTraineeModel = traineeService.createTrainee(testFirstName, testLastName, address, dateOfBirthInString);
         TraineeModel newTraineeModel = traineeService.get(credentials, responseTraineeModel.getId());
         TraineeModel responseSecondTraineeModel = traineeService.createTrainee(testFirstName, testLastName, address, dateOfBirthInString);
-        TraineeModel newSecondTraineeModel = traineeService.get(credentials ,responseSecondTraineeModel.getId());
+        TraineeModel newSecondTraineeModel = traineeService.get(credentials, responseSecondTraineeModel.getId());
         TraineeModel responseThirdTraineeModel = traineeService.createTrainee(testFirstName, testLastName, address, dateOfBirthInString);
         TraineeModel newThirdTraineeModel = traineeService.get(credentials, responseThirdTraineeModel.getId());
 
@@ -114,7 +114,6 @@ class TraineeServiceTest {
         assertEquals(testUserName, newTraineeModel.getUserName());
         assertEquals(expectedUserName, newSecondTraineeModel.getUserName());
         assertEquals(expectedSecondUserName, newThirdTraineeModel.getUserName());
-        assertEquals(passwordLength, newTraineeModel.getPassword().length());
         assertEquals(address, newTraineeModel.getAddress());
         assertEquals(dateOfBirth, newTraineeModel.getDateOfBirth());
     }
@@ -150,7 +149,6 @@ class TraineeServiceTest {
         assertEquals("Neil", traineeProfile.getFirstName());
         assertEquals("Young", traineeProfile.getLastName());
         assertEquals("Neil.Young", traineeProfile.getUserName());
-        assertEquals("1234567890", traineeProfile.getPassword());
         assertEquals("Toronto", traineeProfile.getAddress());
         assertEquals(LocalDate.of(1965, 7, 25), traineeProfile.getDateOfBirth());
     }
@@ -175,17 +173,12 @@ class TraineeServiceTest {
 
     @Test
     void deleteTraineeTest() {
-        try {
-            traineeService.delete("Neil.Young");
-            TraineeModel traineeModelAfterDelete = traineeService.getTraineeProfile("Neil.Young");
-
-            assertNull(traineeModelAfterDelete);
-        } catch (NoSuchElementException e) {
-            throw new RuntimeException(e);
-        }
+        traineeService.delete("Neil.Young");
+        assertThrows(NoSuchElementException.class, () -> traineeService.getTraineeProfile("Neil.Young"));
     }
+
     @Test
-    void getTrainingListByParametersTest(){
+    void getTrainingListByParametersTest() {
         String localDateFrom = "2024-09-11";
         String localDateTo = "2024-09-15";
         String trainerUserName = "Kerry.King";

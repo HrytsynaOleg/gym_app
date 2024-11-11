@@ -1,20 +1,17 @@
 package com.gym.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gym.config.WebSecurityConfig;
 import com.gym.dto.training.TrainingCreateDTO;
 import com.gym.model.TrainingModel;
 import com.gym.service.ITrainingService;
 import com.gym.utils.JsonUtils;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
@@ -22,9 +19,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(TrainingController.class)
-@Import(WebSecurityConfig.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class TrainingControllerTest {
 
     @Autowired

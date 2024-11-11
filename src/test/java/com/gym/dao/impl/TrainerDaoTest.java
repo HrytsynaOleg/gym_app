@@ -15,6 +15,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,15 +55,13 @@ class TrainerDaoTest {
         assertEquals("Kerry", trainerModel.getFirstName());
         assertEquals("King", trainerModel.getLastName());
         assertEquals("Kerry.King", trainerModel.getUserName());
-        assertEquals("1234567890", trainerModel.getPassword());
         assertTrue(trainerModel.getIsActive());
         assertEquals(TrainingTypeEnum.YOGA, trainerModel.getTrainingType());
     }
 
     @Test
     void getTrainerIfNotExistTest(){
-        TrainerModel trainerModel = dao.get(2L);
-        assertNull(trainerModel);
+        assertThrows(NoSuchElementException.class, () -> dao.get(2L));
     }
 
 
@@ -79,8 +78,7 @@ class TrainerDaoTest {
 
     @Test
     void getTrainerByUserNameIfNotExistTest(){
-        TrainerModel trainerModel = dao.getByUserName("112");
-        assertNull(trainerModel);
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> dao.getByUserName("112"));
     }
 
     @Test

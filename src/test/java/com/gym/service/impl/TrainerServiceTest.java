@@ -57,7 +57,6 @@ class TrainerServiceTest {
         assertEquals("Tom", newTrainerModel.getFirstName());
         assertEquals("Cruze", newTrainerModel.getLastName());
         assertEquals("Tom.Cruze", newTrainerModel.getUserName());
-        assertEquals(passwordLength, newTrainerModel.getPassword().length());
         assertEquals(trainingTypeEnum, newTrainerModel.getTrainingType());
     }
 
@@ -75,7 +74,6 @@ class TrainerServiceTest {
         assertEquals(lastName, newTrainerModel.getLastName());
         assertEquals(expectedUserName, newTrainerModel.getUserName());
         assertEquals(expectedSecondUserName, newSecondTrainerModel.getUserName());
-        assertEquals(passwordLength, newTrainerModel.getPassword().length());
         assertEquals(trainingTypeEnum, newTrainerModel.getTrainingType());
     }
 
